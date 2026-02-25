@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -21,5 +22,5 @@ jobs:
           remote_host: ${{ secrets.REMOTE_HOST }}
           remote_user: ${{ secrets.REMOTE_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # Configuração crucial para hospedagem compartilhada:
-          rsh: ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o PreferredAuthentications=publickey
+          # Usamos args apenas para pular a checagem de host (comum em hospedagem)
+          args: "-o StrictHostKeyChecking=no"
