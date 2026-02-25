@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade - Gerador de Assinaturas UNIFESP</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        unifesp: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#1E5A3A',
+                        },
+                        gray: {
+                            850: 'var(--bg-panel)',
+                            900: 'var(--bg-main)',
+                            950: 'var(--bg-body)',
+                            800: 'var(--bg-element)',
+                            700: 'var(--border-color)',
+                            600: 'var(--text-muted)',
+                            300: 'var(--text-dim)',
+                        },
+                        white: 'var(--text-primary)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-body: #030712;
+            --bg-main: #111827;
+            --bg-panel: #1f2937;
+            --bg-element: #374151;
+            --border-color: #374151;
+            --text-primary: #f9fafb;
+            --text-muted: #9ca3af;
+            --text-dim: #d1d5db;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-dim); 
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+        .content-section h2 {
+            color: #4ade80;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .content-section ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+
+    <!-- Cabeçalho -->
+    <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
+        <div class="flex items-center justify-between px-4 py-3 border-gray-800 bg-gray-900">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">Gerador de Assinatura</h1>
+                    <span class="text-xl text-gray-700 font-light">|</span>
+                    <span class="text-xl font-bold tracking-tight text-unifesp-400 leading-none truncate">Unifesp : : Política de Privacidade</span>
+                </div>
+            </div>
+            <a href="index.html" class="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition border border-gray-700 text-xs font-medium">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar
+            </a>
+        </div>
+    </header>
+
+    <!-- Área de Conteúdo -->
+    <main class="flex-1 overflow-auto p-6 sm:p-12 fade-in">
+        <div class="max-w-4xl mx-auto bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-8 content-section">
+            <h1 class="text-3xl font-bold text-white mb-6">Política de Privacidade</h1>
+            <p class="text-gray-400">Última atualização: <span id="updateDate"></span></p>
+
+            <section>
+                <h2>1. Compromisso com a Privacidade</h2>
+                <p>A Universidade Federal de São Paulo (UNIFESP) valoriza a privacidade dos seus servidores e colaboradores. Esta política descreve como as informações são tratadas pelo Gerador de Assinaturas, em conformidade com a Lei Geral de Proteção de Dados (LGPD).</p>
+            </section>
+
+            <section>
+                <h2>2. Coleta e Processamento de Dados</h2>
+                <p>O diferencial desta ferramenta é o seu modelo de funcionamento técnico:</p>
+                <ul>
+                    <li><strong>Execução Client-side:</strong> O processamento dos dados ocorre inteiramente no lado do cliente (o seu navegador). Nenhuma informação digitada nos campos (nome, e-mail, telefone, etc.) sai do seu computador para servidores de processamento.</li>
+                    <li><strong>Ausência de Backend:</strong> Não possuímos bases de dados ligadas a este formulário. Assim que a página é atualizada ou fechada, as informações não salvas são perdidas.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>3. Armazenamento e Cookies</h2>
+                <p>Esta aplicação não utiliza cookies de rastreamento ou marketing. Caso o navegador armazene temporariamente informações nos campos de formulário, isto é uma funcionalidade nativa do seu navegador (autocompletar) e não da aplicação UNIFESP.</p>
+            </section>
+
+            <section>
+                <h2>4. Arquivos JSON e Segurança</h2>
+                <p>As funções de <strong>Exportar</strong> e <strong>Importar JSON</strong> servem exclusivamente para a sua conveniência:</p>
+                <ul>
+                    <li>O arquivo gerado contém os dados em texto plano para que você possa reutilizá-los futuramente.</li>
+                    <li>A segurança deste arquivo, após o download, é de responsabilidade exclusiva do usuário. Recomendamos não partilhar este arquivo com terceiros não autorizados.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>5. Links Externos</h2>
+                <p>A aplicação contém links para serviços externos (Lattes, ORCID, GitHub, Portais UNIFESP). Ao clicar nestes links, você estará sujeito às políticas de privacidade de cada um desses terceiros.</p>
+            </section>
+
+            <section>
+                <h2>6. Alterações nesta Política</h2>
+                <p>Podemos atualizar esta política de privacidade periodicamente para refletir mudanças técnicas ou legais. A versão mais recente estará sempre disponível nesta página.</p>
+            </section>
+
+            <div class="mt-12 p-6 bg-gray-850 rounded-xl border border-unifesp-900/30 text-center">
+                <p class="mb-0 italic">Esta ferramenta foi projetada para ser "Privacy by Design", garantindo que a sua identidade profissional seja gerada de forma segura e privada.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+        <div class="flex items-center gap-4">
+            <span><span class="font-mono">v1.2.1</span> | Modificado: <span id="lastModDate"></span></span>
+            <span class="text-gray-700">|</span>
+            <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
+            <span class="text-gray-700">|</span>
+            <a href="termodeprivacidade.html" class="text-white font-semibold">Política de privacidade</a>
+        </div>
+        
+        <div class="flex gap-3 items-center">
+            <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
+                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+            </a>
+            <span class="text-gray-600">|</span>
+            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
+            <span class="text-gray-600">|</span>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
+                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        const date = new Date().toLocaleDateString();
+        document.getElementById('lastModDate').innerText = date;
+        document.getElementById('updateDate').innerText = date;
+    </script>
+</body>
+</html>

@@ -269,7 +269,7 @@
                             <div id="signaturePreview" class="signature-content text-black"></div>
                         </div>
                         
-                        <!-- Barra de Ações Otimizada -->
+                        <!-- Barra de Ações -->
                         <div class="flex items-center gap-2">
                             <button id="copyButton" class="copy-button">
                                 <i class="fa-solid fa-copy"></i> Copiar para o Gmail
@@ -292,11 +292,11 @@
     <!-- Rodapé -->
     <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex items-center gap-4">
-            <span><span class="font-mono">v1.1.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono">v1.2.1</span> | Modificado: <span id="lastModDate"></span></span>
             <span class="text-gray-700">|</span>
-            <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
-                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
-            </a>
+            <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
+            <span class="text-gray-700">|</span>
+            <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
         </div>
         
         <div class="flex gap-3 items-center">
@@ -305,18 +305,24 @@
             </a>
             <span class="text-gray-600">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors" title="Repositório Oficial do Projeto">UNIFESP</a>
+            <span class="text-gray-600">|</span>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
+                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+            </a>
         </div>
     </footer>
 
     <div id="hiddenSignatureContainer" style="position: absolute; left: -9999px; top: -9999px;"></div>
 
     <script>
-        const LOGO_BRASIL = 'https://assinaturadeemail.sistema.gov.br/assets/images/logo_brasil_2023.png';
-        const LOGO_UNIFESP = 'https://dci.unifesp.br/images/DCI/Marca_unifesp/Unifesp_simples_policromia_RGB.png';
-        const LOGO_SUA_DEFAULT = 'https://atendimento.unifesp.br/pics/logos/suaunifespservicos.png';
+        // Caminhos Relativos das Imagens
+        const LOGO_BRASIL = 'images/governo.png';
+        const LOGO_UNIFESP = 'images/unifesp.png';
+        const LOGO_SUA_DEFAULT = 'images/suaunifesp.png';
+        const ICON_ORCID = 'images/orcid.png';
+        const ICON_LATTES = 'images/lattes.png';
+        
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
-        const ICON_ORCID = 'https://ccarvalho.net/assinatura_unifesp/Orcid_icon.png';
-        const ICON_LATTES = 'https://mbaufscar.com.br/wp-content/themes/MBA_Economia/IMG/sbr-lattes.png';
 
         const inputs = ['fullName', 'title', 'department', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'pgpKey', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
             const el = document.getElementById(id);
@@ -344,7 +350,7 @@
             const celular = inputs.celular?.value;
             const lattes = inputs.lattes?.value ? `https://lattes.cnpq.br/${inputs.lattes.value}` : '';
             const orcid = inputs.orcid?.value ? `https://orcid.org/${inputs.orcid.value}` : '';
-            const scheduleLink = inputs.scheduleLink?.value ? `https://calendar.app.google/${inputs.scheduleLink.value}` : '';
+            const scheduleLinkID = inputs.scheduleLink?.value;
             const pgpKey = inputs.pgpKey?.value;
             const photoUrl = inputs.photoUrl?.value || PLACEHOLDER_AVATAR;
             const customMessage = inputs.customMessage?.value;
@@ -378,14 +384,17 @@
 
             if (pgpKey) contactHTML += `<div style="color: #333; font-size: 11px; margin: 2px 0; display: flex; align-items: center; gap: 4px;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E5A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3L15.5 7.5z"/></svg><span style="color: #1E5A3A; font-weight: bold;">PGP:</span><span style="color: #666;">${linkify(escapeHtml(pgpKey))}</span></div>`;
 
+            // Lógica restaurada para exibição do Agendamento
             let btns = '';
-            if (scheduleLink) {
-                btns += `<a href="${escapeHtml(scheduleLink)}" style="display: inline-block; background-color: #1E5A3A; color: white; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px;">📅 Agendar horário</a>`;
+            if (scheduleLinkID) {
+                btns += `<a href="https://calendar.app.google/${escapeHtml(scheduleLinkID)}" style="display: inline-block; background-color: #1E5A3A; color: white; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px;">📅 Agendar horário</a>`;
             }
             btns += `<a href="https://atendimento.unifesp.br" style="display: inline-block; background-color: #1E5A3A; color: white; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px;">🎫 Abrir um chamado</a>`;
 
             let logosHTML = '';
-            if (sectorLogoUrl) logosHTML += `<td style="padding-right: 25px; vertical-align: bottom;"><a href="${escapeHtml(sectorLogoLink)}"><img src="${escapeHtml(sectorLogoUrl)}" height="40" style="height: 40px; border: 0; vertical-align: bottom;"></a></td>`;
+            if (sectorLogoUrl) {
+                logosHTML += `<td style="padding-right: 25px; vertical-align: bottom;"><a href="${escapeHtml(sectorLogoLink)}"><img src="${escapeHtml(sectorLogoUrl)}" height="40" style="height: 40px; border: 0; vertical-align: bottom;"></a></td>`;
+            }
             logosHTML += `<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://sua.unifesp.br"><img src="${LOGO_SUA_DEFAULT}" height="40" style="height: 40px; border: 0; vertical-align: bottom;"></a></td><td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; vertical-align: bottom;"></a></td><td style="vertical-align: bottom;"><a href="https://www.gov.br/pt-br"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; vertical-align: bottom;"></a></td>`;
 
             return `
