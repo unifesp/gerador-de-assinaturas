@@ -1,2 +1,2 @@
 # gerador-de-assinaturas
-ë um gerador de assinaturas imples para facilitar a padronização da comunicaão por email da universidade
+Gerador de assinaturas simples para facilitar a padronização da comunicão por email da Universidade Federal de São Paulo
