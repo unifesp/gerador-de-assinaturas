@@ -80,14 +80,3 @@ Crachá/RF: 01-20418
 Siape: 28753972
 Situação: Ativo
 Responsável pelo Centro de Custo: ALEXSANDRO CARDOSO CARVALHO
-
-
-ID do cliente 800018626028-g4qma58t7g6f1o2tirfmulp6rvrnmuuc.apps.googleusercontent.com
-Não será mais possível acessar ou fazer o download da chave secreta do cliente depois que esta caixa de diálogo for fechada. Copie ou faça o download das informações abaixo e armazene-as em um local seguro.
-Chave secreta do cliente
-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
-Data da criação
-25 de fevereiro de 2026 01:43:08 GMT-3
-Status
-Ativadas
-
