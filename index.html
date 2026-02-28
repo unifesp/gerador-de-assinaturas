@@ -248,6 +248,37 @@
                                 </div>
                             </div>
 
+                            <!-- Redes Sociais e Contatos Adicionais -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">GitHub (User)</label>
+                                    <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">GitLab (User)</label>
+                                    <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">WhatsApp (Número)</label>
+                                    <input type="text" id="whatsapp" class="form-input-dark" placeholder="(DDD) 00000-0000">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">Instagram (User)</label>
+                                    <input type="text" id="instagram" class="form-input-dark" placeholder="ex: seu-perfil">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">YouTube (User)</label>
+                                    <input type="text" id="youtube" class="form-input-dark" placeholder="ex: @seu-canal">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block">Wikipedia (User)</label>
+                                    <input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário">
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="flex items-center gap-2 mb-1">
                                     <label class="form-label text-gray-300 font-medium mb-0">Link da Agenda (ID)</label>
@@ -327,7 +358,7 @@
     <!-- Rodapé -->
     <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-            <span><span class="font-mono">v0.9.0</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono">v0.9.2</span> | Modificado: <span id="lastModDate"></span></span>
             <span class="hidden sm:inline text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="hidden sm:inline text-gray-700">|</span>
@@ -357,10 +388,16 @@
         const LOGO_SUA_DEFAULT = 'images/suaunifesp.png';
         const ICON_ORCID = 'images/orcid.png';
         const ICON_LATTES = 'images/lattes.png';
+        const ICON_GITHUB = 'images/github.png';
+        const ICON_GITLAB = 'images/gitlab.png';
+        const ICON_INSTAGRAM = 'images/instagram.png';
+        const ICON_YOUTUBE = 'images/youtube.png';
+        const ICON_WIKIPEDIA = 'images/wikipedia.png';
+        const ICON_WHATSAPP = 'images/whatsapp.png';
         
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
 
-        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'pgpKey', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
+        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'github', 'gitlab', 'whatsapp', 'instagram', 'youtube', 'wikipedia', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
             const el = document.getElementById(id);
             if (el) acc[id] = el;
             return acc;
@@ -387,8 +424,22 @@
             const phone = inputs.phone?.value;
             const ramal = inputs.ramal?.value;
             const celular = inputs.celular?.value;
+            
             const lattes = inputs.lattes?.value ? `https://lattes.cnpq.br/${inputs.lattes.value.trim()}` : '';
             const orcid = inputs.orcid?.value ? `https://orcid.org/${inputs.orcid.value.trim()}` : '';
+            const github = inputs.github?.value ? `https://github.com/${inputs.github.value.trim()}` : '';
+            const gitlab = inputs.gitlab?.value ? `https://gitlab.com/${inputs.gitlab.value.trim()}` : '';
+            const instagram = inputs.instagram?.value ? `https://instagram.com/${inputs.instagram.value.trim().replace('@', '')}` : '';
+            const youtube = inputs.youtube?.value ? `https://youtube.com/${inputs.youtube.value.trim().startsWith('@') ? '' : '@'}${inputs.youtube.value.trim()}` : '';
+            const wikipedia = inputs.wikipedia?.value ? `https://pt.wikipedia.org/wiki/Usuário:${inputs.wikipedia.value.trim()}` : '';
+            
+            // Lógica WhatsApp
+            let whatsappUrl = '';
+            if (inputs.whatsapp?.value) {
+                const cleanWhatsApp = inputs.whatsapp.value.replace(/\D/g, '');
+                whatsappUrl = `https://wa.me/55${cleanWhatsApp}`;
+            }
+            
             const scheduleLinkID = inputs.scheduleLink?.value;
             const pgpKey = inputs.pgpKey?.value;
             const photoUrl = inputs.photoUrl?.value || PLACEHOLDER_AVATAR;
@@ -396,7 +447,6 @@
             const sectorLogoUrl = inputs.sectorLogoUrl?.value;
             const sectorLogoLink = inputs.sectorLogoLink?.value || 'https://sua.unifesp.br';
 
-            // Cores baseadas em transparência com alta opacidade para melhor contraste em ambos os temas
             let contactHTML = `<div style="color: inherit; font-size: 12px; margin: 2px 0;"><a href="mailto:${email}" style="color: #1E5A3A; text-decoration: none;">✉️ ${escapeHtml(email)}</a></div>`;
 
             let phoneLineParts = [];
@@ -413,11 +463,19 @@
                 contactHTML += `<div style="color: inherit; font-size: 12px; margin: 2px 0;">${phoneLineParts.join('<span style="color: #1E5A3A; font-weight: bold; margin: 0 8px;"> | </span>')}</div>`;
             }
 
-            if (lattes || orcid) {
-                let researchLinks = [];
-                if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="color: #1E5A3A; text-decoration: none; display: inline-block; white-space: nowrap; margin-right: 12px;"><img src="${ICON_LATTES}" width="16" height="16" style="vertical-align: middle; border: 0; display: inline-block; margin-right: 4px;"><span style="vertical-align: middle;">Currículo Lattes</span></a>`);
-                if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="color: #1E5A3A; text-decoration: none; display: inline-block; white-space: nowrap;"><img src="${ICON_ORCID}" width="16" height="16" style="vertical-align: middle; border: 0; display: inline-block; margin-right: 4px;"><span style="vertical-align: middle;">ORCID</span></a>`);
-                contactHTML += `<div style="color: inherit; font-size: 12px; margin: 2px 0;">${researchLinks.join('')}</div>`;
+            // Links de Redes Sociais e Pesquisa (Apenas ícones conforme solicitado)
+            let researchLinks = [];
+            if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="Currículo Lattes"><img src="${ICON_LATTES}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="ORCID"><img src="${ICON_ORCID}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (github) researchLinks.push(`<a href="${escapeHtml(github)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="GitHub"><img src="${ICON_GITHUB}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (gitlab) researchLinks.push(`<a href="${escapeHtml(gitlab)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="GitLab"><img src="${ICON_GITLAB}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (instagram) researchLinks.push(`<a href="${escapeHtml(instagram)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="Instagram"><img src="${ICON_INSTAGRAM}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (youtube) researchLinks.push(`<a href="${escapeHtml(youtube)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="YouTube"><img src="${ICON_YOUTUBE}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (wikipedia) researchLinks.push(`<a href="${escapeHtml(wikipedia)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="Wikipedia"><img src="${ICON_WIKIPEDIA}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            if (whatsappUrl) researchLinks.push(`<a href="${escapeHtml(whatsappUrl)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="WhatsApp"><img src="${ICON_WHATSAPP}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
+            
+            if (researchLinks.length > 0) {
+                contactHTML += `<div style="margin: 6px 0;">${researchLinks.join('')}</div>`;
             }
 
             if (pgpKey) contactHTML += `<div style="color: inherit; font-size: 11px; margin: 2px 0;"><span style="color: #1E5A3A; font-weight: bold;">PGP:</span> ${escapeHtml(pgpKey)}</div>`;
