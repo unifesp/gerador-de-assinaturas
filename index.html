@@ -162,7 +162,7 @@
         .label-with-icon {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .layout-selector {
@@ -246,56 +246,61 @@
 
                     <form id="signatureForm" onsubmit="event.preventDefault();">
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-user-pen"></i> Seus Dados
+                            <i class="fa-solid fa-user-pen"></i> Seus Dados Principais
                         </h2>
 
                         <div class="grid grid-cols-1 gap-4">
                             <!-- Nome Completo -->
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Nome Completo <span class="text-red-500">*</span></label>
-                                <input type="text" id="fullName" class="form-input-dark" placeholder="Ex: Alexsandro Cardoso Carvalho" value="" required minlength="3">
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
+                                <input type="text" id="fullName" class="form-input-dark" placeholder="Digite seu nome completo profissional" value="" required minlength="3">
                             </div>
 
                             <!-- Foto de Perfil -->
                             <div id="photoGroup" class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Foto de Perfil (URL)</label>
-                                <input type="url" id="photoUrl" class="form-input-dark" value="" placeholder="https://exemplo.com/foto.jpg">
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
+                                <input type="url" id="photoUrl" class="form-input-dark" value="" placeholder="https://exemplo.com/suafoto.jpg">
+                                <p class="text-[10px] text-gray-500 mt-1">Recomendado: foto quadrada (1:1) com fundo sólido ou transparente.</p>
                             </div>
 
-                            <!-- Restante dos campos principais -->
+                            <!-- Cargo -->
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Cargo / Função <span class="text-red-500">*</span></label>
-                                <input type="text" id="title" class="form-input-dark" placeholder="Ex: Diretor de Governança" value="" required>
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
+                                <input type="text" id="title" class="form-input-dark" placeholder="Ex: Professor Adjunto, Analista de TI..." value="" required>
                             </div>
 
+                            <!-- Unidade -->
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Unidade de lotação <span class="text-red-500">*</span></label>
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Unidade de Lotação <span class="text-red-500">*</span></label>
                                 <input type="text" id="department" class="form-input-dark" placeholder="Ex: Superintendência de Tecnologia da Informação" value="" required>
                             </div>
 
+                            <!-- Unidade Superior -->
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Unidade Superior</label>
-                                <input type="text" id="superiorUnit" class="form-input-dark" placeholder="Ex: Reitoria" value="">
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Unidade Superior (Opcional)</label>
+                                <input type="text" id="superiorUnit" class="form-input-dark" placeholder="Ex: Reitoria, Pró-Reitoria de Graduação..." value="">
                             </div>
 
+                            <!-- E-mail -->
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">E-mail <span class="text-red-500">*</span></label>
-                                <input type="email" id="email" class="form-input-dark" value="" required placeholder="exemplo@unifesp.br">
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">E-mail Institucional <span class="text-red-500">*</span></label>
+                                <input type="email" id="email" class="form-input-dark" value="" required placeholder="seu.usuario@unifesp.br">
                             </div>
 
+                            <!-- Telefones -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">Telefone</label>
-                                    <input type="tel" id="phone" class="form-input-dark" value="" placeholder="(11) 0000-0000">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Telefone Fixo</label>
+                                    <input type="tel" id="phone" class="form-input-dark" value="" placeholder="(11) 3385-4100">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">Ramal</label>
-                                    <input type="text" id="ramal" class="form-input-dark" value="" placeholder="0000" pattern="\d*">
+                                    <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Ramal</label>
+                                    <input type="text" id="ramal" class="form-input-dark" value="" placeholder="8000" pattern="\d*">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Celular</label>
+                                <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Celular Institucional/Pessoal</label>
                                 <input type="tel" id="celular" class="form-input-dark" placeholder="(11) 90000-0000">
                             </div>
 
@@ -306,88 +311,192 @@
                                 </summary>
                                 <div class="mt-4 flex flex-col gap-4">
                                     
-                                    <!-- Grupo de Links Sociais/Acadêmicos -->
+                                    <!-- Subtítulo: Redes Sociais e Acadêmicas -->
+                                    <div class="form-group">
+                                        <label class="form-label text-unifesp-400 font-bold mb-2 block text-xs uppercase tracking-wider">Redes Sociais e Acadêmicas</label>
+                                        <p class="text-[10px] text-gray-500">Insira apenas o ID ou nome de usuário conforme o exemplo.</p>
+                                    </div>
+
                                     <div id="socialFieldsGroup" class="flex flex-col gap-4">
+                                        <!-- Lattes -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID Numérico)
                                             </label>
-                                            <input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos (apenas números)" value="" pattern="[0-9]{16}" title="O ID Lattes deve conter exatamente 16 dígitos numéricos">
+                                            <input type="text" id="lattes" class="form-input-dark" placeholder="Ex: 6792408436784536" pattern="[0-9]{16}" title="Insira os 16 dígitos numéricos do seu currículo Lattes">
                                         </div>
 
+                                        <!-- ProdMais Unifesp -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)
                                             </label>
-                                            <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]" title="O ORCID deve seguir o formato 0000-0000-0000-0000">
+                                            <input type="text" id="prodmais" class="form-input-dark" placeholder="ID presente na URL do seu perfil no ProdMais">
                                         </div>
 
+                                        <!-- ORCID -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/orcid.png" class="w-4 h-4" alt=""> ORCID (ID Completo)
                                             </label>
-                                            <input type="text" id="linkedin" class="form-input-dark" placeholder="ex: seu-nome-perfil">
+                                            <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]">
                                         </div>
 
+                                        <!-- Zotero -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/zotero.png" class="w-4 h-4" alt=""> Zotero (Nome de Usuário)
                                             </label>
-                                            <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
+                                            <input type="text" id="zotero" class="form-input-dark" placeholder="Seu ID de usuário Zotero">
                                         </div>
 
+                                        <!-- Wikipédia -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Nome de Usuário)
                                             </label>
-                                            <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
+                                            <input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome exato da sua página de usuário">
                                         </div>
 
+                                        <!-- Google Acadêmico -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                                <img src="images/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp (Somente Números)
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/googleacademic.png" class="w-4 h-4" alt=""> Google Acadêmico (ID do Perfil)
                                             </label>
-                                            <input type="text" id="whatsapp" class="form-input-dark" placeholder="11900000000" pattern="\d{10,11}" title="Insira o número com DDD (10 ou 11 dígitos), apenas números">
+                                            <input type="text" id="googleacademic" class="form-input-dark" placeholder="O código 'user=XXXX' da sua URL">
                                         </div>
 
+                                        <!-- ResearchGate -->
                                         <div class="form-group">
-                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/researchgate.png" class="w-4 h-4" alt=""> ResearchGate (ID de Perfil)
+                                            </label>
+                                            <input type="text" id="researchgate" class="form-input-dark" placeholder="Ex: Nome-Sobrenome">
+                                        </div>
+
+                                        <!-- LinkedIn -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Nome de Usuário)
+                                            </label>
+                                            <input type="text" id="linkedin" class="form-input-dark" placeholder="Ex: joao-silva-123">
+                                        </div>
+
+                                        <!-- Instagram -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
                                                 <img src="images/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)
                                             </label>
-                                            <input type="text" id="instagram" class="form-input-dark" placeholder="ex: seu-perfil">
+                                            <input type="text" id="instagram" class="form-input-dark" placeholder="Apenas o @usuario">
+                                        </div>
+
+                                        <!-- Reddit -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/reddit.png" class="w-4 h-4" alt=""> Reddit (Nome de Usuário)
+                                            </label>
+                                            <input type="text" id="reddit" class="form-input-dark" placeholder="Seu nome de usuário">
+                                        </div>
+
+                                        <!-- TikTok -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)
+                                            </label>
+                                            <input type="text" id="tiktok" class="form-input-dark" placeholder="Ex: @seuperfil">
+                                        </div>
+
+                                        <!-- YouTube -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/youtube.png" class="w-4 h-4" alt=""> YouTube (ID do Canal ou @)
+                                            </label>
+                                            <input type="text" id="youtube" class="form-input-dark" placeholder="Ex: @meucanal">
+                                        </div>
+
+                                        <!-- Telegram -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/telegram.png" class="w-4 h-4" alt=""> Telegram (Nome de Usuário)
+                                            </label>
+                                            <input type="text" id="telegram" class="form-input-dark" placeholder="Seu @ de usuário">
+                                        </div>
+
+                                        <!-- Signal -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/signal.png" class="w-4 h-4" alt=""> Signal (Número ou ID)
+                                            </label>
+                                            <input type="text" id="signal" class="form-input-dark" placeholder="Ex: +5511999999999">
+                                        </div>
+
+                                        <!-- Medium -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/medium.png" class="w-4 h-4" alt=""> Medium (Nome de Usuário)
+                                            </label>
+                                            <input type="text" id="medium" class="form-input-dark" placeholder="Apenas o @usuario">
+                                        </div>
+
+                                        <!-- WhatsApp -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp (Número com DDD)
+                                            </label>
+                                            <input type="text" id="whatsapp" class="form-input-dark" placeholder="Apenas números: 11999999999" pattern="\d{10,11}">
+                                        </div>
+
+                                        <!-- GitHub -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)
+                                            </label>
+                                            <input type="text" id="github" class="form-input-dark" placeholder="Seu nome de usuário">
+                                        </div>
+
+                                        <!-- GitLab -->
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs">
+                                                <img src="images/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)
+                                            </label>
+                                            <input type="text" id="gitlab" class="form-input-dark" placeholder="Seu nome de usuário">
                                         </div>
                                     </div>
 
-                                    <!-- Campos Extras -->
+                                    <!-- Campos Técnicos -->
                                     <div class="form-group pt-2 border-t border-gray-700">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider font-bold text-unifesp-400">Opções Técnicas</label>
+                                        <label class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase tracking-wider">Opções Técnicas</label>
                                     </div>
 
+                                    <!-- Link da Agenda -->
                                     <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Link da Agenda (ID do Google)</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Link da Agenda (ID do Google Calendar)</label>
                                         <div class="flex">
                                             <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-[10px]">calendar.app.google/</span>
                                             <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="Ex: 2cKG4...">
                                         </div>
                                     </div>
 
+                                    <!-- PGP -->
                                     <div id="pgpGroup" class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Chave Pública PGP</label>
-                                        <input type="text" id="pgpKey" class="form-input-dark" placeholder="ID ou Chave Completa" value="">
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Chave Pública PGP</label>
+                                        <input type="text" id="pgpKey" class="form-input-dark" placeholder="Cole aqui sua chave pública ou link para servidor de chaves">
                                     </div>
 
+                                    <!-- Mensagem Personalizada -->
                                     <div id="customMessageGroup" class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Mensagem Personalizada</label>
-                                        <textarea id="customMessage" class="form-input-dark" rows="3" placeholder="Mensagem adicional no rodapé da assinatura"></textarea>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Mensagem Personalizada de Rodapé</label>
+                                        <textarea id="customMessage" class="form-input-dark" rows="3" placeholder="Frase de efeito ou informação de segurança adicional..."></textarea>
                                     </div>
 
+                                    <!-- Logotipo Setorial -->
                                     <div class="form-group">
                                         <label class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
-                                            <i class="fa-solid fa-gear"></i> Logotipo Setorial
+                                            <i class="fa-solid fa-gear"></i> Logotipo Setorial Personalizado
                                         </label>
                                         <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700 space-y-3">
-                                            <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem (https://...)">
-                                            <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link de destino ao clicar (https://...)">
+                                            <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL direta da imagem do logo setorial (PNG ou JPG)">
+                                            <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link para onde o logotipo deve redirecionar">
                                         </div>
                                     </div>
                                 </div>
@@ -400,7 +509,7 @@
                 <div class="space-y-6 lg:col-span-3">
                     <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8 lg:sticky lg:top-4">
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-eye"></i> Pré-visualização
+                            <i class="fa-solid fa-eye"></i> Pré-visualização Real
                         </h2>
                         
                         <div class="signature-preview-area mb-6">
@@ -413,20 +522,20 @@
                                 <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
 
-                            <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda / Tutorial">
+                            <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda / Tutorial de Instalação">
                                 <i class="fa-solid fa-question"></i>
                             </a>
 
-                            <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar formulário">
+                            <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar todo o formulário">
                                 <i class="fa-solid fa-eraser"></i>
                             </button>
                             
-                            <button id="exportButton" class="json-action-button bg-unifesp-800 hover:bg-unifesp-900 text-white border-unifesp-700" title="Exportar dados para arquivo JSON">
-                                <i class="fa-solid fa-file-arrow-down"></i> JSON
+                            <button id="exportButton" class="json-action-button bg-unifesp-800 hover:bg-unifesp-900 text-white border-unifesp-700" title="Exportar dados atuais para arquivo JSON">
+                                <i class="fa-solid fa-file-arrow-down"></i> Exportar JSON
                             </button>
                             
-                            <button id="importButton" class="json-action-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Importar dados de arquivo JSON">
-                                <i class="fa-solid fa-file-arrow-up"></i> JSON
+                            <button id="importButton" class="json-action-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Importar dados de um arquivo JSON salvo">
+                                <i class="fa-solid fa-file-arrow-up"></i> Importar JSON
                             </button>
                         </div>
                     </div>
@@ -438,7 +547,7 @@
     <!-- Rodapé -->
     <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-            <span><span class="font-mono">v0.9.5</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono">v0.9.6</span> | Modificado: <span id="lastModDate"></span></span>
             <span class="hidden sm:inline text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="hidden sm:inline text-gray-700">|</span>
@@ -458,23 +567,36 @@
         </div>
     </footer>
 
+    <!-- Contentor para o clipboard com fundo transparente -->
     <div id="hiddenSignatureContainer" style="position: fixed; left: -9999px; top: 0; width: 600px; height: auto; background-color: transparent !important; color: inherit; overflow: hidden; margin: 0; padding: 0; pointer-events: none;"></div>
 
     <script>
+        // Caminhos das Imagens
         const LOGO_BRASIL = 'images/governo.png';
         const LOGO_UNIFESP = 'images/unifesp.png';
         const LOGO_SUA_DEFAULT = 'images/suaunifesp.png';
         const ICON_ORCID = 'images/orcid.png';
         const ICON_LATTES = 'images/lattes.png';
+        const ICON_PRODMAIS = 'images/prodmais.png';
+        const ICON_ZOTERO = 'images/zotero.png';
+        const ICON_WIKIPEDIA = 'images/wikipedia.png';
+        const ICON_GOOGLEACADEMIC = 'images/googleacademic.png';
+        const ICON_RESEARCHGATE = 'images/researchgate.png';
+        const ICON_LINKEDIN = 'images/linkedin.png';
+        const ICON_INSTAGRAM = 'images/instagram.png';
+        const ICON_REDDIT = 'images/reddit.png';
+        const ICON_TIKTOK = 'images/tiktok.png';
+        const ICON_YOUTUBE = 'images/youtube.png';
+        const ICON_TELEGRAM = 'images/telegram.png';
+        const ICON_SIGNAL = 'images/signal.png';
+        const ICON_MEDIUM = 'images/medium.png';
+        const ICON_WHATSAPP = 'images/whatsapp.png';
         const ICON_GITHUB = 'images/github.png';
         const ICON_GITLAB = 'images/gitlab.png';
-        const ICON_INSTAGRAM = 'images/instagram.png';
-        const ICON_WHATSAPP = 'images/whatsapp.png';
-        const ICON_LINKEDIN = 'images/linkedin.png';
         
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
 
-        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'github', 'gitlab', 'whatsapp', 'instagram', 'linkedin', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
+        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'prodmais', 'orcid', 'zotero', 'wikipedia', 'googleacademic', 'researchgate', 'linkedin', 'instagram', 'reddit', 'tiktok', 'youtube', 'telegram', 'signal', 'medium', 'whatsapp', 'github', 'gitlab', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
             const el = document.getElementById(id);
             if (el) acc[id] = el;
             return acc;
@@ -494,6 +616,8 @@
 
         function generateSignature() {
             const layoutType = document.querySelector('input[name="layoutType"]:checked').value;
+            const isSimplified = layoutType === 'simplificado';
+            
             const fullName = inputs.fullName?.value || 'Seu Nome';
             const title = inputs.title?.value || 'Seu Cargo';
             const department = inputs.department?.value || 'Sua Unidade';
@@ -503,18 +627,27 @@
             const ramal = inputs.ramal?.value;
             const celular = inputs.celular?.value;
             
-            const lattes = inputs.lattes?.value ? `https://lattes.cnpq.br/${inputs.lattes.value.trim()}` : '';
-            const orcid = inputs.orcid?.value ? `https://orcid.org/${inputs.orcid.value.trim()}` : '';
-            const github = inputs.github?.value ? `https://github.com/${inputs.github.value.trim()}` : '';
-            const gitlab = inputs.gitlab?.value ? `https://gitlab.com/${inputs.gitlab.value.trim()}` : '';
-            const instagram = inputs.instagram?.value ? `https://instagram.com/${inputs.instagram.value.trim().replace('@', '')}` : '';
-            const linkedin = inputs.linkedin?.value ? `https://linkedin.com/in/${inputs.linkedin.value.trim()}` : '';
+            const getLink = (id, base) => inputs[id]?.value ? base + inputs[id].value.trim() : null;
             
-            let whatsappUrl = '';
-            if (inputs.whatsapp?.value) {
-                const cleanWhatsApp = inputs.whatsapp.value.replace(/\D/g, '');
-                whatsappUrl = `https://wa.me/55${cleanWhatsApp}`;
-            }
+            const lattes = getLink('lattes', 'https://lattes.cnpq.br/');
+            const prodmais = getLink('prodmais', 'https://prodmais.unifesp.br/author/');
+            const orcid = getLink('orcid', 'https://orcid.org/');
+            const zotero = getLink('zotero', 'https://www.zotero.org/');
+            const wikipedia = getLink('wikipedia', 'https://pt.wikipedia.org/wiki/Usuário:');
+            const googleacademic = getLink('googleacademic', 'https://scholar.google.com.br/citations?user=');
+            const researchgate = getLink('researchgate', 'https://www.researchgate.net/profile/');
+            const linkedin = getLink('linkedin', 'https://linkedin.com/in/');
+            const instagram = inputs.instagram?.value ? `https://instagram.com/${inputs.instagram.value.trim().replace('@', '')}` : null;
+            const reddit = getLink('reddit', 'https://reddit.com/user/');
+            const tiktok = inputs.tiktok?.value ? `https://www.tiktok.com/@${inputs.tiktok.value.trim().replace('@', '')}` : null;
+            const youtube = inputs.youtube?.value ? `https://youtube.com/${inputs.youtube.value.trim().startsWith('@') ? '' : '@'}${inputs.youtube.value.trim()}` : null;
+            const telegram = inputs.telegram?.value ? `https://t.me/${inputs.telegram.value.trim().replace('@', '')}` : null;
+            const signal = getLink('signal', 'https://signal.me/#p/');
+            const medium = inputs.medium?.value ? `https://medium.com/@${inputs.medium.value.trim().replace('@', '')}` : null;
+            const github = getLink('github', 'https://github.com/');
+            const gitlab = getLink('gitlab', 'https://gitlab.com/');
+            
+            let whatsappUrl = inputs.whatsapp?.value ? `https://wa.me/55${inputs.whatsapp.value.replace(/\D/g, '')}` : null;
             
             const scheduleLinkID = inputs.scheduleLink?.value;
             const pgpKey = inputs.pgpKey?.value;
@@ -522,8 +655,6 @@
             const customMessage = inputs.customMessage?.value;
             const sectorLogoUrl = inputs.sectorLogoUrl?.value;
             const sectorLogoLink = inputs.sectorLogoLink?.value || 'https://sua.unifesp.br';
-
-            const isSimplified = layoutType === 'simplificado';
 
             let contactHTML = `<div style="color: inherit; font-size: 12px; margin: 2px 0;"><a href="mailto:${email}" style="color: #1E5A3A; text-decoration: none;">✉️ ${escapeHtml(email)}</a></div>`;
 
@@ -543,16 +674,29 @@
 
             let socialIconsHTML = '';
             if (!isSimplified) {
-                let researchLinks = [];
-                if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_LATTES}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_ORCID}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (linkedin) researchLinks.push(`<a href="${escapeHtml(linkedin)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_LINKEDIN}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (github) researchLinks.push(`<a href="${escapeHtml(github)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_GITHUB}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (gitlab) researchLinks.push(`<a href="${escapeHtml(gitlab)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_GITLAB}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (instagram) researchLinks.push(`<a href="${escapeHtml(instagram)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_INSTAGRAM}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
-                if (whatsappUrl) researchLinks.push(`<a href="${escapeHtml(whatsappUrl)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_WHATSAPP}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                let icons = [];
+                const addIcon = (url, icon, title) => { if(url) icons.push(`<a href="${escapeHtml(url)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="${title}"><img src="${icon}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`); };
                 
-                if (researchLinks.length > 0) socialIconsHTML = `<div style="margin: 6px 0;">${researchLinks.join('')}</div>`;
+                addIcon(lattes, ICON_LATTES, 'Lattes');
+                addIcon(prodmais, ICON_PRODMAIS, 'ProdMais');
+                addIcon(orcid, ICON_ORCID, 'ORCID');
+                addIcon(zotero, ICON_ZOTERO, 'Zotero');
+                addIcon(wikipedia, ICON_WIKIPEDIA, 'Wikipédia');
+                addIcon(googleacademic, ICON_GOOGLEACADEMIC, 'Google Acadêmico');
+                addIcon(researchgate, ICON_RESEARCHGATE, 'ResearchGate');
+                addIcon(linkedin, ICON_LINKEDIN, 'LinkedIn');
+                addIcon(instagram, ICON_INSTAGRAM, 'Instagram');
+                addIcon(reddit, ICON_REDDIT, 'Reddit');
+                addIcon(tiktok, ICON_TIKTOK, 'TikTok');
+                addIcon(youtube, ICON_YOUTUBE, 'YouTube');
+                addIcon(telegram, ICON_TELEGRAM, 'Telegram');
+                addIcon(signal, ICON_SIGNAL, 'Signal');
+                addIcon(medium, ICON_MEDIUM, 'Medium');
+                addIcon(whatsappUrl, ICON_WHATSAPP, 'WhatsApp');
+                addIcon(github, ICON_GITHUB, 'GitHub');
+                addIcon(gitlab, ICON_GITLAB, 'GitLab');
+                
+                if (icons.length > 0) socialIconsHTML = `<div style="margin: 6px 0;">${icons.join('')}</div>`;
             }
 
             if (pgpKey) contactHTML += `<div style="color: inherit; font-size: 11px; margin: 2px 0;"><span style="color: #1E5A3A; font-weight: bold;">PGP:</span> ${escapeHtml(pgpKey)}</div>`;
@@ -578,7 +722,6 @@
                 logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://sua.unifesp.br"><img src="${LOGO_SUA_DEFAULT}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
                 logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
                 logosList.push(`<td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
-                
                 footerLogos = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%;"><table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr>${logosList.join('')}</tr></table></div>`;
             }
 
