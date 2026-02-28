@@ -558,16 +558,17 @@
             if (pgpKey) contactHTML += `<div style="color: inherit; font-size: 11px; margin: 2px 0;"><span style="color: #1E5A3A; font-weight: bold;">PGP:</span> ${escapeHtml(pgpKey)}</div>`;
 
             const btnStyle = "display: inline-block; background-color: #1E5A3A; color: #ffffff; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px; margin-bottom: 5px;";
-            let btns = '';
-            if (scheduleLinkID) btns += `<a href="https://calendar.app.google/${escapeHtml(scheduleLinkID)}" style="${btnStyle}">📅 Agendar horário</a>`;
-            btns += `<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`;
+            let btns = `<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`;
+            if (scheduleLinkID) btns = `<a href="https://calendar.app.google/${escapeHtml(scheduleLinkID)}" style="${btnStyle}">📅 Agendar horário</a> ` + btns;
 
             let leftCellContent = '';
             if (!isSimplified) {
-                leftCellContent = `<img src="${photoUrl}" alt="${fullName}" width="100" height="100" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid #ffffff;">`;
+                leftCellContent = `<img src="${photoUrl}" alt="${fullName}" width="100" height="100" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid #ffffff; margin: 0 auto;">`;
             } else {
-                if (sectorLogoUrl) leftCellContent += `<a href="${escapeHtml(sectorLogoLink)}" style="display: block; margin-bottom: 15px;"><img src="${escapeHtml(sectorLogoUrl)}" width="100" style="width: 100px; border: 0; display: block;"></a>`;
-                leftCellContent += `<a href="https://portal.unifesp.br/" style="display: block;"><img src="${LOGO_UNIFESP}" width="100" style="width: 100px; border: 0; display: block;"></a>`;
+                let logos = [];
+                if (sectorLogoUrl) logos.push(`<a href="${escapeHtml(sectorLogoLink)}" style="display: block; margin-bottom: 15px;"><img src="${escapeHtml(sectorLogoUrl)}" width="100" style="width: 100px; border: 0; display: block; margin: 0 auto;"></a>`);
+                logos.push(`<a href="https://portal.unifesp.br/" style="display: block;"><img src="${LOGO_UNIFESP}" width="100" style="width: 100px; border: 0; display: block; margin: 0 auto;"></a>`);
+                leftCellContent = logos.join('');
             }
 
             let footerLogos = '';
@@ -578,16 +579,12 @@
                 logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
                 logosList.push(`<td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
                 
-                footerLogos = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%; background-color: transparent !important;">
-                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; background-color: transparent !important;"><tr>${logosList.join('')}</tr></table>
-                </div>`;
+                footerLogos = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%;"><table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr>${logosList.join('')}</tr></table></div>`;
             }
 
             let customMsgHTML = '';
             if (!isSimplified && customMessage) {
-                customMsgHTML = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin-top: 10px; padding-top: 10px; color: inherit; opacity: 0.85; font-family: Arial, sans-serif; font-size: 11px; text-align: justify; width: 100%; background-color: transparent !important;">
-                    ${linkify(escapeHtml(customMessage)).replace(/\n/g, '<br>')}
-                </div>`;
+                customMsgHTML = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin-top: 10px; padding-top: 10px; color: inherit; opacity: 0.85; font-family: Arial, sans-serif; font-size: 11px; text-align: justify; width: 100%;">${linkify(escapeHtml(customMessage)).replace(/\n/g, '<br>')}</div>`;
             }
 
             return `<table border="0" cellpadding="0" cellspacing="0" width="600" style="width: 600px; border-collapse: collapse; margin: 0; padding: 0; background-color: transparent !important;">
@@ -595,7 +592,7 @@
         <td style="padding: 15px; border: none; margin: 0; background-color: transparent !important;" valign="top">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; background-color: transparent !important;">
                 <tr>
-                    <td style="padding: 0; vertical-align: middle; width: ${isSimplified ? '120px' : '110px'}; background-color: transparent !important;">
+                    <td style="padding: 0; vertical-align: middle; width: ${isSimplified ? '120px' : '110px'}; background-color: transparent !important; text-align: center;">
                         ${leftCellContent}
                     </td>
                     <td style="width: 2px; background-color: #1E5A3A; padding: 0; vertical-align: middle; min-width: 2px;"></td>
