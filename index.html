@@ -160,6 +160,37 @@
             gap: 6px;
         }
 
+        /* Estilo para Radio Buttons de Layout */
+        .layout-selector {
+            display: flex;
+            gap: 16px;
+            background: var(--bg-panel);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .layout-option {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .layout-option:hover {
+            background: var(--bg-element);
+        }
+
+        .layout-option input[type="radio"] {
+            accent-color: #4ade80;
+            width: 16px;
+            height: 16px;
+        }
+
         @media (max-width: 640px) {
             .header-title { font-size: 1.1rem; }
             .section-title { font-size: 1rem; }
@@ -193,6 +224,22 @@
                 
                 <!-- Formulário -->
                 <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8 lg:col-span-2">
+                    
+                    <!-- Seletor de Modelo -->
+                    <h2 class="section-title font-bold text-unifesp-400 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group"></i> Modelo da Assinatura
+                    </h2>
+                    <div class="layout-selector">
+                        <label class="layout-option">
+                            <input type="radio" name="layoutType" value="completo" checked onchange="updatePreview()">
+                            <span class="text-white font-medium">Completo</span>
+                        </label>
+                        <label class="layout-option">
+                            <input type="radio" name="layoutType" value="simplificado" onchange="updatePreview()">
+                            <span class="text-white font-medium">Simplificado</span>
+                        </label>
+                    </div>
+
                     <form id="signatureForm" onsubmit="event.preventDefault();">
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2">
                             <i class="fa-solid fa-user-pen"></i> Seus Dados
@@ -206,7 +253,7 @@
                             </div>
 
                             <!-- Foto de Perfil -->
-                            <div class="form-group">
+                            <div id="photoGroup" class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block">Foto de Perfil (URL)</label>
                                 <input type="url" id="photoUrl" class="form-input-dark" value="https://atendimento.unifesp.br/pics/usuarios/alexsandrocarvalho.jpg">
                             </div>
@@ -255,123 +302,63 @@
                                 </summary>
                                 <div class="mt-4 flex flex-col gap-4">
                                     
-                                    <!-- Lattes -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)
-                                        </label>
-                                        <input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos" value="6792408436784536">
+                                    <!-- Grupo de Links Sociais/Acadêmicos (Ocultos no Simplificado) -->
+                                    <div id="socialFieldsGroup" class="flex flex-col gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)
+                                            </label>
+                                            <input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos" value="6792408436784536">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)
+                                            </label>
+                                            <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)
+                                            </label>
+                                            <input type="text" id="linkedin" class="form-input-dark" placeholder="ex: seu-nome-perfil">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)
+                                            </label>
+                                            <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)
+                                            </label>
+                                            <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp (Número com DDD)
+                                            </label>
+                                            <input type="text" id="whatsapp" class="form-input-dark" placeholder="(DDD) 00000-0000">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
+                                                <img src="images/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)
+                                            </label>
+                                            <input type="text" id="instagram" class="form-input-dark" placeholder="ex: @seu-perfil">
+                                        </div>
                                     </div>
 
-                                    <!-- ORCID -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)
-                                        </label>
-                                        <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000">
+                                    <!-- Campos Extras -->
+                                    <div class="form-group pt-2 border-t border-gray-700">
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider font-bold text-unifesp-400">Opções Técnicas</label>
                                     </div>
 
-                                    <!-- LinkedIn -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)
-                                        </label>
-                                        <input type="text" id="linkedin" class="form-input-dark" placeholder="ex: seu-nome-perfil">
-                                    </div>
-
-                                    <!-- GitHub -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)
-                                        </label>
-                                        <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
-                                    </div>
-
-                                    <!-- GitLab -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)
-                                        </label>
-                                        <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
-                                    </div>
-
-                                    <!-- Medium -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/medium.png" class="w-4 h-4" alt=""> Medium (Usuário)
-                                        </label>
-                                        <input type="text" id="medium" class="form-input-dark" placeholder="ex: @seu-usuario">
-                                    </div>
-
-                                    <!-- WhatsApp -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp (Número com DDD)
-                                        </label>
-                                        <input type="text" id="whatsapp" class="form-input-dark" placeholder="(DDD) 00000-0000">
-                                    </div>
-
-                                    <!-- Telegram -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/telegram.png" class="w-4 h-4" alt=""> Telegram (Usuário)
-                                        </label>
-                                        <input type="text" id="telegram" class="form-input-dark" placeholder="ex: seu-usuario">
-                                    </div>
-
-                                    <!-- Signal -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/signal.png" class="w-4 h-4" alt=""> Signal (Número / ID)
-                                        </label>
-                                        <input type="text" id="signal" class="form-input-dark" placeholder="ex: seu-id.01">
-                                    </div>
-
-                                    <!-- TikTok -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)
-                                        </label>
-                                        <input type="text" id="tiktok" class="form-input-dark" placeholder="ex: @seu-usuario">
-                                    </div>
-
-                                    <!-- Instagram -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)
-                                        </label>
-                                        <input type="text" id="instagram" class="form-input-dark" placeholder="ex: @seu-perfil">
-                                    </div>
-
-                                    <!-- YouTube -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/youtube.png" class="w-4 h-4" alt=""> YouTube (Canal / @usuario)
-                                        </label>
-                                        <input type="text" id="youtube" class="form-input-dark" placeholder="ex: @seu-canal">
-                                    </div>
-
-                                    <!-- Wikipedia -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/wikipedia.png" class="w-4 h-4" alt=""> Wikipedia (Usuário)
-                                        </label>
-                                        <input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário">
-                                    </div>
-
-                                    <!-- Reddit -->
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs uppercase tracking-wider">
-                                            <img src="images/reddit.png" class="w-4 h-4" alt=""> Reddit (Usuário)
-                                        </label>
-                                        <input type="text" id="reddit" class="form-input-dark" placeholder="ex: seu-perfil">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider font-bold text-unifesp-400">Opções Adicionais</label>
-                                    </div>
-
-                                    <!-- Link da Agenda -->
                                     <div class="form-group">
                                         <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Link da Agenda (Google)</label>
                                         <div class="flex">
@@ -380,19 +367,16 @@
                                         </div>
                                     </div>
 
-                                    <!-- Chave PGP -->
-                                    <div class="form-group">
+                                    <div id="pgpGroup" class="form-group">
                                         <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Chave Pública PGP</label>
                                         <input type="text" id="pgpKey" class="form-input-dark" placeholder="ID ou Chave Completa" value="958B AC14 C720 6D87 423A 10EA 69E4 CC11 2BD6 D620">
                                     </div>
 
-                                    <!-- Mensagem Personalizada -->
-                                    <div class="form-group">
+                                    <div id="customMessageGroup" class="form-group">
                                         <label class="form-label text-gray-300 font-medium mb-1 block text-xs uppercase tracking-wider">Mensagem Personalizada</label>
                                         <textarea id="customMessage" class="form-input-dark" rows="3">Para envio de mensagens seguras (criptografadas) pode ser utilizada a página: https://flowcrypt.com/me/alexsandrocarvalho</textarea>
                                     </div>
 
-                                    <!-- Logotipo Setorial -->
                                     <div class="form-group">
                                         <label class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
                                             <i class="fa-solid fa-gear"></i> Logotipo Setorial
@@ -425,7 +409,6 @@
                                 <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
 
-                            <!-- Botão de Ajuda / Tutorial -->
                             <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda / Tutorial">
                                 <i class="fa-solid fa-question"></i>
                             </a>
@@ -451,7 +434,7 @@
     <!-- Rodapé -->
     <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-            <span><span class="font-mono">v0.9.4</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono">v0.9.5</span> | Modificado: <span id="lastModDate"></span></span>
             <span class="hidden sm:inline text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="hidden sm:inline text-gray-700">|</span>
@@ -475,7 +458,7 @@
     <div id="hiddenSignatureContainer" style="position: fixed; left: -9999px; top: 0; width: 600px; height: auto; background-color: transparent !important; color: inherit; overflow: hidden; margin: 0; padding: 0; pointer-events: none;"></div>
 
     <script>
-        // Caminhos das Imagens (Relativos)
+        // Caminhos das Imagens
         const LOGO_BRASIL = 'images/governo.png';
         const LOGO_UNIFESP = 'images/unifesp.png';
         const LOGO_SUA_DEFAULT = 'images/suaunifesp.png';
@@ -484,19 +467,12 @@
         const ICON_GITHUB = 'images/github.png';
         const ICON_GITLAB = 'images/gitlab.png';
         const ICON_INSTAGRAM = 'images/instagram.png';
-        const ICON_YOUTUBE = 'images/youtube.png';
-        const ICON_WIKIPEDIA = 'images/wikipedia.png';
         const ICON_WHATSAPP = 'images/whatsapp.png';
         const ICON_LINKEDIN = 'images/linkedin.png';
-        const ICON_TELEGRAM = 'images/telegram.png';
-        const ICON_REDDIT = 'images/reddit.png';
-        const ICON_MEDIUM = 'images/medium.png';
-        const ICON_TIKTOK = 'images/tiktok.png';
-        const ICON_SIGNAL = 'images/signal.png';
         
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
 
-        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'github', 'gitlab', 'whatsapp', 'instagram', 'youtube', 'wikipedia', 'linkedin', 'telegram', 'reddit', 'medium', 'tiktok', 'signal', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
+        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'orcid', 'github', 'gitlab', 'whatsapp', 'instagram', 'linkedin', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
             const el = document.getElementById(id);
             if (el) acc[id] = el;
             return acc;
@@ -515,6 +491,7 @@
         }
 
         function generateSignature() {
+            const layoutType = document.querySelector('input[name="layoutType"]:checked').value;
             const fullName = inputs.fullName?.value || 'Seu Nome';
             const title = inputs.title?.value || 'Seu Cargo';
             const department = inputs.department?.value || 'Sua Unidade';
@@ -529,14 +506,7 @@
             const github = inputs.github?.value ? `https://github.com/${inputs.github.value.trim()}` : '';
             const gitlab = inputs.gitlab?.value ? `https://gitlab.com/${inputs.gitlab.value.trim()}` : '';
             const instagram = inputs.instagram?.value ? `https://instagram.com/${inputs.instagram.value.trim().replace('@', '')}` : '';
-            const youtube = inputs.youtube?.value ? `https://youtube.com/${inputs.youtube.value.trim().startsWith('@') ? '' : '@'}${inputs.youtube.value.trim()}` : '';
-            const wikipedia = inputs.wikipedia?.value ? `https://pt.wikipedia.org/wiki/Usuário:${inputs.wikipedia.value.trim()}` : '';
             const linkedin = inputs.linkedin?.value ? `https://linkedin.com/in/${inputs.linkedin.value.trim()}` : '';
-            const telegram = inputs.telegram?.value ? `https://t.me/${inputs.telegram.value.trim().replace('@', '')}` : '';
-            const reddit = inputs.reddit?.value ? `https://reddit.com/user/${inputs.reddit.value.trim()}` : '';
-            const medium = inputs.medium?.value ? `https://medium.com/@${inputs.medium.value.trim().replace('@', '')}` : '';
-            const tiktok = inputs.tiktok?.value ? `https://www.tiktok.com/@${inputs.tiktok.value.trim().replace('@', '')}` : '';
-            const signal = inputs.signal?.value ? `https://signal.me/#p/${inputs.signal.value.trim()}` : '';
             
             let whatsappUrl = '';
             if (inputs.whatsapp?.value) {
@@ -551,6 +521,9 @@
             const sectorLogoUrl = inputs.sectorLogoUrl?.value;
             const sectorLogoLink = inputs.sectorLogoLink?.value || 'https://sua.unifesp.br';
 
+            const isSimplified = layoutType === 'simplificado';
+
+            // Contato
             let contactHTML = `<div style="color: inherit; font-size: 12px; margin: 2px 0;"><a href="mailto:${email}" style="color: #1E5A3A; text-decoration: none;">✉️ ${escapeHtml(email)}</a></div>`;
 
             let phoneLineParts = [];
@@ -567,47 +540,70 @@
                 contactHTML += `<div style="color: inherit; font-size: 12px; margin: 2px 0;">${phoneLineParts.join('<span style="color: #1E5A3A; font-weight: bold; margin: 0 8px;"> | </span>')}</div>`;
             }
 
-            let researchLinks = [];
-            if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Currículo Lattes"><img src="${ICON_LATTES}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="ORCID"><img src="${ICON_ORCID}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (linkedin) researchLinks.push(`<a href="${escapeHtml(linkedin)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="LinkedIn"><img src="${ICON_LINKEDIN}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (medium) researchLinks.push(`<a href="${escapeHtml(medium)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Medium"><img src="${ICON_MEDIUM}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (github) researchLinks.push(`<a href="${escapeHtml(github)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="GitHub"><img src="${ICON_GITHUB}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (gitlab) researchLinks.push(`<a href="${escapeHtml(gitlab)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="GitLab"><img src="${ICON_GITLAB}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (whatsappUrl) researchLinks.push(`<a href="${escapeHtml(whatsappUrl)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="WhatsApp"><img src="${ICON_WHATSAPP}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (telegram) researchLinks.push(`<a href="${escapeHtml(telegram)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Telegram"><img src="${ICON_TELEGRAM}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (signal) researchLinks.push(`<a href="${escapeHtml(signal)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Signal"><img src="${ICON_SIGNAL}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (tiktok) researchLinks.push(`<a href="${escapeHtml(tiktok)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="TikTok"><img src="${ICON_TIKTOK}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (instagram) researchLinks.push(`<a href="${escapeHtml(instagram)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Instagram"><img src="${ICON_INSTAGRAM}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (youtube) researchLinks.push(`<a href="${escapeHtml(youtube)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="YouTube"><img src="${ICON_YOUTUBE}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (wikipedia) researchLinks.push(`<a href="${escapeHtml(wikipedia)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Wikipedia"><img src="${ICON_WIKIPEDIA}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            if (reddit) researchLinks.push(`<a href="${escapeHtml(reddit)}" style="text-decoration: none; display: inline-block; margin-right: 10px;" title="Reddit"><img src="${ICON_REDDIT}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
-            
-            if (researchLinks.length > 0) {
-                contactHTML += `<div style="margin: 6px 0;">${researchLinks.join('')}</div>`;
+            // Links Sociais e Pesquisa (Ocultos no Simplificado)
+            let socialIconsHTML = '';
+            if (!isSimplified) {
+                let researchLinks = [];
+                if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_LATTES}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_ORCID}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (linkedin) researchLinks.push(`<a href="${escapeHtml(linkedin)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_LINKEDIN}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (github) researchLinks.push(`<a href="${escapeHtml(github)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_GITHUB}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (gitlab) researchLinks.push(`<a href="${escapeHtml(gitlab)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_GITLAB}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (instagram) researchLinks.push(`<a href="${escapeHtml(instagram)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_INSTAGRAM}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                if (whatsappUrl) researchLinks.push(`<a href="${escapeHtml(whatsappUrl)}" style="text-decoration: none; display: inline-block; margin-right: 12px;"><img src="${ICON_WHATSAPP}" width="18" height="18" style="vertical-align: middle; border: 0;"></a>`);
+                
+                if (researchLinks.length > 0) {
+                    socialIconsHTML = `<div style="margin: 6px 0;">${researchLinks.join('')}</div>`;
+                }
             }
 
             if (pgpKey) contactHTML += `<div style="color: inherit; font-size: 11px; margin: 2px 0;"><span style="color: #1E5A3A; font-weight: bold;">PGP:</span> ${escapeHtml(pgpKey)}</div>`;
 
+            // Botões (Link alterado para sua.unifesp.br)
             const btnStyle = "display: inline-block; background-color: #1E5A3A; color: #ffffff; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px; margin-bottom: 5px;";
-            
             let btns = '';
-            if (scheduleLinkID) {
-                btns += `<a href="https://calendar.app.google/${escapeHtml(scheduleLinkID)}" style="${btnStyle}">📅 Agendar horário</a>`;
-            }
-            btns += `<a href="https://atendimento.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`;
+            if (scheduleLinkID) btns += `<a href="https://calendar.app.google/${escapeHtml(scheduleLinkID)}" style="${btnStyle}">📅 Agendar horário</a>`;
+            btns += `<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`;
 
-            let logosHTML = '';
-            if (sectorLogoUrl) logosHTML += `<td style="padding-right: 25px; vertical-align: bottom;"><a href="${escapeHtml(sectorLogoLink)}"><img src="${escapeHtml(sectorLogoUrl)}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`;
-            logosHTML += `<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://sua.unifesp.br"><img src="${LOGO_SUA_DEFAULT}" height="40" style="height: 40px; border: 0; display: block;"></a></td><td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; display: block;"></a></td><td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`;
+            // Lógica do Logo Lateral (Foto vs Logos Institucionais)
+            let leftCellContent = '';
+            if (!isSimplified) {
+                leftCellContent = `<img src="${photoUrl}" alt="${fullName}" width="100" height="100" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid #ffffff;">`;
+            } else {
+                if (sectorLogoUrl) {
+                    leftCellContent += `<a href="${escapeHtml(sectorLogoLink)}" style="display: block; margin-bottom: 10px;"><img src="${escapeHtml(sectorLogoUrl)}" height="35" style="height: 35px; border: 0; display: block;"></a>`;
+                }
+                leftCellContent += `<a href="https://portal.unifesp.br/" style="display: block;"><img src="${LOGO_UNIFESP}" height="35" style="height: 35px; border: 0; display: block;"></a>`;
+            }
+
+            // Logos do Rodapé
+            let footerLogos = '';
+            if (!isSimplified) {
+                let logosList = [];
+                if (sectorLogoUrl) logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="${escapeHtml(sectorLogoLink)}"><img src="${escapeHtml(sectorLogoUrl)}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
+                logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://sua.unifesp.br"><img src="${LOGO_SUA_DEFAULT}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
+                logosList.push(`<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
+                logosList.push(`<td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`);
+                
+                footerLogos = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%; background-color: transparent !important;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; background-color: transparent !important;"><tr>${logosList.join('')}</tr></table>
+                </div>`;
+            }
+
+            let customMsgHTML = '';
+            if (!isSimplified && customMessage) {
+                customMsgHTML = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin-top: 10px; padding-top: 10px; color: inherit; opacity: 0.85; font-family: Arial, sans-serif; font-size: 11px; text-align: justify; width: 100%; background-color: transparent !important;">
+                    ${linkify(escapeHtml(customMessage)).replace(/\n/g, '<br>')}
+                </div>`;
+            }
 
             return `<table border="0" cellpadding="0" cellspacing="0" width="600" style="width: 600px; border-collapse: collapse; margin: 0; padding: 0; background-color: transparent !important;">
     <tr>
         <td style="padding: 15px; border: none; margin: 0; background-color: transparent !important;" valign="top">
             <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; background-color: transparent !important;">
                 <tr>
-                    <td style="padding: 0; vertical-align: middle; width: 110px; background-color: transparent !important;">
-                        <img src="${photoUrl}" alt="${fullName}" width="100" height="100" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid #ffffff;">
+                    <td style="padding: 0; vertical-align: middle; width: ${isSimplified ? '120px' : '110px'}; background-color: transparent !important;">
+                        ${leftCellContent}
                     </td>
                     <td style="width: 2px; background-color: #1E5A3A; padding: 0; vertical-align: middle; min-width: 2px;"></td>
                     <td style="padding: 0; vertical-align: middle; padding-left: 15px; background-color: transparent !important;">
@@ -617,17 +613,13 @@
                         ${superiorUnit ? `<div style="font-family: Arial, sans-serif; color: inherit; opacity: 0.95; font-size: 12px; margin-bottom: 1px;">${escapeHtml(superiorUnit)}</div>` : ''}
                         <div style="font-family: Arial, sans-serif; color: inherit; opacity: 0.95; font-size: 11px; margin-bottom: 6px;">Universidade Federal de São Paulo</div>
                         <div style="font-family: Arial, sans-serif;">${contactHTML}</div>
+                        ${socialIconsHTML}
                         <div style="margin-top: 10px;">${btns}</div>
                     </td>
                 </tr>
             </table>
-            <div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%; background-color: transparent !important;">
-                <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; background-color: transparent !important;"><tr>${logosHTML}</tr></table>
-            </div>
-            ${customMessage ? `
-            <div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin-top: 10px; padding-top: 10px; color: inherit; opacity: 0.85; font-family: Arial, sans-serif; font-size: 11px; text-align: justify; width: 100%; background-color: transparent !important;">
-                ${linkify(escapeHtml(customMessage)).replace(/\n/g, '<br>')}
-            </div>` : ''}
+            ${footerLogos}
+            ${customMsgHTML}
         </td>
     </tr>
 </table>`;
@@ -636,60 +628,61 @@
         function updatePreview() { 
             const prev = document.getElementById('signaturePreview');
             if (prev) prev.innerHTML = generateSignature(); 
+            
+            const layoutType = document.querySelector('input[name="layoutType"]:checked').value;
+            const isSimplified = layoutType === 'simplificado';
+
+            const photoGroup = document.getElementById('photoGroup');
+            const customMsgGroup = document.getElementById('customMessageGroup');
+            const socialFieldsGroup = document.getElementById('socialFieldsGroup');
+            const pgpGroup = document.getElementById('pgpGroup');
+            
+            if (isSimplified) {
+                photoGroup.classList.add('hidden');
+                customMsgGroup.classList.add('hidden');
+                socialFieldsGroup.classList.add('hidden');
+                pgpGroup.classList.add('hidden');
+            } else {
+                photoGroup.classList.remove('hidden');
+                customMsgGroup.classList.remove('hidden');
+                socialFieldsGroup.classList.remove('hidden');
+                pgpGroup.classList.remove('hidden');
+            }
         }
 
         const copyToGmail = () => {
             const form = document.getElementById('signatureForm'); 
             const btn = document.getElementById('copyButton');
             const originalContent = btn.innerHTML;
-
             const selection = window.getSelection();
             selection.removeAllRanges();
 
             if (!form.reportValidity()) {
                 btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <span>Formulário Inválido</span>';
                 btn.classList.add('error');
-                setTimeout(() => {
-                    btn.innerHTML = originalContent;
-                    btn.classList.remove('error');
-                }, 3000);
+                setTimeout(() => { btn.innerHTML = originalContent; btn.classList.remove('error'); }, 3000);
                 return;
             }
 
             const container = document.getElementById('hiddenSignatureContainer');
-            const signatureHtml = generateSignature().trim();
-            container.innerHTML = signatureHtml;
-            
+            container.innerHTML = generateSignature().trim();
             container.setAttribute('contenteditable', 'true');
-            
             const range = document.createRange();
             range.selectNodeContents(container);
             selection.addRange(range);
-            
             container.focus();
 
             try {
-                const successful = document.execCommand('copy');
-                if (successful) {
+                if (document.execCommand('copy')) {
                     btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copiado!</span>';
                     btn.classList.add('success');
-                    setTimeout(() => { 
-                        btn.innerHTML = originalContent;
-                        btn.classList.remove('success');
-                    }, 3000);
-                } else {
-                    throw new Error();
+                    setTimeout(() => { btn.innerHTML = originalContent; btn.classList.remove('success'); }, 3000);
                 }
             } catch (err) {
-                console.error('Erro ao copiar:', err);
                 btn.innerHTML = '<i class="fa-solid fa-xmark"></i> <span>Erro ao copiar</span>';
                 btn.classList.add('error');
-                setTimeout(() => {
-                    btn.innerHTML = originalContent;
-                    btn.classList.remove('error');
-                }, 3000);
+                setTimeout(() => { btn.innerHTML = originalContent; btn.classList.remove('error'); }, 3000);
             }
-            
             container.removeAttribute('contenteditable');
             selection.removeAllRanges();
             btn.focus();
@@ -700,43 +693,21 @@
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            const fileName = inputs.email?.value.split('@')[0] || 'assinatura';
-            a.href = url; a.download = `${fileName}.json`; a.click();
+            a.href = url; a.download = `${inputs.email?.value.split('@')[0] || 'assinatura'}.json`; a.click();
             URL.revokeObjectURL(url);
         }
 
         function importSignatureJson() {
-            const f = document.createElement('input'); 
-            f.type = 'file'; 
-            f.accept = '.json';
-            
+            const f = document.createElement('input'); f.type = 'file'; f.accept = '.json';
             f.onchange = (e) => {
-                const file = e.target.files[0]; 
-                if (!file) return;
-                
+                const file = e.target.files[0]; if (!file) return;
                 const r = new FileReader();
                 r.onload = (ev) => {
                     try {
                         const d = JSON.parse(ev.target.result);
-                        
-                        Object.keys(d).forEach(k => { 
-                            if (inputs[k]) {
-                                inputs[k].value = d[k] || '';
-                            }
-                        });
-                        
+                        Object.keys(d).forEach(k => { if (inputs[k]) inputs[k].value = d[k] || ''; });
                         updatePreview();
-                        window.focus();
-                        
-                        setTimeout(() => {
-                            document.getElementById('signatureForm').checkValidity();
-                            inputs.fullName.focus();
-                            inputs.fullName.blur();
-                        }, 100);
-
-                    } catch (err) { 
-                        console.error('Erro no JSON:', err); 
-                    }
+                    } catch (err) { console.error('Erro no JSON:', err); }
                 };
                 r.readAsText(file);
             };
