@@ -193,11 +193,19 @@
                         </h2>
 
                         <div class="grid grid-cols-1 gap-4">
+                            <!-- Nome Completo -->
                             <div class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block">Nome Completo <span class="text-red-500">*</span></label>
                                 <input type="text" id="fullName" class="form-input-dark" placeholder="Ex: Alexsandro Cardoso Carvalho" value="Alexsandro Cardoso Carvalho" required>
                             </div>
 
+                            <!-- Foto de Perfil -->
+                            <div class="form-group">
+                                <label class="form-label text-gray-300 font-medium mb-1 block">Foto de Perfil (URL)</label>
+                                <input type="url" id="photoUrl" class="form-input-dark" value="https://atendimento.unifesp.br/pics/usuarios/alexsandrocarvalho.jpg">
+                            </div>
+
+                            <!-- Restante dos campos principais -->
                             <div class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block">Cargo / Função <span class="text-red-500">*</span></label>
                                 <input type="text" id="title" class="form-input-dark" placeholder="Ex: Diretor de Governança" value="Diretor de Governança e Planejamento" required>
@@ -234,88 +242,89 @@
                                 <input type="tel" id="celular" class="form-input-dark" placeholder="(00) 00000-0000">
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="form-group">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <label class="form-label text-gray-300 font-medium mb-0">Lattes (ID)</label>
-                                        <a href="https://sua.unifesp.br/pt-br/curriculum_lattes" target="_blank" class="text-unifesp-400 hover:text-unifesp-100 transition-colors"><i class="fa-solid fa-circle-question"></i></a>
+                            <!-- Cortina: Personalização Avançada -->
+                            <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group mt-2">
+                                <summary class="font-bold text-unifesp-400 cursor-pointer list-none flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> Personalização Avançada
+                                </summary>
+                                <div class="mt-4 space-y-4">
+                                    <!-- Lattes e ORCID -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">Lattes (ID)</label>
+                                            <input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos" value="6792408436784536">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">ORCID (ID)</label>
+                                            <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000">
+                                        </div>
                                     </div>
-                                    <input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos" value="6792408436784536">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">ORCID (ID)</label>
-                                    <input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000">
-                                </div>
-                            </div>
 
-                            <!-- Redes Sociais e Contatos Adicionais -->
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">GitHub (User)</label>
-                                    <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">GitLab (User)</label>
-                                    <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">WhatsApp (Número)</label>
-                                    <input type="text" id="whatsapp" class="form-input-dark" placeholder="(DDD) 00000-0000">
-                                </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">Instagram (User)</label>
-                                    <input type="text" id="instagram" class="form-input-dark" placeholder="ex: seu-perfil">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">YouTube (User)</label>
-                                    <input type="text" id="youtube" class="form-input-dark" placeholder="ex: @seu-canal">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label text-gray-300 font-medium mb-1 block">Wikipedia (User)</label>
-                                    <input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <label class="form-label text-gray-300 font-medium mb-0">Link da Agenda (ID)</label>
-                                    <a href="https://support.google.com/google-workspace-individual/answer/10729749?hl=pt" target="_blank" class="text-unifesp-400 hover:text-unifesp-100 transition-colors"><i class="fa-solid fa-circle-question"></i></a>
-                                </div>
-                                <div class="flex">
-                                    <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-xs">calendar.app.google/</span>
-                                    <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="Ex: 2cKG4..." value="2cKG4rUYkKPr62VL7">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Chave Pública PGP</label>
-                                <input type="text" id="pgpKey" class="form-input-dark" value="958B AC14 C720 6D87 423A 10EA 69E4 CC11 2BD6 D620">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Foto de Perfil (URL)</label>
-                                <input type="url" id="photoUrl" class="form-input-dark" value="https://atendimento.unifesp.br/pics/usuarios/alexsandrocarvalho.jpg">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label text-gray-300 font-medium mb-1 block">Mensagem Personalizada</label>
-                                <textarea id="customMessage" class="form-input-dark" rows="3">Para envio de mensagens seguras (criptografadas) pode ser utilizada a página: https://flowcrypt.com/me/alexsandrocarvalho</textarea>
-                            </div>
-
-                            <div class="form-group mt-2">
-                                <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group">
-                                    <summary class="font-bold text-unifesp-400 cursor-pointer list-none flex items-center gap-2">
-                                        <i class="fa-solid fa-gear group-open:rotate-90 transition-transform"></i> Logotipo Setorial (Avançado)
-                                    </summary>
-                                    <div class="mt-4 space-y-3">
-                                        <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem do logotipo">
-                                        <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="URL de destino ao clicar">
+                                    <!-- GitHub, GitLab e WhatsApp -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">GitHub (User)</label>
+                                            <input type="text" id="github" class="form-input-dark" placeholder="ex: seu-usuario">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">GitLab (User)</label>
+                                            <input type="text" id="gitlab" class="form-input-dark" placeholder="ex: seu-usuario">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">WhatsApp</label>
+                                            <input type="text" id="whatsapp" class="form-input-dark" placeholder="(DDD) 00000-0000">
+                                        </div>
                                     </div>
-                                </details>
-                            </div>
+
+                                    <!-- Instagram, YouTube e Wikipedia -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">Instagram (User)</label>
+                                            <input type="text" id="instagram" class="form-input-dark" placeholder="ex: seu-perfil">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">YouTube (User)</label>
+                                            <input type="text" id="youtube" class="form-input-dark" placeholder="ex: @seu-canal">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">Wikipedia (User)</label>
+                                            <input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário">
+                                        </div>
+                                    </div>
+
+                                    <!-- Link da Agenda e Chave PGP -->
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">Link da Agenda (ID)</label>
+                                            <div class="flex">
+                                                <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-xs">calendar.app.google/</span>
+                                                <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="Ex: 2cKG4..." value="2cKG4rUYkKPr62VL7">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label text-gray-300 font-medium mb-1 block">Chave Pública PGP</label>
+                                            <input type="text" id="pgpKey" class="form-input-dark" value="958B AC14 C720 6D87 423A 10EA 69E4 CC11 2BD6 D620">
+                                        </div>
+                                    </div>
+
+                                    <!-- Mensagem Personalizada -->
+                                    <div class="form-group">
+                                        <label class="form-label text-gray-300 font-medium mb-1 block">Mensagem Personalizada</label>
+                                        <textarea id="customMessage" class="form-input-dark" rows="3">Para envio de mensagens seguras (criptografadas) pode ser utilizada a página: https://flowcrypt.com/me/alexsandrocarvalho</textarea>
+                                    </div>
+
+                                    <!-- Logotipo Setorial (Avançado) -->
+                                    <div class="form-group">
+                                        <label class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2">
+                                            <i class="fa-solid fa-gear"></i> Logotipo Setorial
+                                        </label>
+                                        <div class="p-4 bg-gray-900/50 rounded-lg border border-gray-700 space-y-3">
+                                            <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem do logotipo">
+                                            <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="URL de destino ao clicar">
+                                        </div>
+                                    </div>
+                                </div>
+                            </details>
                         </div>
                     </form>
                 </div>
@@ -336,6 +345,11 @@
                             <button id="copyButton" class="copy-button">
                                 <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
+
+                            <!-- Botão de Ajuda / Tutorial -->
+                            <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda / Tutorial">
+                                <i class="fa-solid fa-question"></i>
+                            </a>
 
                             <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar formulário">
                                 <i class="fa-solid fa-eraser"></i>
@@ -447,6 +461,7 @@
             const sectorLogoUrl = inputs.sectorLogoUrl?.value;
             const sectorLogoLink = inputs.sectorLogoLink?.value || 'https://sua.unifesp.br';
 
+            // Cores baseadas em transparência com alta opacidade para melhor contraste em ambos os temas
             let contactHTML = `<div style="color: inherit; font-size: 12px; margin: 2px 0;"><a href="mailto:${email}" style="color: #1E5A3A; text-decoration: none;">✉️ ${escapeHtml(email)}</a></div>`;
 
             let phoneLineParts = [];
@@ -463,7 +478,7 @@
                 contactHTML += `<div style="color: inherit; font-size: 12px; margin: 2px 0;">${phoneLineParts.join('<span style="color: #1E5A3A; font-weight: bold; margin: 0 8px;"> | </span>')}</div>`;
             }
 
-            // Links de Redes Sociais e Pesquisa (Apenas ícones conforme solicitado)
+            // Links de Redes Sociais e Pesquisa (Apenas ícones)
             let researchLinks = [];
             if (lattes) researchLinks.push(`<a href="${escapeHtml(lattes)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="Currículo Lattes"><img src="${ICON_LATTES}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
             if (orcid) researchLinks.push(`<a href="${escapeHtml(orcid)}" style="text-decoration: none; display: inline-block; margin-right: 12px;" title="ORCID"><img src="${ICON_ORCID}" width="18" height="18" style="vertical-align: middle; border: 0; display: inline-block;"></a>`);
