@@ -106,7 +106,7 @@
             cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; transition: all 0.2s;
         }
         .layout-option:hover { background: var(--bg-element); }
-        .layout-option input[type="radio"] { accent-color: #4ade80; width: 16px; height: 16px; }
+        .layout-option input[type="radio"], .layout-option input[type="checkbox"] { accent-color: #4ade80; width: 16px; height: 16px; }
 
         .loader-dots { display: inline-flex; gap: 4px; align-items: center; }
         .loader-dots div { width: 4px; height: 4px; background: currentColor; border-radius: 50%; animation: blink 1.4s infinite both; }
@@ -148,6 +148,7 @@
                 <!-- Formulário -->
                 <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8 lg:col-span-2">
                     
+                    <!-- Seletor de Modelo -->
                     <h2 class="section-title font-bold text-unifesp-400 mb-3 flex items-center gap-2 text-base">
                         <i class="fa-solid fa-layer-group"></i> Modelo da Assinatura
                     </h2>
@@ -182,16 +183,19 @@
                         </h2>
 
                         <div class="grid grid-cols-1 gap-4">
+                            <!-- Nome Completo -->
                             <div class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
                                 <input type="text" id="fullName" class="form-input-dark" placeholder="Nome Profissional" required minlength="3">
                             </div>
 
+                            <!-- Foto de Perfil -->
                             <div id="photoGroup" class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
                                 <input type="url" id="photoUrl" class="form-input-dark" placeholder="https://atendimento.unifesp.br/pics/usuarios/usuario.jpg">
                             </div>
 
+                            <!-- Restante dos campos principais -->
                             <div class="form-group">
                                 <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
                                 <input type="text" id="title" class="form-input-dark" placeholder="Ex: Professor Adjunto" required>
@@ -207,6 +211,7 @@
                                 <input type="text" id="superiorUnit" class="form-input-dark" placeholder="Ex: Reitoria">
                             </div>
 
+                            <!-- Telefones -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-group">
                                     <label class="form-label text-gray-300 font-medium mb-1 block font-bold">Telefone Fixo</label>
@@ -223,6 +228,7 @@
                                 <input type="tel" id="celular" class="form-input-dark" placeholder="(11) 90000-0000">
                             </div>
 
+                            <!-- Cortina: Personalização Avançada -->
                             <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group mt-2">
                                 <summary class="font-bold text-unifesp-400 cursor-pointer list-none flex items-center gap-2">
                                     <i class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> Personalização Avançada
@@ -234,8 +240,8 @@
                                     </div>
 
                                     <div id="socialFieldsGroup" class="flex flex-col gap-4">
-                                        <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos" pattern="[0-9]{16}"></div>
-                                        <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="ID no ProdMais"></div>
+                                        <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos numéricos" pattern="[0-9]{16}"></div>
+                                        <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="Seu ID no ProdMais"></div>
                                         <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)</label><input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]"></div>
                                         <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/zotero.png" class="w-4 h-4" alt=""> Zotero (ID)</label><input type="text" id="zotero" class="form-input-dark" placeholder="ID de usuário"></div>
                                         <div class="form-group"><label class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Usuário)</label><input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário"></div>
@@ -259,7 +265,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs">ID Agenda Google</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
                                         <div class="flex">
                                             <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-[10px]">calendar.app.google/</span>
                                             <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
@@ -267,7 +273,7 @@
                                     </div>
 
                                     <div id="pgpGroup" class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs">Chave Pública PGP</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Chave Pública PGP</label>
                                         <input type="text" id="pgpKey" class="form-input-dark" placeholder="Link ou ID da chave">
                                     </div>
 
@@ -285,6 +291,15 @@
                                             <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link ao clicar">
                                         </div>
                                     </div>
+
+                                    <!-- Novo Controle: Ocultar Abrir Chamado -->
+                                    <div class="form-group mt-2 pt-2 border-t border-gray-700">
+                                        <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
+                                            <input type="checkbox" id="hideTicketBtn" onchange="updatePreview()">
+                                            <span class="text-gray-300 font-medium text-xs">Ocultar botão "Abrir um chamado"</span>
+                                        </label>
+                                    </div>
+
                                 </div>
                             </details>
                         </div>
@@ -353,7 +368,7 @@
         
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
 
-        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'prodmais', 'orcid', 'zotero', 'wikipedia', 'googleacademic', 'researchgate', 'linkedin', 'instagram', 'reddit', 'tiktok', 'youtube', 'telegram', 'signal', 'medium', 'whatsapp', 'github', 'gitlab', 'scheduleLink', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink'].reduce((acc, id) => {
+        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'prodmais', 'orcid', 'zotero', 'wikipedia', 'googleacademic', 'researchgate', 'linkedin', 'instagram', 'reddit', 'tiktok', 'youtube', 'telegram', 'signal', 'medium', 'whatsapp', 'github', 'gitlab', 'scheduleLink', 'pgpKey', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink', 'hideTicketBtn'].reduce((acc, id) => {
             acc[id] = document.getElementById(id);
             return acc;
         }, {});
@@ -374,22 +389,11 @@
             finally { loader.classList.add('hidden'); }
         }
 
-        function escapeHtml(text) {
-            if (!text) return '';
-            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
-            return String(text).replace(/[&<>"']/g, m => map[m]);
-        }
-
-        function linkify(text) {
-            if (!text) return '';
-            const urlPattern = /(https?:\/\/[^\s]+)/g;
-            return String(text).replace(urlPattern, url => `<a href="${url}" style="color: #1E5A3A; text-decoration: underline;">${url}</a>`);
-        }
-
         function generateSignature() {
             const layoutEl = document.querySelector('input[name="layoutType"]:checked');
             const layoutType = layoutEl ? layoutEl.value : 'completo';
             const isSimplified = layoutType === 'simplificado';
+            const hideTicket = inputs.hideTicketBtn.checked;
 
             const fullName = inputs.fullName?.value || 'Seu Nome';
             const title = inputs.title?.value || 'Seu Cargo';
@@ -426,6 +430,10 @@
             if (celular) phones.push(`<a href="tel:${celular.replace(/\D/g, '')}" style="color: #1E5A3A; text-decoration: none;">📱 ${celular}</a>`);
             if (phones.length > 0) contactHTML += `<div style="color: inherit; font-size: 12px; margin: 2px 0;">${phones.join('<span style="color: #1E5A3A; font-weight: bold; margin: 0 8px;"> | </span>')}</div>`;
 
+            if (!isSimplified && pgpKey && pgpKey.trim() !== '') {
+                contactHTML += `<div style="color: inherit; font-size: 11px; margin: 2px 0;"><span style="color: #1E5A3A; font-weight: bold;">PGP:</span> ${escapeHtml(pgpKey)}</div>`;
+            }
+
             let iconsHTML = '';
             if (!isSimplified) {
                 let items = [];
@@ -436,8 +444,15 @@
             }
 
             const btnStyle = "display: inline-block; background-color: #1E5A3A; color: #ffffff; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px; margin-bottom: 5px;";
-            let btns = `<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`;
-            if (inputs.scheduleLink?.value) btns = `<a href="https://calendar.app.google/${inputs.scheduleLink.value}" style="${btnStyle}">📅 Agendar horário</a> ` + btns;
+            
+            let btnsList = [];
+            if (inputs.scheduleLink?.value) {
+                btnsList.push(`<a href="https://calendar.app.google/${inputs.scheduleLink.value}" style="${btnStyle}">📅 Agendar horário</a>`);
+            }
+            if (!hideTicket) {
+                btnsList.push(`<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`);
+            }
+            let btns = btnsList.join(' ');
 
             let leftCell = isSimplified ? 
                 ((sectorLogoUrl ? `<a href="${sectorLogoLink}" style="display: block; margin-bottom: 15px;"><img src="${sectorLogoUrl}" width="100" style="width: 100px; border: 0; display: block; margin: 0 auto;"></a>` : '') + 
@@ -453,7 +468,6 @@
                 footer = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%;"><table border="0" cellpadding="0" cellspacing="0"><tr>${fLogos}</tr></table></div>`;
             }
 
-            // CORREÇÃO: Lógica para exibição da mensagem de rodapé
             let msg = '';
             if (!isSimplified && customMessage && customMessage.trim() !== '') {
                 msg = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin-top: 10px; padding-top: 10px; color: inherit; opacity: 0.85; font-family: Arial; font-size: 11px; text-align: justify; width: 100%;">${linkify(escapeHtml(customMessage)).replace(/\n/g, '<br>')}</div>`;
@@ -467,7 +481,7 @@
                 <td style="padding: 0; vertical-align: middle; padding-left: 15px; background-color: transparent !important;">
                     <div style="font-family: Arial, sans-serif; font-weight: bold; color: #1E5A3A; font-size: 16px; margin-bottom: 2px;">${fullName}</div>
                     <div style="font-family: Arial, font-weight: bold; color: inherit; font-size: 13px; margin-bottom: 2px;">${title}</div>
-                    <div style="font-family: Arial; color: inherit; opacity: 0.95; font-size: 12px; margin-bottom: 1px;">${department}</div>
+                    <div style="font-family: Arial, color: inherit; opacity: 0.95; font-size: 12px; margin-bottom: 1px;">${department}</div>
                     ${superiorUnit ? `<div style="font-family: Arial, color: inherit; opacity: 0.95; font-size: 12px; margin-bottom: 1px;">${superiorUnit}</div>` : ''}
                     <div style="font-family: Arial, color: inherit; opacity: 0.95; font-size: 11px; margin-bottom: 6px;">Universidade Federal de São Paulo</div>
                     <div style="font-family: Arial;">${contactHTML}</div>
@@ -532,12 +546,17 @@
         });
 
         document.getElementById('resetButton').addEventListener('click', () => {
-            Object.values(inputs).forEach(input => { if (input) input.value = ''; });
+            Object.values(inputs).forEach(input => { if (input) {
+                if (input.type === 'checkbox') input.checked = false;
+                else input.value = ''; 
+            }});
             updatePreview();
         });
 
         document.getElementById('exportButton').addEventListener('click', () => {
-            const data = {}; Object.keys(inputs).forEach(key => { data[key] = inputs[key].value; });
+            const data = {}; Object.keys(inputs).forEach(key => { 
+                data[key] = inputs[key].type === 'checkbox' ? inputs[key].checked : inputs[key].value; 
+            });
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -553,7 +572,12 @@
                 r.onload = (ev) => {
                     try {
                         const d = JSON.parse(ev.target.result);
-                        Object.keys(d).forEach(k => { if (inputs[k]) inputs[k].value = d[k] || ''; });
+                        Object.keys(d).forEach(k => { 
+                            if (inputs[k]) {
+                                if (inputs[k].type === 'checkbox') inputs[k].checked = d[k];
+                                else inputs[k].value = d[k] || '';
+                            }
+                        });
                         updatePreview();
                     } catch (err) { console.error('Erro no JSON:', err); }
                 };
