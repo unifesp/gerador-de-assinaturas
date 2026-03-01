@@ -265,7 +265,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs">ID Agenda Google</label>
                                         <div class="flex">
                                             <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-[10px]">calendar.app.google/</span>
                                             <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
@@ -387,6 +387,19 @@
                 }
             } catch (err) { console.error("Erro no autopreenchimento:", err); }
             finally { loader.classList.add('hidden'); }
+        }
+
+        // --- FUNÇÕES AUXILIARES RESTAURADAS ---
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+            return String(text).replace(/[&<>"']/g, m => map[m]);
+        }
+
+        function linkify(text) {
+            if (!text) return '';
+            const urlPattern = /(https?:\/\/[^\s]+)/g;
+            return String(text).replace(urlPattern, url => `<a href="${url}" style="color: #1E5A3A; text-decoration: underline;">${url}</a>`);
         }
 
         function generateSignature() {
