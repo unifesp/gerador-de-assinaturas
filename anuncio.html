@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicado Interno - Gerador de Assinaturas UNIFESP</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        unifesp: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#1E5A3A',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                            800: '#374151',
+                            700: '#4b5563',
+                            600: '#9ca3af',
+                            300: '#d1d5db',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-body: #030712;
+            --bg-main: #111827;
+            --bg-panel: #1f2937;
+            --bg-element: #374151;
+            --border-color: #374151;
+            --text-primary: #f9fafb;
+            --text-muted: #9ca3af;
+            --text-dim: #d1d5db;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-dim); 
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E5A3A 0%, #123924 100%);
+        }
+        
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border-color: #16a34a;
+        }
+
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+
+    <!-- Cabeçalho Padrão -->
+    <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
+        <div class="flex items-center justify-between px-4 py-3 bg-gray-900">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shadow-glow text-base">
+                    <i class="fa-solid fa-signature"></i>
+                </div>
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <h1 class="font-bold text-white leading-none whitespace-nowrap">Gerador de Assinaturas</h1>
+                    <span class="text-xl text-gray-700 font-light">|</span>
+                    <span class="font-bold text-unifesp-400 leading-none whitespace-nowrap">UNIFESP</span>
+                </div>
+            </div>
+            <!-- Botão "Ir para o Gerador" removido conforme solicitação -->
+        </div>
+    </header>
+
+    <!-- Área de Conteúdo -->
+    <main class="flex-1 overflow-auto">
+        
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white py-20 px-6 text-center border-b border-unifesp-900">
+            <div class="max-w-4xl mx-auto fade-in">
+                <div class="inline-block bg-unifesp-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-6 animate-pulse">
+                    Comunicação Institucional
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">Uma Nova Identidade para nossa Comunicação</h1>
+                <p class="text-lg md:text-xl opacity-90 leading-relaxed mb-10 max-w-2xl mx-auto">
+                    Padronizar nossa assinatura de e-mail é um passo fundamental para fortalecer a marca UNIFESP e facilitar o contacto através dos nossos canais oficiais.
+                </p>
+                <!-- Botão "Criar minha assinatura agora" removido conforme solicitação -->
+            </div>
+        </section>
+
+        <!-- Importância da Padronização -->
+        <section class="py-16 px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <h2 class="text-3xl font-bold text-white">Porquê padronizar?</h2>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="shrink-0 w-10 h-10 bg-unifesp-900/50 text-unifesp-400 rounded-xl flex items-center justify-center font-bold border border-unifesp-900">1</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Profissionalismo</h4>
+                                    <p class="text-gray-400">Transmite seriedade e confiança em cada e-mail enviado para parceiros e para a sociedade.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="shrink-0 w-10 h-10 bg-unifesp-900/50 text-unifesp-400 rounded-xl flex items-center justify-center font-bold border border-unifesp-900">2</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Canais de Contacto</h4>
+                                    <p class="text-gray-400">Divulga de forma eficiente os seus ramais, agenda, redes académicas e canais de atendimento oficial.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="shrink-0 w-10 h-10 bg-unifesp-900/50 text-unifesp-400 rounded-xl flex items-center justify-center font-bold border border-unifesp-900">3</div>
+                                <div>
+                                    <h4 class="text-white font-bold mb-1">Acessibilidade Visual</h4>
+                                    <p class="text-gray-400">Garante que a assinatura seja lida corretamente em qualquer dispositivo, do desktop ao mobile.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Imagem de Exemplo -->
+                    <div class="relative group text-center">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-unifesp-600 to-unifesp-900 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                        <img src="images/exemplo.png" alt="Exemplo de Assinatura Padronizada" class="relative w-full h-auto rounded-3xl border border-gray-700 shadow-2xl" onerror="this.src='https://via.placeholder.com/600x300?text=Exemplo+de+Assinatura+UNIFESP'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Características -->
+        <section class="py-16 bg-gray-900/30 px-6 border-y border-gray-800">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-center text-3xl font-bold text-white mb-12">Recursos da Ferramenta</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-magic text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Autopreenchimento</h3>
+                        <p class="text-xs text-gray-500">Integração com o diretório institucional para buscar o seu nome e foto via e-mail.</p>
+                    </div>
+
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-graduation-cap text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Redes Académicas</h3>
+                        <p class="text-xs text-gray-500">Suporte completo para Lattes, ORCID, ProdMais, Google Académico e muito mais.</p>
+                    </div>
+
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-layer-group text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Modelos Versáteis</h3>
+                        <p class="text-xs text-gray-500">Escolha entre o modelo <strong>Completo</strong> (com foto) ou o <strong>Simplificado</strong> (minimalista).</p>
+                    </div>
+
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-shield-halved text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Privacidade</h3>
+                        <p class="text-xs text-gray-500">Desenvolvido com foco na segurança: os seus dados são processados apenas no seu navegador.</p>
+                    </div>
+
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-file-export text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Backup JSON</h3>
+                        <p class="text-xs text-gray-500">Exporte os seus dados para um ficheiro e reutilize-os sempre que precisar de atualizar.</p>
+                    </div>
+
+                    <div class="feature-card p-6 rounded-2xl">
+                        <i class="fa-solid fa-sitemap text-unifesp-400 text-2xl mb-4"></i>
+                        <h3 class="text-white font-bold mb-2">Hierarquia Institucional</h3>
+                        <p class="text-xs text-gray-500">Inclua a sua unidade de lotação e unidade superior de forma clara e padronizada.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Call to Action -->
+        <section class="py-24 text-center px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold text-white mb-4 tracking-tight">Pronto para transformar a sua comunicação?</h2>
+                <p class="text-xl text-gray-400 mb-10">Crie a sua assinatura institucional agora mesmo.</p>
+                <a href="https://ccarvalho.net/labs/gerador-de-assinaturas/" class="inline-block hero-gradient text-white text-lg font-bold px-12 py-5 rounded-2xl shadow-glow hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-rocket mr-2"></i> Começar agora
+                </a>
+                
+                <div class="mt-16 p-6 bg-unifesp-900/10 border border-unifesp-900/30 rounded-2xl text-unifesp-400 inline-block text-left max-w-lg">
+                    <div class="flex gap-4 items-start">
+                        <i class="fa-solid fa-circle-info text-xl mt-1"></i>
+                        <p class="text-sm leading-relaxed">
+                            <strong>Dúvidas ou esclarecimentos?</strong><br>
+                            Consulte os tutoriais detalhados e a base de conhecimento no portal: 
+                            <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="font-bold underline hover:text-white transition-colors">sua.unifesp.br</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software Livre & GitHub -->
+        <section class="py-16 bg-gray-900 border-t border-gray-800">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                <div class="inline-flex items-center gap-3 text-unifesp-400 mb-4">
+                    <i class="fa-brands fa-github text-4xl"></i>
+                    <h2 class="text-2xl font-bold tracking-tight uppercase tracking-widest">Orgulho em ser Software Livre</h2>
+                </div>
+                <p class="text-gray-400 max-w-3xl mx-auto text-base leading-relaxed">
+                    Este é o <strong>segundo software livre</strong> desenvolvido integralmente pela 
+                    <strong>Superintendência de Tecnologia da Informação (STI)</strong>. 
+                    Promovemos a transparência e a inovação aberta disponibilizando o nosso código para toda a comunidade académica e externa.
+                </p>
+                <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="text-unifesp-400 font-semibold hover:text-unifesp-100 mt-6 inline-block transition-colors border border-unifesp-900/50 px-4 py-2 rounded-lg hover:bg-unifesp-900/20">
+                    Contribuir no GitHub <i class="fa-solid fa-external-link text-xs ml-2"></i>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé Padrão -->
+    <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+        <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
+            <span><span class="font-mono">v0.9.8</span> | Modificado: <span id="lastModDate"></span></span>
+            <span class="hidden sm:inline text-gray-700">|</span>
+            <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
+            <span class="hidden sm:inline text-gray-700">|</span>
+            <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-3 items-center">
+            <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
+                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+            </a>
+            <span class="text-gray-600">|</span>
+            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors" title="Repositório Oficial do Projeto">UNIFESP</a>
+            <span class="text-gray-600">|</span>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
+                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('lastModDate').innerText = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
