@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -261,11 +261,11 @@
                                     </div>
 
                                     <div class="form-group pt-2 border-t border-gray-700">
-                                        <label class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase">Opções Técnicas</label>
+                                        <label class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase tracking-wider">Opções Técnicas</label>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Link da Agenda</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
                                         <div class="flex">
                                             <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-[10px]">calendar.app.google/</span>
                                             <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
@@ -273,7 +273,7 @@
                                     </div>
 
                                     <div id="pgpGroup" class="form-group">
-                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Chave Pública PGP</label>
+                                        <label class="form-label text-gray-300 font-medium mb-1 block text-xs">Chave Pública PGP</label>
                                         <input type="text" id="pgpKey" class="form-input-dark" placeholder="Link ou ID da chave">
                                     </div>
 
@@ -320,7 +320,7 @@
                             <button id="copyButton" class="copy-button">
                                 <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
-                            <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda">
+                            <a href="ajuda.html" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda">
                                 <i class="fa-solid fa-question"></i>
                             </a>
                             <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar">
@@ -340,22 +340,24 @@
         </div>
     </main>
 
-    <!-- Rodapé Completo Restaurado -->
-    <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
-        <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-            <span><span class="font-mono">v0.9.8</span> | Modificado: <span id="lastModDate"></span></span>
-            <span class="hidden sm:inline text-gray-700">|</span>
+    <!-- Rodapé Padronizado -->
+    <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+        <div class="flex items-center gap-4">
+            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span class="text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
-            <span class="hidden sm:inline text-gray-700">|</span>
+            <span class="text-gray-700">|</span>
             <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
+            <span class="text-gray-700">|</span>
+            <a href="ajuda.html" class="hover:text-white transition-colors">Como usar (ajuda)</a>
         </div>
         
-        <div class="flex flex-wrap justify-center gap-3 items-center">
+        <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
                 <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-gray-600">|</span>
-            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors" title="Repositório Oficial do Projeto">UNIFESP</a>
+            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-gray-600">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
                 <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3

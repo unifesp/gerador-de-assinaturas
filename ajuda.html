@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda e Tutorial - Gerador de Assinaturas UNIFESP</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        unifesp: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#1E5A3A',
+                        },
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                            800: '#374151',
+                            700: '#4b5563',
+                            600: '#9ca3af',
+                            300: '#d1d5db',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-body: #030712;
+            --bg-main: #111827;
+            --bg-panel: #1f2937;
+            --bg-element: #374151;
+            --border-color: #374151;
+            --text-primary: #f9fafb;
+            --text-muted: #9ca3af;
+            --text-dim: #d1d5db;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-dim); 
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-body); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+
+        .help-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .help-image {
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .step-number {
+            background-color: #1E5A3A;
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 0.75rem;
+        }
+
+        h2 { color: #f9fafb; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
+        h3 { color: #4ade80; font-weight: 600; font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        p { line-height: 1.6; margin-bottom: 1rem; }
+        code { background: #000; padding: 0.2rem 0.4rem; border-radius: 0.25rem; color: #4ade80; font-family: monospace; }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+
+    <!-- Cabeçalho -->
+    <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
+        <div class="flex items-center justify-between px-4 py-3 border-gray-800 bg-gray-900">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shrink-0">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">Gerador de Assinatura</h1>
+                    <span class="text-xl text-gray-700 font-light">|</span>
+                    <span class="text-xl font-bold tracking-tight text-unifesp-400 leading-none truncate">Unifesp : : Ajuda</span>
+                </div>
+            </div>
+            <a href="index.html" class="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition border border-gray-700 text-xs font-medium">
+                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar ao Gerador
+            </a>
+        </div>
+    </header>
+
+    <!-- Área de Conteúdo -->
+    <main class="flex-1 overflow-auto p-6 sm:p-12">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="mb-12 text-center">
+                <h1 class="text-4xl font-extrabold text-white mb-4">Como criar a sua assinatura profissional</h1>
+                <p class="text-lg text-gray-400">Siga este guia passo a passo para configurar e instalar a sua nova assinatura institucional.</p>
+            </div>
+
+            <!-- Passo 1: Modelo -->
+            <section class="help-card">
+                <h2><span class="step-number">1</span> Escolha do Modelo</h2>
+                <p>O gerador oferece dois estilos visuais. Escolha o que melhor se adapta à sua necessidade de comunicação:</p>
+                <ul class="list-disc pl-8 mb-4 space-y-2">
+                    <li><strong>Completo:</strong> Ideal para uso individual, permitindo a inclusão de foto de perfil, links de redes académicas (Lattes, ORCID) e mensagens personalizadas.</li>
+                    <li><strong>Simplificado:</strong> Focado na unidade. Remove a foto e os links sociais, destacando os logotipos da sua unidade e da Unifesp.</li>
+                </ul>
+                <img src="images/passo1_modelos.jpg" alt="Interface de seleção entre os modelos Completo e Simplificado" class="help-image">
+                <p class="text-xs text-gray-500 italic text-center">Legenda: Seletor de modelos no topo do formulário.</p>
+            </section>
+
+            <!-- Passo 2: E-mail e Autopreenchimento -->
+            <section class="help-card">
+                <h2><span class="step-number">2</span> E-mail e Autopreenchimento</h2>
+                <p>Insira o seu e-mail institucional (ex: <code>usuario@unifesp.br</code>). Como a ferramenta é integrada ao Google Workspace da Unifesp, ao sair do campo (clicar fora ou dar Tab), o sistema tentará buscar automaticamente o seu <strong>Nome Completo</strong> e a sua <strong>Foto de Perfil</strong> oficial.</p>
+                <div class="p-4 bg-unifesp-900/10 border-l-4 border-unifesp-600 rounded-r-lg mb-4 text-xs">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                    <strong>Nota:</strong> Caso o sistema não encontre a sua foto ou nome, ou você prefira usar dados diferentes, você pode editá-los manualmente a qualquer momento.
+                </div>
+                <img src="images/passo2_email.jpg" alt="Campo de e-mail institucional e indicador de busca de dados" class="help-image">
+                <p class="text-xs text-gray-500 italic text-center">Legenda: O autopreenchimento agiliza a inserção dos dados básicos.</p>
+            </section>
+
+            <!-- Passo 3: Dados Principais -->
+            <section class="help-card">
+                <h2><span class="step-number">3</span> Dados Principais</h2>
+                <p>Preencha os seus dados profissionais. Os campos marcados com um asterisco vermelho são obrigatórios para garantir a integridade da assinatura.</p>
+                <ul class="list-disc pl-8 mb-4 space-y-2">
+                    <li><strong>Cargo ou Função:</strong> Informe como você deve ser identificado institucionalmente.</li>
+                    <li><strong>Unidade de Lotação:</strong> Ex: Departamento de Medicina, STI, Pró-Reitoria, etc.</li>
+                    <li><strong>Unidade Superior:</strong> Ex: Campus São Paulo, Reitoria.</li>
+                    <li><strong>Contactos:</strong> O campo Ramal aceita apenas números. O telemóvel deve conter o DDD.</li>
+                </ul>
+            </section>
+
+            <!-- Passo 4: Parâmetros Avançados -->
+            <section class="help-card">
+                <h2><span class="step-number">4</span> Personalização Avançada</h2>
+                <p>Nesta secção, você pode enriquecer a sua assinatura com informações de pesquisa e contacto especializado. <strong>Importante:</strong> Nestes campos, geralmente deve-se inserir apenas o identificador (ID) ou nome de utilizador, e não o link completo.</p>
+
+                <h3>Redes Académicas e Sociais</h3>
+                <div class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-xs">
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/lattes.png" class="w-3 h-3 inline mr-1"> Currículo Lattes</p>
+                        <p>Insira apenas os 16 dígitos numéricos. <br><span class="text-gray-500 italic">Ex: 6792408436784536</span></p>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/orcid.png" class="w-3 h-3 inline mr-1"> ORCID</p>
+                        <p>Insira o ID completo com traços. <br><span class="text-gray-500 italic">Ex: 0000-0002-1825-0097</span></p>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/prodmais.png" class="w-3 h-3 inline mr-1"> ProdMais Unifesp</p>
+                        <p>Copie o identificador numérico final da URL do seu perfil no ProdMais.</p>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/linkedin.png" class="w-3 h-3 inline mr-1"> LinkedIn</p>
+                        <p>Insira apenas o nome de utilizador (slug) do seu perfil público.</p>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/whatsapp.png" class="w-3 h-3 inline mr-1"> WhatsApp</p>
+                        <p>Insira apenas números incluindo o DDD. <br><span class="text-gray-500 italic">Ex: 11999999999</span></p>
+                    </div>
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="font-bold text-white mb-1"><img src="images/googleacademic.png" class="w-3 h-3 inline mr-1"> Google Académico</p>
+                        <p>Insira o código alfanumérico que aparece após <code>user=</code> na sua URL de perfil.</p>
+                    </div>
+                </div>
+
+                <h3>Opções Técnicas</h3>
+                <ul class="list-disc pl-8 mt-4 space-y-3">
+                    <li><strong>Link da Agenda:</strong> Caso use o agendamento do Google Calendar, insira o ID curto da sua agenda (o código que vem após <code>calendar.app.google/</code>).</li>
+                    <li><strong>Chave PGP:</strong> Para comunicações seguras, insira o identificador da sua chave pública ou um link para o servidor de chaves.</li>
+                    <li><strong>Logotipo Setorial:</strong> Você pode adicionar um logotipo personalizado para a sua unidade. Insira a <code>URL</code> da imagem (deve estar hospedada online) e um <code>link</code> de destino.</li>
+                </ul>
+                <img src="images/detalhe_avancado.jpg" alt="Vista detalhada da secção de parâmetros avançados com exemplos de preenchimento" class="help-image">
+                <p class="text-xs text-gray-500 italic text-center">Legenda: Secção de expansão para redes sociais e académicas.</p>
+            </section>
+
+            <!-- Passo 5: Como instalar -->
+            <section class="help-card">
+                <h2><span class="step-number">5</span> Instalando no Gmail</h2>
+                <p>Após preencher os dados e visualizar o resultado no painel direito, siga estes passos:</p>
+                <ol class="list-decimal pl-8 mb-4 space-y-2">
+                    <li>Clique no botão <strong>Copiar para o Gmail</strong>. Um aviso de "Copiado!" aparecerá.</li>
+                    <li>Abra o seu <strong>Gmail Unifesp</strong>.</li>
+                    <li>Vá em <strong>Configurações</strong> (ícone de engrenagem) > <strong>Ver todas as configurações</strong>.</li>
+                    <li>Na aba <strong>Geral</strong>, role até a secção <strong>Assinatura</strong>.</li>
+                    <li>Clique em <strong>Criar nova</strong>, dê um nome e, no campo de edição, pressione <code>Ctrl + V</code> (ou clique com o botão direito e selecione "Colar").</li>
+                    <li><strong>Importante:</strong> Selecione a sua nova assinatura nos seletores de "Padrões de assinatura" logo abaixo e clique em <strong>Salvar Alterações</strong> no final da página do Gmail.</li>
+                </ol>
+                <img src="images/tutorial_gmail.jpg" alt="Passo a passo visual de onde colar a assinatura nas configurações do Gmail" class="help-image">
+                <p class="text-xs text-gray-500 italic text-center">Legenda: Configuração final no cliente de e-mail institucional.</p>
+            </section>
+
+            <!-- Backup -->
+            <section class="help-card bg-unifesp-900/5">
+                <h2 class="text-unifesp-400"><i class="fa-solid fa-floppy-disk mr-3"></i>Dica: Use o Backup JSON</h2>
+                <p>Para não ter que preencher todos os dados novamente no futuro, utilize os botões de <strong>JSON</strong> na barra de ações. Ao clicar na seta para baixo, você salva um pequeno ficheiro no seu computador. Quando precisar de atualizar a assinatura, basta clicar na seta para cima e carregar esse ficheiro.</p>
+            </section>
+
+            <!-- Suporte Final -->
+            <section class="mt-16 mb-20 text-center">
+                <div class="p-10 bg-gray-900 border border-unifesp-600/30 rounded-3xl">
+                    <h2 class="justify-center text-2xl mb-4 text-white">Precisa de mais ajuda?</h2>
+                    <p class="text-lg text-gray-400 mb-8">Se encontrou algum erro técnico ou possui dúvidas que não foram esclarecidas neste guia, a nossa equipa de suporte está à disposição.</p>
+                    <div class="flex flex-col items-center gap-4">
+                        <p class="font-bold text-white uppercase tracking-widest text-sm">Abra um chamado em:</p>
+                        <a href="https://atendimento.unifesp.br" target="_blank" class="inline-block hover:opacity-80 transition-transform hover:scale-105">
+                            <img src="images/suaunifesp.png" alt="Sua Unifesp" class="h-16 mx-auto" onerror="this.parentElement.innerHTML='sua.unifesp.br'">
+                        </a>
+                        <a href="https://sua.unifesp.br/pt-br/catalogo_ti/email/assinatura" target="_blank" class="text-unifesp-400 hover:underline font-semibold mt-2">
+                            Catálogo de Serviços de TI : : Assinatura de E-mail
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Rodapé Padronizado -->
+    <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+        <div class="flex items-center gap-4">
+            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span class="text-gray-700">|</span>
+            <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
+            <span class="text-gray-700">|</span>
+            <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
+            <span class="text-gray-700">|</span>
+            <a href="ajuda.html" class="text-white font-semibold">Como usar (ajuda)</a>
+        </div>
+        
+        <div class="flex gap-3 items-center">
+            <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
+                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+            </a>
+            <span class="text-gray-600">|</span>
+            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
+            <span class="text-gray-600">|</span>
+            <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
+                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('lastModDate').innerText = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>

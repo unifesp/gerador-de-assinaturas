@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunicado Interno - Gerador de Assinaturas UNIFESP</title>
+    <title>Gerador de Assinaturas UNIFESP</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -99,7 +99,6 @@
                     <span class="font-bold text-unifesp-400 leading-none whitespace-nowrap">UNIFESP</span>
                 </div>
             </div>
-            <!-- Botão "Ir para o Gerador" removido conforme solicitação -->
         </div>
     </header>
 
@@ -116,7 +115,6 @@
                 <p class="text-lg md:text-xl opacity-90 leading-relaxed mb-10 max-w-2xl mx-auto">
                     Padronizar nossa assinatura de e-mail é um passo fundamental para fortalecer a marca UNIFESP e facilitar o contacto através dos nossos canais oficiais.
                 </p>
-                <!-- Botão "Criar minha assinatura agora" removido conforme solicitação -->
             </div>
         </section>
 
@@ -150,7 +148,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Imagem de Exemplo -->
                     <div class="relative group text-center">
                         <div class="absolute -inset-1 bg-gradient-to-r from-unifesp-600 to-unifesp-900 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                         <img src="images/exemplo.png" alt="Exemplo de Assinatura Padronizada" class="relative w-full h-auto rounded-3xl border border-gray-700 shadow-2xl" onerror="this.src='https://via.placeholder.com/600x300?text=Exemplo+de+Assinatura+UNIFESP'">
@@ -247,22 +244,24 @@
 
     </main>
 
-    <!-- Rodapé Padrão -->
-    <footer class="bg-gray-950 border-t border-gray-700 py-4 px-6 text-[10px] sm:text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
-        <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4">
-            <span><span class="font-mono">v0.9.8</span> | Modificado: <span id="lastModDate"></span></span>
-            <span class="hidden sm:inline text-gray-700">|</span>
+    <!-- Rodapé Padronizado -->
+    <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+        <div class="flex items-center gap-4">
+            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span class="text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
-            <span class="hidden sm:inline text-gray-700">|</span>
+            <span class="text-gray-700">|</span>
             <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
+            <span class="text-gray-700">|</span>
+            <a href="ajuda.html" class="hover:text-white transition-colors">Como usar (ajuda)</a>
         </div>
         
-        <div class="flex flex-wrap justify-center gap-3 items-center">
+        <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
                 <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-gray-600">|</span>
-            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors" title="Repositório Oficial do Projeto">UNIFESP</a>
+            <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-gray-600">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
                 <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
