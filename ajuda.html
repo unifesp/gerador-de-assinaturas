@@ -94,9 +94,16 @@
         }
 
         h2 { color: #f9fafb; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; }
-        h3 { color: #4ade80; font-weight: 600; font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        h3 { color: #4ade80; font-weight: 600; font-size: 1.1rem; margin-top: 2rem; margin-bottom: 1rem; }
         p { line-height: 1.6; margin-bottom: 1rem; }
         code { background: #000; padding: 0.2rem 0.4rem; border-radius: 0.25rem; color: #4ade80; font-family: monospace; }
+        
+        .network-grid-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
@@ -134,7 +141,7 @@
                 <h2><span class="step-number">1</span> Escolha do Modelo</h2>
                 <p>O gerador oferece dois estilos visuais. Escolha o que melhor se adapta à sua necessidade de comunicação:</p>
                 <ul class="list-disc pl-8 mb-4 space-y-2">
-                    <li><strong>Completo:</strong> Ideal para uso individual, permitindo a inclusão de foto de perfil, links de redes académicas (Lattes, ORCID) e mensagens personalizadas.</li>
+                    <li><strong>Completo:</strong> Ideal para uso individual, permitindo a inclusão de foto de perfil, links de redes académicas e mensagens personalizadas.</li>
                     <li><strong>Simplificado:</strong> Focado na unidade. Remove a foto e os links sociais, destacando os logotipos da sua unidade e da Unifesp.</li>
                 </ul>
                 <img src="images/passo1_modelos.jpg" alt="Interface de seleção entre os modelos Completo e Simplificado" class="help-image">
@@ -171,30 +178,98 @@
                 <p>Nesta secção, você pode enriquecer a sua assinatura com informações de pesquisa e contacto especializado. <strong>Importante:</strong> Nestes campos, geralmente deve-se inserir apenas o identificador (ID) ou nome de utilizador, e não o link completo.</p>
 
                 <h3>Redes Académicas e Sociais</h3>
-                <div class="grid md:grid-cols-2 gap-x-8 gap-y-4 text-xs">
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/lattes.png" class="w-3 h-3 inline mr-1"> Currículo Lattes</p>
-                        <p>Insira apenas os 16 dígitos numéricos. <br><span class="text-gray-500 italic">Ex: 6792408436784536</span></p>
+                <p class="mb-4 text-gray-400">Siga a lista abaixo para saber exatamente o que preencher em cada campo:</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 text-xs">
+                    <!-- 1. Lattes -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/lattes.png" class="w-3 h-3 inline mr-1"> Currículo Lattes (ID)</p>
+                        <p>Insira apenas os 16 dígitos numéricos do seu currículo. <br><span class="text-gray-500 italic">Ex: 6792408436784536</span></p>
                     </div>
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/orcid.png" class="w-3 h-3 inline mr-1"> ORCID</p>
-                        <p>Insira o ID completo com traços. <br><span class="text-gray-500 italic">Ex: 0000-0002-1825-0097</span></p>
+                    <!-- 2. ProdMais -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/prodmais.png" class="w-3 h-3 inline mr-1"> ProdMais Unifesp (ID)</p>
+                        <p>Insira o identificador numérico que aparece ao final da URL do seu perfil no portal ProdMais.</p>
                     </div>
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/prodmais.png" class="w-3 h-3 inline mr-1"> ProdMais Unifesp</p>
-                        <p>Copie o identificador numérico final da URL do seu perfil no ProdMais.</p>
+                    <!-- 3. ORCID -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/orcid.png" class="w-3 h-3 inline mr-1"> ORCID (ID)</p>
+                        <p>Insira o ID completo com os hífens. <br><span class="text-gray-500 italic">Ex: 0000-0002-1825-0097</span></p>
                     </div>
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/linkedin.png" class="w-3 h-3 inline mr-1"> LinkedIn</p>
-                        <p>Insira apenas o nome de utilizador (slug) do seu perfil público.</p>
+                    <!-- 4. Zotero -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/zotero.png" class="w-3 h-3 inline mr-1"> Zotero (ID)</p>
+                        <p>Insira o seu nome de utilizador ou ID numérico de perfil público do Zotero.</p>
                     </div>
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/whatsapp.png" class="w-3 h-3 inline mr-1"> WhatsApp</p>
-                        <p>Insira apenas números incluindo o DDD. <br><span class="text-gray-500 italic">Ex: 11999999999</span></p>
+                    <!-- 5. Wikipédia -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/wikipedia.png" class="w-3 h-3 inline mr-1"> Wikipédia (Usuário)</p>
+                        <p>Insira o nome exato da sua página de utilizador (após <code>Usuário:</code>).</p>
                     </div>
-                    <div class="p-3 bg-gray-800 rounded-lg">
-                        <p class="font-bold text-white mb-1"><img src="images/googleacademic.png" class="w-3 h-3 inline mr-1"> Google Académico</p>
+                    <!-- 6. Google Acadêmico -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/googleacademic.png" class="w-3 h-3 inline mr-1"> Google Académico (ID)</p>
                         <p>Insira o código alfanumérico que aparece após <code>user=</code> na sua URL de perfil.</p>
+                    </div>
+                    <!-- 7. ResearchGate -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/researchgate.png" class="w-3 h-3 inline mr-1"> ResearchGate (ID)</p>
+                        <p>Insira o identificador de perfil (normalmente <code>Nome-Sobrenome</code> ou similar).</p>
+                    </div>
+                    <!-- 8. LinkedIn -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/linkedin.png" class="w-3 h-3 inline mr-1"> LinkedIn (Usuário)</p>
+                        <p>Insira apenas o nome de utilizador (slug) do seu perfil público (após <code>/in/</code>).</p>
+                    </div>
+                    <!-- 9. Instagram -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/instagram.png" class="w-3 h-3 inline mr-1"> Instagram (Usuário)</p>
+                        <p>Insira o seu nome de utilizador sem o símbolo @. <br><span class="text-gray-500 italic">Ex: unifesp_oficial</span></p>
+                    </div>
+                    <!-- 10. Reddit -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/reddit.png" class="w-3 h-3 inline mr-1"> Reddit (Usuário)</p>
+                        <p>Insira o seu nome de utilizador do Reddit (após <code>/user/</code>).</p>
+                    </div>
+                    <!-- 11. TikTok -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/tiktok.png" class="w-3 h-3 inline mr-1"> TikTok (Usuário)</p>
+                        <p>Insira o seu utilizador (handle) sem o símbolo @.</p>
+                    </div>
+                    <!-- 12. YouTube -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/youtube.png" class="w-3 h-3 inline mr-1"> YouTube (Canal)</p>
+                        <p>Insira o identificador do canal ou o handle (ex: <code>@canalexemplo</code>).</p>
+                    </div>
+                    <!-- 13. Telegram -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/telegram.png" class="w-3 h-3 inline mr-1"> Telegram (Usuário)</p>
+                        <p>Insira o seu "username" configurado no Telegram sem o @.</p>
+                    </div>
+                    <!-- 14. Signal -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/signal.png" class="w-3 h-3 inline mr-1"> Signal (Número)</p>
+                        <p>Insira o seu número no formato internacional ou ID de perfil. <br><span class="text-gray-500 italic">Ex: +5511999999999</span></p>
+                    </div>
+                    <!-- 15. Medium -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/medium.png" class="w-3 h-3 inline mr-1"> Medium (Usuário)</p>
+                        <p>Insira o seu nome de utilizador (ex: <code>@usuario</code>).</p>
+                    </div>
+                    <!-- 16. WhatsApp -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/whatsapp.png" class="w-3 h-3 inline mr-1"> WhatsApp</p>
+                        <p>Insira apenas números incluindo o código do país e DDD. <br><span class="text-gray-500 italic">Ex: 5511999999999</span></p>
+                    </div>
+                    <!-- 17. GitHub -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/github.png" class="w-3 h-3 inline mr-1"> GitHub (Usuário)</p>
+                        <p>Insira o seu nome de utilizador do GitHub.</p>
+                    </div>
+                    <!-- 18. GitLab -->
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><img src="images/gitlab.png" class="w-3 h-3 inline mr-1"> GitLab (Usuário)</p>
+                        <p>Insira o seu nome de utilizador do GitLab.</p>
                     </div>
                 </div>
 
@@ -202,10 +277,10 @@
                 <ul class="list-disc pl-8 mt-4 space-y-3">
                     <li><strong>Link da Agenda:</strong> Caso use o agendamento do Google Calendar, insira o ID curto da sua agenda (o código que vem após <code>calendar.app.google/</code>).</li>
                     <li><strong>Chave PGP:</strong> Para comunicações seguras, insira o identificador da sua chave pública ou um link para o servidor de chaves.</li>
-                    <li><strong>Logotipo Setorial:</strong> Você pode adicionar um logotipo personalizado para a sua unidade. Insira a <code>URL</code> da imagem (deve estar hospedada online) e um <code>link</code> de destino.</li>
+                    <li><strong>Logotipo Setorial:</strong> Você pode adicionar um logotipo personalizado para a sua unidade. Insira a <code>URL</code> da imagem (deve estar hospedada online) e um <code>link</code> de destino ao clicar.</li>
                 </ul>
                 <img src="images/detalhe_avancado.jpg" alt="Vista detalhada da secção de parâmetros avançados com exemplos de preenchimento" class="help-image">
-                <p class="text-xs text-gray-500 italic text-center">Legenda: Secção de expansão para redes sociais e académicas.</p>
+                <p class="text-xs text-gray-500 italic text-center">Legenda: Seção de expansão para redes sociais e académicas.</p>
             </section>
 
             <!-- Passo 5: Como instalar -->
@@ -233,10 +308,10 @@
             <!-- Suporte Final -->
             <section class="mt-16 mb-20 text-center">
                 <div class="p-10 bg-gray-900 border border-unifesp-600/30 rounded-3xl">
-                    <h2 class="justify-center text-2xl mb-4 text-white">Precisa de mais ajuda?</h2>
+                    <h2 class="justify-center text-2xl mb-4 text-white font-bold">Precisa de mais ajuda?</h2>
                     <p class="text-lg text-gray-400 mb-8">Se encontrou algum erro técnico ou possui dúvidas que não foram esclarecidas neste guia, a nossa equipa de suporte está à disposição.</p>
                     <div class="flex flex-col items-center gap-4">
-                        <p class="font-bold text-white uppercase tracking-widest text-sm">Abra um chamado em:</p>
+                        <p class="font-bold text-white uppercase tracking-widest text-sm">Abra um chamado oficial em:</p>
                         <a href="https://atendimento.unifesp.br" target="_blank" class="inline-block hover:opacity-80 transition-transform hover:scale-105">
                             <img src="images/suaunifesp.png" alt="Sua Unifesp" class="h-16 mx-auto" onerror="this.parentElement.innerHTML='sua.unifesp.br'">
                         </a>
