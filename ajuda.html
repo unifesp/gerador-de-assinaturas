@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajuda e Tutorial - Gerador de Assinaturas UNIFESP</title>
+    <title>Ajuda e Tutorial - SUA Assinatura UNIFESP</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -117,13 +117,13 @@
                     <i class="fa-solid fa-circle-question"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
-                    <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">Gerador de Assinatura</h1>
+                    <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
                     <span class="text-xl text-gray-700 font-light">|</span>
                     <span class="text-xl font-bold tracking-tight text-unifesp-400 leading-none truncate">Unifesp : : Ajuda</span>
                 </div>
             </div>
             <a href="index.html" class="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition border border-gray-700 text-xs font-medium">
-                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar ao Gerador
+                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar à SUA Assinatura
             </a>
         </div>
     </header>
@@ -140,7 +140,7 @@
             <!-- Passo 1: Modelo -->
             <section class="help-card">
                 <h2><span class="step-number">1</span> Escolha do Modelo</h2>
-                <p>O gerador oferece dois estilos visuais. Escolha o que melhor se adapta à sua necessidade de comunicação:</p>
+                <p>A SUA Assinatura oferece dois estilos visuais. Escolha o que melhor se adapta à sua necessidade de comunicação:</p>
                 <ul class="list-disc pl-8 mb-4 space-y-2">
                     <li><strong>Completo:</strong> Ideal para uso individual, permitindo a inclusão de foto de perfil, links de redes acadêmicas e mensagens personalizadas.</li>
                     <li><strong>Simplificado:</strong> Focado na unidade. Remove a foto e os links sociais, destacando os logotipos da sua unidade e da Unifesp.</li>
@@ -278,15 +278,28 @@
                 <ul class="list-disc pl-8 mt-4 space-y-3">
                     <li><strong>Link da Agenda:</strong> Caso use o agendamento do Google Calendar, insira o ID curto da sua agenda (o código que vem após <code>calendar.app.google/</code>).</li>
                     <li><strong>Chave PGP:</strong> Para comunicações seguras, insira o identificador da sua chave pública ou um link para o servidor de chaves.</li>
-                    <li><strong>Logotipo Setorial:</strong> Você pode adicionar um logotipo personalizado para a sua unidade. Insira a <code>URL</code> da imagem (deve estar hospedada online) e um <code>link</code> de destino ao clicar.</li>
                 </ul>
                 <img src="images/tutorial/detalhe_avancado.jpg" alt="Vista detalhada da seção de parâmetros avançados com exemplos de preenchimento" class="help-image">
                 <p class="text-xs text-gray-500 italic text-center">Legenda: Seção de expansão para redes sociais e acadêmicas.</p>
             </section>
 
-            <!-- Passo 5: Como instalar -->
+            <!-- Passo 5: Unidade Setorial -->
             <section class="help-card">
-                <h2><span class="step-number">5</span> Instalando no Gmail</h2>
+                <h2><span class="step-number">5</span> Unidade Setorial</h2>
+                <p>Além dos logotipos institucionais fixos (UNIFESP, SUA Unifesp e Governo Federal), você pode incluir no rodapé da assinatura o logotipo da sua unidade, departamento ou setor específico.</p>
+
+                <h3>Como selecionar</h3>
+                <ul class="list-disc pl-8 mt-4 space-y-3">
+                    <li><strong>Sem Unidade Setorial</strong> (opção padrão): nenhum logotipo adicional é exibido, só os três logotipos institucionais fixos.</li>
+                    <li><strong>Lista de unidades:</strong> escolha sua unidade no menu suspenso. O logotipo e o link de destino são preenchidos automaticamente — não é preciso digitar nada.</li>
+                    <li><strong>Outro (informar URL manualmente):</strong> se a sua unidade ainda não estiver na lista, selecione esta opção para revelar dois campos manuais: a <code>URL</code> da imagem do logotipo (deve estar hospedada online) e o <code>link</code> de destino ao clicar nele.</li>
+                </ul>
+                <p class="mt-4 text-gray-400 text-xs">Se a sua unidade não aparece na lista e você acredita que deveria fazer parte dela permanentemente, entre em contato com a equipe responsável pela ferramenta para que ela seja cadastrada — enquanto isso, use a opção "Outro" para não ficar sem o logotipo.</p>
+            </section>
+
+            <!-- Passo 6: Como instalar (manual) -->
+            <section class="help-card">
+                <h2><span class="step-number">6</span> Instalando no Gmail</h2>
                 <p>Após preencher os dados e visualizar o resultado no painel direito, siga estes passos:</p>
                 <ol class="list-decimal pl-8 mb-4 space-y-2">
                     <li>Clique no botão <strong>Copiar para o Gmail</strong>. Um aviso de "Copiado!" aparecerá.</li>
@@ -298,6 +311,46 @@
                 </ol>
                 <img src="images/tutorial/tutorial_gmail.jpg" alt="Passo a passo visual de onde colar a assinatura nas configurações do Gmail" class="help-image">
                 <p class="text-xs text-gray-500 italic text-center">Legenda: Configuração final no cliente de e-mail institucional.</p>
+            </section>
+
+            <!-- Passo 7: Injetar no Gmail automaticamente -->
+            <section class="help-card">
+                <h2><span class="step-number">7</span> Injetar no Gmail (automático)</h2>
+                <p>Em vez de copiar e colar manualmente, você pode gravar a assinatura direto na sua conta do Gmail institucional com um clique, usando o botão <strong>Injetar no Gmail</strong>.</p>
+
+                <h3>Como usar</h3>
+                <ol class="list-decimal pl-8 mb-4 space-y-2">
+                    <li>Preencha um e-mail institucional válido (<code>@unifesp.br</code>) no campo de e-mail. O botão <strong>Injetar no Gmail</strong> só fica habilitado depois disso.</li>
+                    <li>Clique em <strong>Injetar no Gmail</strong>.</li>
+                    <li>Uma janela de confirmação avisa que isso vai <strong>substituir a assinatura atual</strong> configurada no Gmail dessa conta. Confirme para continuar.</li>
+                    <li>Uma nova aba abre pedindo para você fazer login com sua conta institucional Google (caso ainda não esteja logado).</li>
+                    <li>Na primeira vez, o Google exibe uma <strong>tela de permissões</strong> — veja abaixo exatamente o que ela significa antes de aceitar.</li>
+                    <li>Após aceitar, a assinatura é gravada e uma tela de confirmação (✅ sucesso ou ⚠️ erro) aparece. Você pode fechar essa aba em seguida.</li>
+                </ol>
+
+                <h3>Sobre a tela de permissões do Google</h3>
+                <p class="mb-4 text-gray-400">É normal — e recomendado — desconfiar de qualquer tela que peça permissão de acesso à sua conta Google. Aqui está exatamente o que essa permissão específica permite e não permite:</p>
+                <div class="grid md:grid-cols-2 gap-4 text-xs mb-4">
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><i class="fa-solid fa-check text-unifesp-400 mr-1"></i> O que a permissão PERMITE</p>
+                        <p>Ler e alterar apenas as <strong>configurações administrativas</strong> do Gmail — neste caso, especificamente o campo de assinatura salva na sua conta.</p>
+                    </div>
+                    <div class="network-grid-item">
+                        <p class="font-bold text-white mb-1"><i class="fa-solid fa-xmark text-red-400 mr-1"></i> O que a permissão NÃO PERMITE</p>
+                        <p>Não dá acesso à leitura, envio ou exclusão dos seus e-mails, não acessa seus contatos, anexos ou conteúdo da caixa de entrada.</p>
+                    </div>
+                </div>
+                <p class="mb-4 text-gray-400">Essa ferramenta usa a API oficial do Google (Gmail API) para essa tarefa específica, executada com a sua própria identidade — ou seja, ela só consegue alterar a assinatura da <strong>sua própria conta</strong>, nunca a de outra pessoa.</p>
+
+                <h3>Depois de injetar: verifique se está marcada como padrão</h3>
+                <p>O Gmail permite guardar mais de uma assinatura salva, mas só a marcada como <strong>padrão</strong> é inserida automaticamente ao escrever ou responder um e-mail. Na primeira vez que você usar o botão de injeção, é importante conferir isso manualmente:</p>
+                <ol class="list-decimal pl-8 mb-4 space-y-2">
+                    <li>Vá em <strong>Configurações</strong> (ícone de engrenagem) > <strong>Ver todas as configurações</strong> > aba <strong>Geral</strong> > seção <strong>Assinatura</strong>.</li>
+                    <li>Localize a assinatura que acabou de ser gravada (pode aparecer com o nome padrão "My Signature").</li>
+                    <li>Nos seletores <strong>"Para novos e-mails use"</strong> e <strong>"Para respostas/encaminhamentos use"</strong>, selecione essa assinatura.</li>
+                    <li>Clique em <strong>Salvar Alterações</strong>.</li>
+                </ol>
+                <p class="text-xs text-gray-500 italic">Esse passo só é necessário na primeira vez. Injeções futuras atualizam o conteúdo dessa mesma assinatura, sem precisar repetir a seleção de padrão.</p>
             </section>
 
             <!-- Backup -->
@@ -329,7 +382,7 @@
     <!-- Rodapé Padronizado -->
     <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex items-center gap-4">
-            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono" id="appVersion"></span> | Modificado: <span id="lastModDate"></span></span>
             <span class="text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="text-gray-700">|</span>
@@ -352,7 +405,8 @@
     </footer>
 
     <script>
-        document.getElementById('lastModDate').innerText = new Date().toLocaleDateString();
+        document.getElementById('appVersion').innerText = 'v1.0.3';
+        document.getElementById('lastModDate').innerText = '16/07/2026';
     </script>
 </body>
 </html>

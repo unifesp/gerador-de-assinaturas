@@ -109,7 +109,26 @@ function doPost(e) {
       userEmail
     );
 
-    return createHtmlResponse(true, "Assinatura atualizada com sucesso na conta " + userEmail + ".");
+    // Confirmação real: relê o que ficou gravado no Gmail (em vez de confiar apenas
+    // na ausência de erro). O Gmail sanitiza o HTML da assinatura ao salvar, então essa
+    // leitura também serve para detectar o caso em que o conteúdo foi salvo praticamente vazio.
+    const saved = Gmail.Users.Settings.SendAs.get("me", userEmail);
+    const savedSignature = (saved && saved.signature) ? saved.signature : "";
+
+    if (!savedSignature || savedSignature.trim().length < 20) {
+      return createHtmlResponse(false,
+        "A gravação não gerou erro, mas ao conferir o resultado a assinatura salva ficou vazia ou muito curta. " +
+        "É possível que o Gmail tenha removido parte do conteúdo ao sanitizar o HTML. Avise o suporte técnico.");
+    }
+
+    const note =
+      "Assinatura gravada com sucesso na conta " + userEmail + ". " +
+      "IMPORTANTE: o Gmail permite guardar várias assinaturas, e só a marcada como \"padrão\" é inserida " +
+      "automaticamente ao escrever ou responder um email. Na primeira vez, confira em " +
+      "Configurações (⚙️) → Ver todas as configurações → Geral → Assinatura, e marque a assinatura que " +
+      "acabamos de gravar como padrão para \"Novos emails\" e para \"Respostas/encaminhamentos\".";
+
+    return createHtmlResponse(true, note);
   } catch (err) {
     return createHtmlResponse(false, "Erro ao gravar a assinatura: " + err.message);
   }
