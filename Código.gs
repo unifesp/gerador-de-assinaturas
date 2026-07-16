@@ -68,3 +68,64 @@ function createResponse(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * ATENÇÃO: esta função deve ser publicada em um SEGUNDO deployment de Web App,
+ * separado do usado pelo doGet acima. Configuração desse segundo deployment:
+ *   - Executar como: "Usuário que acessa o app da web"
+ *   - Quem tem acesso: "Qualquer pessoa na organização [UNIFESP]"
+ * Isso é necessário porque o doGet (busca no Directory) precisa rodar com a
+ * identidade de quem publicou o script (para ter permissão de consultar
+ * QUALQUER usuário no diretório), enquanto esta função precisa rodar com a
+ * identidade de quem está USANDO a página (para gravar a assinatura só na
+ * própria conta Gmail dele, nunca na de outra pessoa).
+ *
+ * Também é necessário, no manifesto do projeto (appsscript.json — em "Editor" ->
+ * ícone de engrenagem -> "Mostrar arquivo de manifesto do projeto"), garantir que
+ * o escopo abaixo esteja declarado em "oauthScopes":
+ *   "https://www.googleapis.com/auth/gmail.settings.basic"
+ * e que o serviço avançado "Gmail API" esteja ativado em Serviços (barra lateral
+ * do editor de Apps Script).
+ */
+function doPost(e) {
+  const signatureHtml = e.parameter.signatureHtml;
+
+  if (!signatureHtml) {
+    return createHtmlResponse(false, "Nenhum conteúdo de assinatura foi recebido.");
+  }
+
+  try {
+    // Session.getActiveUser() só retorna o e-mail real quando o deployment está
+    // configurado como "Executar como: Usuário que acessa o app da web".
+    const userEmail = Session.getActiveUser().getEmail();
+    if (!userEmail) {
+      return createHtmlResponse(false, "Não foi possível identificar o usuário autenticado. Verifique se você fez login com sua conta institucional.");
+    }
+
+    // Localiza o endereço de envio (send-as) principal do usuário e atualiza a assinatura.
+    Gmail.Users.Settings.SendAs.patch(
+      { signature: signatureHtml },
+      "me",
+      userEmail
+    );
+
+    return createHtmlResponse(true, "Assinatura atualizada com sucesso na conta " + userEmail + ".");
+  } catch (err) {
+    return createHtmlResponse(false, "Erro ao gravar a assinatura: " + err.message);
+  }
+}
+
+function createHtmlResponse(success, message) {
+  const color = success ? "#16a34a" : "#dc2626";
+  const title = success ? "Assinatura atualizada" : "Não foi possível atualizar a assinatura";
+  const html =
+    '<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8">' +
+    '<title>' + title + '</title>' +
+    '<style>body{font-family:Arial,sans-serif;background:#111827;color:#e5e7eb;' +
+    'display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;padding:20px;box-sizing:border-box;}' +
+    'h1{color:' + color + ';font-size:20px;}p{max-width:480px;}</style></head><body>' +
+    '<div><h1>' + title + '</h1><p>' + message + '</p>' +
+    '<p style="color:#9ca3af;font-size:12px;">Você já pode fechar esta janela.</p></div>' +
+    '</body></html>';
+  return HtmlService.createHtmlOutput(html);
+}
