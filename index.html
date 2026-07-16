@@ -292,11 +292,27 @@
                                         </div>
                                     </div>
 
-                                    <!-- Controle: Ocultar Abrir Chamado -->
+                                    <!-- Controle: Exibir Botão Abrir Chamado -->
                                     <div class="form-group mt-2 pt-2 border-t border-gray-700">
                                         <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
-                                            <input type="checkbox" id="hideTicketBtn" onchange="updatePreview()">
-                                            <span class="text-gray-300 font-medium text-xs">Ocultar botão "Abrir um chamado"</span>
+                                            <input type="checkbox" id="showTicketBtn" checked onchange="updatePreview()">
+                                            <span class="text-gray-300 font-medium text-xs">Exibir botão "Abrir um chamado"</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Controle: Exibir Botão Agendar Horário -->
+                                    <div class="form-group mt-2">
+                                        <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
+                                            <input type="checkbox" id="showScheduleBtn" checked onchange="updatePreview()">
+                                            <span class="text-gray-300 font-medium text-xs">Exibir botão "Agendar horário" (mantém o link salvo, mesmo oculto)</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Controle: Exibir Logotipo do Governo Federal -->
+                                    <div class="form-group mt-2">
+                                        <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
+                                            <input type="checkbox" id="showGovLogo" checked onchange="updatePreview()">
+                                            <span class="text-gray-300 font-medium text-xs">Exibir logotipo do Governo Federal (desative durante o período de defeso eleitoral)</span>
                                         </label>
                                     </div>
                                 </div>
@@ -320,6 +336,9 @@
                             <button id="copyButton" class="copy-button">
                                 <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
+                            <button id="injectButton" class="copy-button" disabled title="Preencha um e-mail institucional (@unifesp.br) válido para habilitar">
+                                <i class="fa-brands fa-google"></i> <span>Injetar assinatura no Gmail</span>
+                            </button>
                             <a href="ajuda.html" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda">
                                 <i class="fa-solid fa-question"></i>
                             </a>
@@ -334,6 +353,14 @@
                                 <i class="fa-solid fa-arrow-up"></i> JSON
                             </button>
                         </div>
+
+                        <!-- Formulário oculto: envia a assinatura via POST para o Web App de injeção.
+                             Um POST de formulário com target="_blank" faz uma navegação normal do
+                             navegador (não é uma chamada fetch/XHR), então o próprio Google consegue
+                             conduzir a tela de login/consentimento OAuth sem problemas de CORS. -->
+                        <form id="injectSignatureForm" action="" method="POST" target="_blank" class="hidden">
+                            <input type="hidden" name="signatureHtml" id="injectSignatureHtml">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -343,7 +370,7 @@
     <!-- Rodapé Padronizado -->
     <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex items-center gap-4">
-            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono" id="appVersion"></span> | Modificado: <span id="lastModDate"></span></span>
             <span class="text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="text-gray-700">|</span>
@@ -370,21 +397,40 @@
     <script>
         const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwFfVK-WwdcJ8oNL_4iVK1DTbQmOW7eXlrz57dMwMINW4rW2Lu-NFEIiToYOgSQ2xrz/exec"; 
 
-        const LOGO_BRASIL = 'images/governo.png';
-        const LOGO_UNIFESP = 'images/unifesp.png';
-        const LOGO_SUA_DEFAULT = 'images/suaunifesp.png';
-        const ICONS = {
+        // URL do SEGUNDO Web App do mesmo projeto Apps Script, implantado separadamente com
+        // "Executar como: Usuário que acessa o app da web" e "Quem tem acesso: Qualquer pessoa
+        // na organização". É esse segundo deployment que grava a assinatura no Gmail do próprio
+        // usuário autenticado. Substitua pela URL real após publicar o deployment (ver Código.gs).
+        const GAS_SIGNATURE_INJECT_URL = "https://script.google.com/a/macros/unifesp.br/s/AKfycbw0RUIGqkox-QO7bJqcZoEhX7j2wAx7vwQN4C17j8-8iBcwVsilUiSl0T9pNataOGNq/exec";
+
+        // Atualize estes dois valores juntos, apenas quando a versão do gerador mudar.
+        // A data deve refletir o dia em que o número de versão foi alterado,
+        // não a data corrente de acesso à página.
+        const APP_VERSION = 'v1.0.0';
+        const APP_LAST_MODIFIED = '16/07/2026';
+
+        // Resolve caminhos relativos (ex.: "images/governo.png") para URLs absolutas com base
+        // na URL real da página. Isso é indispensável para o botão "Injetar assinatura no Gmail":
+        // o HTML da assinatura é enviado como texto puro para a API do Gmail, que não tem como
+        // resolver caminhos relativos (ela tentaria resolver contra mail.google.com, que não
+        // tem essas imagens, e o resultado seria ícones quebrados).
+        const abs = (path) => new URL(path, document.baseURI).href;
+
+        const LOGO_BRASIL = abs('images/governo.png');
+        const LOGO_UNIFESP = abs('images/unifesp.png');
+        const LOGO_SUA_DEFAULT = abs('images/suaunifesp.png');
+        const ICONS = Object.fromEntries(Object.entries({
             orcid: 'images/orcid.png', lattes: 'images/lattes.png', prodmais: 'images/prodmais.png',
             zotero: 'images/zotero.png', wikipedia: 'images/wikipedia.png', googleacademic: 'images/googleacademic.png',
             researchgate: 'images/researchgate.png', linkedin: 'images/linkedin.png', instagram: 'images/instagram.png',
             reddit: 'images/reddit.png', tiktok: 'images/tiktok.png', youtube: 'images/youtube.png',
             telegram: 'images/telegram.png', signal: 'images/signal.png', medium: 'images/medium.png',
             whatsapp: 'images/whatsapp.png', github: 'images/github.png', gitlab: 'images/gitlab.png'
-        };
+        }).map(([k, v]) => [k, abs(v)]));
         
         const PLACEHOLDER_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjMDA1MzA0Ii8+CjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjE1IiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNIDMwIDYwIFEgMzAgNzAgNDAgODAgTCA2MCA4MCBRIDcwIDcwIDcwIDYwIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=';
 
-        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'prodmais', 'orcid', 'zotero', 'wikipedia', 'googleacademic', 'researchgate', 'linkedin', 'instagram', 'reddit', 'tiktok', 'youtube', 'telegram', 'signal', 'medium', 'whatsapp', 'github', 'gitlab', 'scheduleLink', 'pgpKey', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink', 'hideTicketBtn'].reduce((acc, id) => {
+        const inputs = ['fullName', 'title', 'department', 'superiorUnit', 'email', 'phone', 'ramal', 'celular', 'lattes', 'prodmais', 'orcid', 'zotero', 'wikipedia', 'googleacademic', 'researchgate', 'linkedin', 'instagram', 'reddit', 'tiktok', 'youtube', 'telegram', 'signal', 'medium', 'whatsapp', 'github', 'gitlab', 'scheduleLink', 'pgpKey', 'photoUrl', 'customMessage', 'sectorLogoUrl', 'sectorLogoLink', 'showTicketBtn', 'showScheduleBtn', 'showGovLogo'].reduce((acc, id) => {
             acc[id] = document.getElementById(id);
             return acc;
         }, {});
@@ -399,6 +445,12 @@
                 if (data.success) {
                     if (data.name) inputs.fullName.value = data.name;
                     if (data.photoUrl) inputs.photoUrl.value = data.photoUrl;
+                    if (data.title) inputs.title.value = data.title;
+                    if (data.department) inputs.department.value = data.department;
+                    if (data.costCenter) inputs.superiorUnit.value = data.costCenter;
+                    if (data.mobile) inputs.celular.value = data.mobile;
+                    if (data.phone) inputs.phone.value = data.phone;
+                    if (data.ramal) inputs.ramal.value = data.ramal;
                     updatePreview();
                 }
             } catch (err) { console.error("Erro no autopreenchimento:", err); }
@@ -422,7 +474,9 @@
             const layoutEl = document.querySelector('input[name="layoutType"]:checked');
             const layoutType = layoutEl ? layoutEl.value : 'completo';
             const isSimplified = layoutType === 'simplificado';
-            const hideTicket = inputs.hideTicketBtn.checked;
+            const showTicket = inputs.showTicketBtn.checked;
+            const showSchedule = inputs.showScheduleBtn.checked;
+            const showGovLogo = inputs.showGovLogo.checked;
 
             const fullName = inputs.fullName?.value || 'Seu Nome';
             const title = inputs.title?.value || 'Seu Cargo';
@@ -475,10 +529,10 @@
             const btnStyle = "display: inline-block; background-color: #1E5A3A; color: #ffffff; padding: 8px 12px; border-radius: 4px; text-decoration: none; font-size: 12px; margin-right: 8px; margin-bottom: 5px;";
             
             let btnsList = [];
-            if (inputs.scheduleLink?.value) {
+            if (showSchedule && inputs.scheduleLink?.value) {
                 btnsList.push(`<a href="https://calendar.app.google/${inputs.scheduleLink.value}" style="${btnStyle}">📅 Agendar horário</a>`);
             }
-            if (!hideTicket) {
+            if (showTicket) {
                 btnsList.push(`<a href="https://sua.unifesp.br" style="${btnStyle}">🎫 Abrir um chamado</a>`);
             }
             let btns = btnsList.join(' ');
@@ -493,7 +547,7 @@
                 let fLogos = (sectorLogoUrl ? `<td style="padding-right: 25px; vertical-align: bottom;"><a href="${sectorLogoLink}"><img src="${sectorLogoUrl}" height="40" style="height: 40px; border: 0; display: block;"></a></td>` : '') +
                     `<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://sua.unifesp.br"><img src="${LOGO_SUA_DEFAULT}" height="40" style="height: 40px; border: 0; display: block;"></a></td>` +
                     `<td style="padding-right: 25px; vertical-align: bottom;"><a href="https://portal.unifesp.br/"><img src="${LOGO_UNIFESP}" height="40" style="height: 40px; border: 0; display: block;"></a></td>` +
-                    `<td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>`;
+                    (showGovLogo ? `<td style="vertical-align: bottom;"><a href="https://www.gov.br/"><img src="${LOGO_BRASIL}" height="40" style="height: 40px; border: 0; display: block;"></a></td>` : '');
                 footer = `<div style="border-top: 1px solid rgba(128, 128, 128, 0.3); margin: 15px 0 10px 0; padding-top: 10px; width: 100%;"><table border="0" cellpadding="0" cellspacing="0"><tr>${fLogos}</tr></table></div>`;
             }
 
@@ -548,8 +602,34 @@
         });
 
         const emailInput = document.getElementById('email');
+        const injectButton = document.getElementById('injectButton');
+
+        function isValidInstitutionalEmail(value) {
+            return /^[^\s@]+@unifesp\.br$/.test((value || '').trim());
+        }
+
+        function updateInjectButtonState() {
+            injectButton.disabled = !isValidInstitutionalEmail(emailInput.value);
+        }
+
         emailInput.addEventListener('blur', () => handleAutoFill(emailInput.value));
-        emailInput.addEventListener('input', updatePreview);
+        emailInput.addEventListener('input', () => { updatePreview(); updateInjectButtonState(); });
+        updateInjectButtonState();
+
+        injectButton.addEventListener('click', () => {
+            if (injectButton.disabled) return;
+            if (!GAS_SIGNATURE_INJECT_URL || GAS_SIGNATURE_INJECT_URL.startsWith('COLE_AQUI')) {
+                alert('A URL do Web App de injeção ainda não foi configurada. Veja as instruções em Código.gs.');
+                return;
+            }
+            const confirmMsg = 'Isso vai substituir a assinatura atual configurada no Gmail de ' + emailInput.value.trim() + '. Deseja continuar?';
+            if (!window.confirm(confirmMsg)) return;
+
+            const form = document.getElementById('injectSignatureForm');
+            form.action = GAS_SIGNATURE_INJECT_URL;
+            document.getElementById('injectSignatureHtml').value = generateSignature().trim();
+            form.submit();
+        });
 
         document.getElementById('copyButton').addEventListener('click', () => {
             const form = document.getElementById('signatureForm'); 
@@ -576,10 +656,11 @@
 
         document.getElementById('resetButton').addEventListener('click', () => {
             Object.values(inputs).forEach(input => { if (input) {
-                if (input.type === 'checkbox') input.checked = false;
+                if (input.type === 'checkbox') input.checked = true;
                 else input.value = ''; 
             }});
             updatePreview();
+            updateInjectButtonState();
         });
 
         document.getElementById('exportButton').addEventListener('click', () => {
@@ -608,6 +689,7 @@
                             }
                         });
                         updatePreview();
+                        updateInjectButtonState();
                     } catch (err) { console.error('Erro no JSON:', err); }
                 };
                 r.readAsText(file);
@@ -615,7 +697,8 @@
             f.click();
         });
 
-        document.getElementById('lastModDate').innerText = new Date().toLocaleDateString();
+        document.getElementById('appVersion').innerText = APP_VERSION;
+        document.getElementById('lastModDate').innerText = APP_LAST_MODIFIED;
         updatePreview();
     </script>
 </body>
