@@ -9,11 +9,6 @@
       "logoUrl": "images/setores/sti.png",
       "url": "https://sti.unifesp.br"
     }
- {
-      "name": "DCI - Departamento de Comunicaçao Institucional",
-      "logoUrl": "images/setores/dci.svg",
-      "url": "https://dci.unifesp.br"
-    }
   ],
   "colors": {
     "primary": "#1E5A3A"
