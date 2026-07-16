@@ -117,15 +117,30 @@ function doPost(e) {
 
 function createHtmlResponse(success, message) {
   const color = success ? "#16a34a" : "#dc2626";
-  const title = success ? "Assinatura atualizada" : "Não foi possível atualizar a assinatura";
+  const bgIcon = success ? "rgba(22,163,74,0.15)" : "rgba(220,38,38,0.15)";
+  const icon = success ? "✅" : "⚠️";
+  const title = success ? "Assinatura atualizada com sucesso!" : "Não foi possível atualizar a assinatura";
   const html =
     '<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
     '<title>' + title + '</title>' +
-    '<style>body{font-family:Arial,sans-serif;background:#111827;color:#e5e7eb;' +
+    '<style>' +
+    'body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e5e7eb;' +
     'display:flex;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center;padding:20px;box-sizing:border-box;}' +
-    'h1{color:' + color + ';font-size:20px;}p{max-width:480px;}</style></head><body>' +
-    '<div><h1>' + title + '</h1><p>' + message + '</p>' +
-    '<p style="color:#9ca3af;font-size:12px;">Você já pode fechar esta janela.</p></div>' +
+    '.card{max-width:440px;width:100%;}' +
+    '.icon-wrap{width:80px;height:80px;border-radius:50%;background:' + bgIcon + ';' +
+    'display:flex;align-items:center;justify-content:center;margin:0 auto 20px auto;font-size:40px;line-height:1;}' +
+    'h1{color:' + color + ';font-size:22px;margin:0 0 12px 0;}' +
+    'p.message{font-size:14px;color:#d1d5db;margin:0 0 24px 0;}' +
+    '.close-hint{background:#1f2937;border:1px solid ' + color + ';border-radius:8px;padding:14px 18px;' +
+    'font-size:14px;font-weight:bold;color:#f9fafb;}' +
+    '</style></head><body>' +
+    '<div class="card">' +
+    '<div class="icon-wrap">' + icon + '</div>' +
+    '<h1>' + title + '</h1>' +
+    '<p class="message">' + message + '</p>' +
+    '<div class="close-hint">👉 Você já pode fechar esta janela.</div>' +
+    '</div>' +
     '</body></html>';
   return HtmlService.createHtmlOutput(html);
 }
