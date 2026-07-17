@@ -135,16 +135,35 @@
             .copy-button { width: 100%; flex: none; }
             .action-bar { justify-content: center; }
         }
+
+        /* Modo de Alto Contraste: preserva a área de pré-visualização (que reflete
+           as cores reais do e-mail gerado), mas força preto/branco/amarelo em
+           todo o resto da interface do editor. */
+        html.high-contrast body *:not(.signature-preview-area):not(.signature-preview-area *) {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border-color: #ffeb3b !important;
+        }
+        html.high-contrast a:not(.signature-preview-area a),
+        html.high-contrast button:not(.signature-preview-area button) {
+            color: #ffeb3b !important;
+            text-decoration: underline;
+        }
+        html.high-contrast .form-input-dark:focus {
+            border-color: #ffeb3b !important;
+            box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.8) !important;
+        }
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-unifesp-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Pular para o conteúdo</a>
 
     <!-- Cabeçalho Principal -->
     <header class="bg-unifesp-600 border-b border-unifesp-700 flex flex-col shadow-sm z-20 shrink-0 transition-colors duration-300">
         <div class="flex items-center justify-between px-4 py-3 bg-unifesp-600">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-white flex items-center justify-center text-unifesp-600 font-bold">
-                    <i class="fa-solid fa-signature"></i>
+                    <i aria-hidden="true" class="fa-solid fa-signature"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="font-bold text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
@@ -159,7 +178,7 @@
     </header>
 
     <!-- Área de Conteúdo Principal -->
-    <main class="flex-1 overflow-auto p-3 sm:p-6 fade-in">
+    <main id="main-content" class="flex-1 overflow-auto p-3 sm:p-6 fade-in">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                 
@@ -168,7 +187,7 @@
                     
                     <!-- Seletor de Modelo -->
                     <h2 class="section-title font-bold text-unifesp-400 mb-3 flex items-center gap-2 text-base">
-                        <i class="fa-solid fa-layer-group"></i> Modelo da Assinatura
+                        <i aria-hidden="true" class="fa-solid fa-layer-group"></i> Modelo da Assinatura
                     </h2>
                     <div class="layout-selector">
                         <label class="layout-option">
@@ -185,124 +204,124 @@
                         
                         <!-- Seção Email -->
                         <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center justify-between text-base">
-                            <span class="flex items-center gap-2"><i class="fa-solid fa-envelope"></i> Email @unifesp.br</span>
-                            <div id="emailLoader" class="hidden text-xs text-unifesp-400 italic flex items-center gap-2">
+                            <span class="flex items-center gap-2"><i aria-hidden="true" class="fa-solid fa-envelope"></i> Email @unifesp.br</span>
+                            <div id="emailLoader" class="hidden text-xs text-unifesp-400 italic flex items-center gap-2" role="status" aria-live="polite">
                                 Buscando dados <div class="loader-dots"><div></div><div></div><div></div></div>
                             </div>
                         </h2>
                         <div class="form-group mb-8">
-                            <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">E-mail Institucional <span class="text-red-500">*</span></label>
+                            <label for="email" class="form-label text-neutral-700 font-medium mb-1 block font-bold">E-mail Institucional <span class="text-red-500">*</span></label>
                             <input type="email" id="email" class="form-input-dark" required placeholder="seu.usuario@unifesp.br">
-                            <p class="text-[10px] text-gray-500 mt-1">O nome e a foto serão preenchidos automaticamente se encontrados no diretório.</p>
+                            <p class="text-xs text-gray-500 mt-1">O nome e a foto serão preenchidos automaticamente se encontrados no diretório.</p>
                         </div>
 
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-user-pen"></i> Seus Dados Principais
+                            <i aria-hidden="true" class="fa-solid fa-user-pen"></i> Seus Dados Principais
                         </h2>
 
                         <div class="grid grid-cols-1 gap-4">
                             <!-- Nome Completo -->
                             <div class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
+                                <label for="fullName" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
                                 <input type="text" id="fullName" class="form-input-dark" placeholder="Nome Profissional" required minlength="3">
                             </div>
 
                             <!-- Foto de Perfil -->
                             <div id="photoGroup" class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
+                                <label for="photoUrl" class="form-label text-neutral-700 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
                                 <input type="url" id="photoUrl" class="form-input-dark" placeholder="https://atendimento.unifesp.br/pics/usuarios/usuario.jpg">
                             </div>
 
                             <!-- Restante dos campos principais -->
                             <div class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
+                                <label for="title" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
                                 <input type="text" id="title" class="form-input-dark" placeholder="Ex: Professor Adjunto" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade de Lotação <span class="text-red-500">*</span></label>
+                                <label for="department" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade de Lotação <span class="text-red-500">*</span></label>
                                 <input type="text" id="department" class="form-input-dark" placeholder="Ex: STI" required>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade Superior (Opcional)</label>
+                                <label for="superiorUnit" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade Superior (Opcional)</label>
                                 <input type="text" id="superiorUnit" class="form-input-dark" placeholder="Ex: Reitoria">
                             </div>
 
                             <!-- Telefones -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-group">
-                                    <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Telefone Fixo</label>
+                                    <label for="phone" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Telefone Fixo</label>
                                     <input type="tel" id="phone" class="form-input-dark" placeholder="(11) 3385-4100">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Ramal</label>
+                                    <label for="ramal" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Ramal</label>
                                     <input type="text" id="ramal" class="form-input-dark" value="" placeholder="8000" pattern="\d*">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label text-neutral-700 font-medium mb-1 block font-bold">Celular</label>
+                                <label for="celular" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Celular</label>
                                 <input type="tel" id="celular" class="form-input-dark" placeholder="(11) 90000-0000">
                             </div>
 
                             <!-- Cortina: Personalização Avançada -->
                             <details class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 group mt-2">
                                 <summary class="font-bold text-unifesp-400 cursor-pointer list-none flex items-center gap-2">
-                                    <i class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> Personalização Avançada
+                                    <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> Personalização Avançada
                                 </summary>
                                 <div class="mt-4 flex flex-col gap-4">
                                     
                                     <div class="form-group">
-                                        <label class="form-label text-unifesp-400 font-bold mb-2 block text-xs uppercase tracking-wider">Redes Sociais e Acadêmicas</label>
+                                        <p class="form-label text-unifesp-400 font-bold mb-2 block text-xs uppercase tracking-wider">Redes Sociais e Acadêmicas</p>
                                     </div>
 
                                     <div id="socialFieldsGroup" class="flex flex-col gap-4">
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos numéricos" pattern="[0-9]{16}"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="Seu ID no ProdMais"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)</label><input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/zotero.png" class="w-4 h-4" alt=""> Zotero (ID)</label><input type="text" id="zotero" class="form-input-dark" placeholder="ID de usuário"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Usuário)</label><input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/googleacademic.png" class="w-4 h-4" alt=""> Google Acadêmico (ID)</label><input type="text" id="googleacademic" class="form-input-dark" placeholder="Código user="></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/researchgate.png" class="w-4 h-4" alt=""> ResearchGate (ID)</label><input type="text" id="researchgate" class="form-input-dark" placeholder="ID do perfil"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)</label><input type="text" id="linkedin" class="form-input-dark" placeholder="nome-perfil"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)</label><input type="text" id="instagram" class="form-input-dark" placeholder="@perfil"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/reddit.png" class="w-4 h-4" alt=""> Reddit (Usuário)</label><input type="text" id="reddit" class="form-input-dark" placeholder="seu-usuario"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)</label><input type="text" id="tiktok" class="form-input-dark" placeholder="@perfil"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/youtube.png" class="w-4 h-4" alt=""> YouTube (Canal)</label><input type="text" id="youtube" class="form-input-dark" placeholder="@canal"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/telegram.png" class="w-4 h-4" alt=""> Telegram (Usuário)</label><input type="text" id="telegram" class="form-input-dark" placeholder="seu-usuario"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/signal.png" class="w-4 h-4" alt=""> Signal (Número)</label><input type="text" id="signal" class="form-input-dark" placeholder="+5511..."></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/medium.png" class="w-4 h-4" alt=""> Medium (Usuário)</label><input type="text" id="medium" class="form-input-dark" placeholder="@usuario"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp</label><input type="text" id="whatsapp" class="form-input-dark" placeholder="11900000000" pattern="\d{10,11}"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)</label><input type="text" id="github" class="form-input-dark" placeholder="seu-usuario"></div>
-                                        <div class="form-group"><label class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)</label><input type="text" id="gitlab" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="lattes" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos numéricos" pattern="[0-9]{16}"></div>
+                                        <div class="form-group"><label for="prodmais" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="Seu ID no ProdMais"></div>
+                                        <div class="form-group"><label for="orcid" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)</label><input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]"></div>
+                                        <div class="form-group"><label for="zotero" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/zotero.png" class="w-4 h-4" alt=""> Zotero (ID)</label><input type="text" id="zotero" class="form-input-dark" placeholder="ID de usuário"></div>
+                                        <div class="form-group"><label for="wikipedia" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Usuário)</label><input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário"></div>
+                                        <div class="form-group"><label for="googleacademic" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/googleacademic.png" class="w-4 h-4" alt=""> Google Acadêmico (ID)</label><input type="text" id="googleacademic" class="form-input-dark" placeholder="Código user="></div>
+                                        <div class="form-group"><label for="researchgate" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/researchgate.png" class="w-4 h-4" alt=""> ResearchGate (ID)</label><input type="text" id="researchgate" class="form-input-dark" placeholder="ID do perfil"></div>
+                                        <div class="form-group"><label for="linkedin" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)</label><input type="text" id="linkedin" class="form-input-dark" placeholder="nome-perfil"></div>
+                                        <div class="form-group"><label for="instagram" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)</label><input type="text" id="instagram" class="form-input-dark" placeholder="@perfil"></div>
+                                        <div class="form-group"><label for="reddit" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/reddit.png" class="w-4 h-4" alt=""> Reddit (Usuário)</label><input type="text" id="reddit" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="tiktok" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)</label><input type="text" id="tiktok" class="form-input-dark" placeholder="@perfil"></div>
+                                        <div class="form-group"><label for="youtube" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/youtube.png" class="w-4 h-4" alt=""> YouTube (Canal)</label><input type="text" id="youtube" class="form-input-dark" placeholder="@canal"></div>
+                                        <div class="form-group"><label for="telegram" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/telegram.png" class="w-4 h-4" alt=""> Telegram (Usuário)</label><input type="text" id="telegram" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="signal" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/signal.png" class="w-4 h-4" alt=""> Signal (Número)</label><input type="text" id="signal" class="form-input-dark" placeholder="+5511..."></div>
+                                        <div class="form-group"><label for="medium" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/medium.png" class="w-4 h-4" alt=""> Medium (Usuário)</label><input type="text" id="medium" class="form-input-dark" placeholder="@usuario"></div>
+                                        <div class="form-group"><label for="whatsapp" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp</label><input type="text" id="whatsapp" class="form-input-dark" placeholder="11900000000" pattern="\d{10,11}"></div>
+                                        <div class="form-group"><label for="github" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)</label><input type="text" id="github" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="gitlab" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)</label><input type="text" id="gitlab" class="form-input-dark" placeholder="seu-usuario"></div>
                                     </div>
 
                                     <div class="form-group pt-2 border-t border-neutral-200">
-                                        <label class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase tracking-wider">Opções Técnicas</label>
+                                        <p class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase tracking-wider">Opções Técnicas</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
+                                        <label for="scheduleLink" class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
                                         <div class="flex">
-                                            <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-neutral-300 bg-neutral-100 text-neutral-600 text-[10px]">calendar.app.google/</span>
+                                            <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-neutral-300 bg-neutral-100 text-neutral-600 text-xs">calendar.app.google/</span>
                                             <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
                                         </div>
                                     </div>
 
                                     <div id="pgpGroup" class="form-group">
-                                        <label class="form-label text-neutral-700 font-medium mb-1 block text-xs">Chave Pública PGP</label>
+                                        <label for="pgpKey" class="form-label text-neutral-700 font-medium mb-1 block text-xs">Chave Pública PGP</label>
                                         <input type="text" id="pgpKey" class="form-input-dark" placeholder="Link ou ID da chave">
                                     </div>
 
                                     <div id="customMessageGroup" class="form-group">
-                                        <label class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">Mensagem de Rodapé</label>
+                                        <label for="customMessage" class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">Mensagem de Rodapé</label>
                                         <textarea id="customMessage" class="form-input-dark" rows="2" placeholder="Frase ou aviso de segurança"></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
-                                            <i class="fa-solid fa-gear"></i> Unidade Setorial
+                                        <label for="sectorSelect" class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
+                                            <i aria-hidden="true" class="fa-solid fa-gear"></i> Unidade Setorial
                                         </label>
                                         <div class="p-4 bg-neutral-50 rounded-lg border border-neutral-200 space-y-3">
                                             <select id="sectorSelect" class="form-input-dark text-xs">
@@ -310,7 +329,9 @@
                                                 <option value="__manual__">Outro (informar URL manualmente)</option>
                                             </select>
                                             <div id="sectorManualWrap" class="space-y-3 hidden">
+                                                <label for="sectorLogoUrl" class="form-label text-neutral-700 mb-1 block text-xs">URL da imagem do logotipo</label>
                                                 <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem (PNG/JPG)">
+                                                <label for="sectorLogoLink" class="form-label text-neutral-700 mb-1 block text-xs">Link de destino ao clicar</label>
                                                 <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link ao clicar">
                                             </div>
                                         </div>
@@ -357,7 +378,7 @@
                 <div class="space-y-6 lg:col-span-3 lg:sticky lg:top-4 lg:self-start">
                     <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-5 sm:p-8">
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2">
-                            <i class="fa-solid fa-eye"></i> Pré-visualização Real
+                            <i aria-hidden="true" class="fa-solid fa-eye"></i> Pré-visualização Real
                         </h2>
                         
                         <div class="signature-preview-area mb-6">
@@ -366,23 +387,23 @@
                         
                         <div class="action-bar flex items-center gap-2 flex-wrap">
                             <button id="copyButton" class="copy-button">
-                                <i class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
+                                <i aria-hidden="true" class="fa-solid fa-copy"></i> <span>Copiar para o Gmail</span>
                             </button>
                             <button id="injectButton" class="copy-button" disabled title="Preencha um e-mail institucional (@unifesp.br) válido para habilitar">
-                                <i class="fa-brands fa-google"></i> <span>Injetar no Gmail</span>
+                                <i aria-hidden="true" class="fa-brands fa-google"></i> <span>Injetar no Gmail</span>
                             </button>
-                            <a href="ajuda.html" class="icon-only-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Ajuda">
-                                <i class="fa-solid fa-question"></i>
+                            <a href="ajuda.html" class="icon-only-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Ajuda" aria-label="Ajuda">
+                                <i aria-hidden="true" class="fa-solid fa-question"></i>
                             </a>
-                            <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar">
-                                <i class="fa-solid fa-eraser"></i>
+                            <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar" aria-label="Limpar formulário">
+                                <i aria-hidden="true" class="fa-solid fa-eraser"></i>
                             </button>
 
-                            <button id="exportButton" class="json-action-button bg-unifesp-800 hover:bg-unifesp-900 text-white border-unifesp-700" title="Exportar dados para arquivo JSON">
-                                <i class="fa-solid fa-arrow-down"></i> JSON
+                            <button id="exportButton" class="json-action-button bg-unifesp-800 hover:bg-unifesp-900 text-white border-unifesp-700" title="Exportar dados para arquivo JSON" aria-label="Exportar dados para arquivo JSON">
+                                <i aria-hidden="true" class="fa-solid fa-arrow-down"></i> JSON
                             </button>
-                            <button id="importButton" class="json-action-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Importar dados de um arquivo JSON salvo">
-                                <i class="fa-solid fa-arrow-up"></i> JSON
+                            <button id="importButton" class="json-action-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Importar dados de um arquivo JSON salvo" aria-label="Importar dados de um arquivo JSON salvo">
+                                <i aria-hidden="true" class="fa-solid fa-arrow-up"></i> JSON
                             </button>
                         </div>
 
@@ -398,7 +419,7 @@
                     <!-- Avalie este aplicativo: mesma largura da pré-visualização, logo abaixo dela -->
                     <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-5 sm:p-8">
                         <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center gap-2 text-base">
-                            <i class="fa-solid fa-star"></i> Avalie este aplicativo
+                            <i aria-hidden="true" class="fa-solid fa-star"></i> Avalie este aplicativo
                         </h2>
                         <div id="ratingStars" class="flex items-center gap-1 mb-4">
                             <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="1" aria-label="1 estrela">★</button>
@@ -410,9 +431,9 @@
                         </div>
                         <textarea id="ratingComment" class="form-input-dark text-sm mb-4" rows="3" placeholder="Comentário (opcional)"></textarea>
                         <button type="button" id="ratingSubmitButton" class="copy-button">
-                            <i class="fa-solid fa-paper-plane"></i> Enviar avaliação
+                            <i aria-hidden="true" class="fa-solid fa-paper-plane"></i> Enviar avaliação
                         </button>
-                        <p id="ratingFeedbackMsg" class="text-sm mt-3 hidden"></p>
+                        <p id="ratingFeedbackMsg" class="text-sm mt-3 hidden" role="status" aria-live="polite"></p>
                     </div>
                 </div>
             </div>
@@ -429,17 +450,21 @@
             <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
             <span class="text-white/25">|</span>
             <a href="ajuda.html" class="hover:text-white transition-colors">Como usar (ajuda)</a>
+            <span class="text-white/25">|</span>
+            <button type="button" id="highContrastToggle" class="hover:text-white transition-colors flex items-center gap-1" aria-pressed="false">
+                <i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i> Alto contraste
+            </button>
         </div>
         
         <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
-                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+                <i aria-hidden="true" class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-white/25">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-white/25">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
-                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+                <i aria-hidden="true" class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
             </a>
         </div>
     </footer>
@@ -447,6 +472,31 @@
     <div id="hiddenSignatureContainer" style="position: fixed; left: -9999px; top: 0; width: 600px; background-color: transparent !important; pointer-events: none;"></div>
 
     <script>
+      // Modo de Alto Contraste: aplicado o quanto antes (fora da espera do config.json)
+      // para evitar um "flash" da interface normal antes de trocar de tema.
+      (function initHighContrast() {
+          const STORAGE_KEY = 'suaAssinaturaAltoContraste';
+          const htmlEl = document.documentElement;
+          if (localStorage.getItem(STORAGE_KEY) === '1') {
+              htmlEl.classList.add('high-contrast');
+          }
+          document.addEventListener('DOMContentLoaded', () => {
+              const toggle = document.getElementById('highContrastToggle');
+              if (!toggle) return;
+              const syncState = () => {
+                  const active = htmlEl.classList.contains('high-contrast');
+                  toggle.setAttribute('aria-pressed', active ? 'true' : 'false');
+              };
+              syncState();
+              toggle.addEventListener('click', () => {
+                  htmlEl.classList.toggle('high-contrast');
+                  const active = htmlEl.classList.contains('high-contrast');
+                  localStorage.setItem(STORAGE_KEY, active ? '1' : '0');
+                  syncState();
+              });
+          });
+      })();
+
       (async function initApp() {
         let APP_CONFIG;
         try {
@@ -494,7 +544,7 @@
         // Atualize estes dois valores juntos, apenas quando a versão da SUA Assinatura mudar.
         // A data deve refletir o dia em que o número de versão foi alterado,
         // não a data corrente de acesso à página.
-        const APP_VERSION = 'v1.2.0';
+        const APP_VERSION = 'v1.2.1';
         const APP_LAST_MODIFIED = '17/07/2026';
 
         // Resolve caminhos relativos (ex.: "images/geral/governo.png") para URLs absolutas com base
@@ -809,7 +859,7 @@
 
             submitBtn.disabled = true;
             const origBtnHtml = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+            submitBtn.innerHTML = '<i aria-hidden="true" class="fa-solid fa-spinner fa-spin"></i> Enviando...';
 
             try {
                 const response = await fetch(GAS_WEBAPP_URL, {
@@ -861,7 +911,7 @@
             if (document.execCommand('copy')) {
                 const btn = document.getElementById('copyButton');
                 const orig = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+                btn.innerHTML = '<i aria-hidden="true" class="fa-solid fa-check"></i> Copiado!';
                 btn.classList.add('success');
                 setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('success'); }, 3000);
                 const layoutType = document.querySelector('input[name="layoutType"]:checked')?.value || 'completo';

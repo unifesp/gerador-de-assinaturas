@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,13 +105,14 @@
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-unifesp-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Pular para o conteúdo</a>
 
     <!-- Cabeçalho Padrão -->
     <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
         <div class="flex items-center justify-between px-4 py-3 bg-gray-900">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shadow-glow text-base">
-                    <i class="fa-solid fa-signature"></i>
+                    <i aria-hidden="true" class="fa-solid fa-signature"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="font-bold text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
@@ -123,12 +124,12 @@
     </header>
 
     <!-- Área de Conteúdo -->
-    <main class="flex-1 overflow-auto">
+    <main id="main-content" class="flex-1 overflow-auto">
         
         <!-- Hero Section -->
         <section class="hero-gradient text-white py-20 px-6 text-center border-b border-unifesp-900">
             <div class="max-w-4xl mx-auto fade-in">
-                <div class="inline-block bg-unifesp-600 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-6 animate-pulse">
+                <div class="inline-block bg-unifesp-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-6 animate-pulse">
                     Comunicação Institucional
                 </div>
                 <h1 class="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight">Uma Nova Identidade para nossa Comunicação</h1>
@@ -183,37 +184,37 @@
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-magic text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-magic text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Autopreenchimento</h3>
                         <p class="text-xs text-gray-500">Integração com o diretório institucional para buscar o seu nome e foto via e-mail.</p>
                     </div>
 
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-graduation-cap text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-graduation-cap text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Redes Académicas</h3>
                         <p class="text-xs text-gray-500">Suporte completo para Lattes, ORCID, ProdMais, Google Académico e muito mais.</p>
                     </div>
 
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-layer-group text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-layer-group text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Modelos Versáteis</h3>
                         <p class="text-xs text-gray-500">Escolha entre o modelo <strong>Completo</strong> (com foto) ou o <strong>Simplificado</strong> (minimalista).</p>
                     </div>
 
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-shield-halved text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-shield-halved text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Privacidade</h3>
                         <p class="text-xs text-gray-500">Desenvolvido com foco na segurança: os seus dados são processados apenas no seu navegador.</p>
                     </div>
 
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-file-export text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-file-export text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Backup JSON</h3>
                         <p class="text-xs text-gray-500">Exporte os seus dados para um ficheiro e reutilize-os sempre que precisar de atualizar.</p>
                     </div>
 
                     <div class="feature-card p-6 rounded-2xl">
-                        <i class="fa-solid fa-sitemap text-unifesp-400 text-2xl mb-4"></i>
+                        <i aria-hidden="true" class="fa-solid fa-sitemap text-unifesp-400 text-2xl mb-4"></i>
                         <h3 class="text-white font-bold mb-2">Hierarquia Institucional</h3>
                         <p class="text-xs text-gray-500">Inclua a sua unidade de lotação e unidade superior de forma clara e padronizada.</p>
                     </div>
@@ -228,12 +229,12 @@
                 <h2 class="text-4xl font-bold text-white mb-4 tracking-tight">Pronto para transformar a sua comunicação?</h2>
                 <p class="text-xl text-gray-400 mb-10">Crie a sua assinatura institucional agora mesmo.</p>
                 <a href="https://ccarvalho.net/labs/gerador-de-assinaturas/" class="inline-block hero-gradient text-white text-lg font-bold px-12 py-5 rounded-2xl shadow-glow hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-rocket mr-2"></i> Começar agora
+                    <i aria-hidden="true" class="fa-solid fa-rocket mr-2"></i> Começar agora
                 </a>
                 
                 <div class="mt-16 p-6 bg-unifesp-900/10 border border-unifesp-900/30 rounded-2xl text-unifesp-400 inline-block text-left max-w-lg">
                     <div class="flex gap-4 items-start">
-                        <i class="fa-solid fa-circle-info text-xl mt-1"></i>
+                        <i aria-hidden="true" class="fa-solid fa-circle-info text-xl mt-1"></i>
                         <p class="text-sm leading-relaxed">
                             <strong>Dúvidas ou esclarecimentos?</strong><br>
                             Consulte os tutoriais detalhados e a base de conhecimento no portal: 
@@ -248,7 +249,7 @@
         <section class="py-16 bg-gray-900 border-t border-gray-800">
             <div class="max-w-5xl mx-auto px-6 text-center">
                 <div class="inline-flex items-center gap-3 text-unifesp-400 mb-4">
-                    <i class="fa-brands fa-github text-4xl"></i>
+                    <i aria-hidden="true" class="fa-brands fa-github text-4xl"></i>
                     <h2 class="text-2xl font-bold tracking-tight uppercase tracking-widest">Orgulho em ser Software Livre</h2>
                 </div>
                 <p class="text-gray-400 max-w-3xl mx-auto text-base leading-relaxed">
@@ -257,7 +258,7 @@
                     Promovemos a transparência e a inovação aberta disponibilizando o nosso código para toda a comunidade académica e externa.
                 </p>
                 <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="text-unifesp-400 font-semibold hover:text-unifesp-100 mt-6 inline-block transition-colors border border-unifesp-900/50 px-4 py-2 rounded-lg hover:bg-unifesp-900/20">
-                    Contribuir no GitHub <i class="fa-solid fa-external-link text-xs ml-2"></i>
+                    Contribuir no GitHub <i aria-hidden="true" class="fa-solid fa-external-link text-xs ml-2"></i>
                 </a>
             </div>
         </section>
@@ -278,19 +279,19 @@
         
         <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
-                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+                <i aria-hidden="true" class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-gray-600">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-gray-600">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
-                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+                <i aria-hidden="true" class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
             </a>
         </div>
     </footer>
 
     <script>
-        document.getElementById('appVersion').innerText = 'v1.2.0';
+        document.getElementById('appVersion').innerText = 'v1.2.1';
         document.getElementById('lastModDate').innerText = '17/07/2026';
     </script>
 </body>

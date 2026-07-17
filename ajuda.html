@@ -128,13 +128,14 @@
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-unifesp-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Pular para o conteúdo</a>
 
     <!-- Cabeçalho -->
     <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
         <div class="flex items-center justify-between px-4 py-3 border-gray-800 bg-gray-900">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shrink-0">
-                    <i class="fa-solid fa-circle-question"></i>
+                    <i aria-hidden="true" class="fa-solid fa-circle-question"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
@@ -143,13 +144,13 @@
                 </div>
             </div>
             <a href="index.html" class="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition border border-gray-700 text-xs font-medium">
-                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar à SUA Assinatura
+                <i aria-hidden="true" class="fa-solid fa-arrow-left mr-2"></i>Voltar à SUA Assinatura
             </a>
         </div>
     </header>
 
     <!-- Área de Conteúdo -->
-    <main class="flex-1 overflow-auto p-6 sm:p-12">
+    <main id="main-content" class="flex-1 overflow-auto p-6 sm:p-12">
         <div class="max-w-4xl mx-auto">
             
             <div class="mb-12 text-center">
@@ -174,7 +175,7 @@
                 <h2><span class="step-number">2</span> E-mail e Autopreenchimento</h2>
                 <p>Insira o seu e-mail institucional (ex: <code>usuaria@unifesp.br</code>). Como a ferramenta é integrada ao Google Workspace da Unifesp, ao sair do campo (clicar fora ou usar a tecla Tab), o sistema tentará buscar automaticamente o seu <strong>Nome Completo</strong> e a sua <strong>Foto de Perfil</strong> oficial.</p>
                 <div class="p-4 bg-unifesp-900/10 border-l-4 border-unifesp-600 rounded-r-lg mb-4 text-xs">
-                    <i class="fa-solid fa-lightbulb mr-2"></i>
+                    <i aria-hidden="true" class="fa-solid fa-lightbulb mr-2"></i>
                     <strong>Nota:</strong> Caso o sistema não encontre a sua foto ou nome, ou você prefira usar dados diferentes, você pode editá-los manualmente a qualquer momento.
                 </div>
                 <img src="images/tutorial/passo2_email.jpg" alt="Campo de e-mail institucional e indicador de busca de dados" class="help-image">
@@ -352,11 +353,11 @@
                 <p class="mb-4 text-gray-400">É normal — e recomendado — desconfiar de qualquer tela que peça permissão de acesso à sua conta Google. Aqui está exatamente o que essa permissão específica permite e não permite:</p>
                 <div class="grid md:grid-cols-2 gap-4 text-xs mb-4">
                     <div class="network-grid-item">
-                        <p class="font-bold text-white mb-1"><i class="fa-solid fa-check text-unifesp-400 mr-1"></i> O que a permissão PERMITE</p>
+                        <p class="font-bold text-white mb-1"><i aria-hidden="true" class="fa-solid fa-check text-unifesp-400 mr-1"></i> O que a permissão PERMITE</p>
                         <p>Ler e alterar apenas as <strong>configurações administrativas</strong> do Gmail — neste caso, especificamente o campo de assinatura salva na sua conta.</p>
                     </div>
                     <div class="network-grid-item">
-                        <p class="font-bold text-white mb-1"><i class="fa-solid fa-xmark text-red-400 mr-1"></i> O que a permissão NÃO PERMITE</p>
+                        <p class="font-bold text-white mb-1"><i aria-hidden="true" class="fa-solid fa-xmark text-red-400 mr-1"></i> O que a permissão NÃO PERMITE</p>
                         <p>Não dá acesso à leitura, envio ou exclusão dos seus e-mails, não acessa seus contatos, anexos ou conteúdo da caixa de entrada.</p>
                     </div>
                 </div>
@@ -375,7 +376,7 @@
 
             <!-- Backup -->
             <section class="help-card bg-unifesp-900/5">
-                <h2 class="text-unifesp-400"><i class="fa-solid fa-floppy-disk mr-3"></i>Dica: Use o Backup JSON</h2>
+                <h2 class="text-unifesp-400"><i aria-hidden="true" class="fa-solid fa-floppy-disk mr-3"></i>Dica: Use o Backup JSON</h2>
                 <p>Para não ter que preencher todos os dados novamente no futuro, utilize os botões de <strong>JSON</strong> na barra de ações. Ao clicar na seta para baixo, você salva um pequeno arquivo no seu computador. Quando precisar de atualizar a assinatura, basta clicar na seta para cima e carregar esse arquivo.</p>
             </section>
 
@@ -413,19 +414,19 @@
         
         <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
-                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+                <i aria-hidden="true" class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-gray-600">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-gray-600">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
-                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+                <i aria-hidden="true" class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
             </a>
         </div>
     </footer>
 
     <script>
-        document.getElementById('appVersion').innerText = 'v1.2.0';
+        document.getElementById('appVersion').innerText = 'v1.2.1';
         document.getElementById('lastModDate').innerText = '17/07/2026';
     </script>
 </body>

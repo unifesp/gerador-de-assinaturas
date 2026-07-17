@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -114,13 +114,14 @@
     </style>
 </head>
 <body class="flex flex-col h-screen overflow-hidden text-sm selection:bg-unifesp-900 selection:text-white">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-unifesp-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Pular para o conteúdo</a>
 
     <!-- Cabeçalho -->
     <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0">
         <div class="flex items-center justify-between px-4 py-3 border-gray-800 bg-gray-900">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shrink-0">
-                    <i class="fa-solid fa-shield-halved"></i>
+                    <i aria-hidden="true" class="fa-solid fa-shield-halved"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="text-xl font-bold tracking-tight text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
@@ -129,13 +130,13 @@
                 </div>
             </div>
             <a href="index.html" class="px-4 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded-md transition border border-gray-700 text-xs font-medium">
-                <i class="fa-solid fa-arrow-left mr-2"></i>Voltar
+                <i aria-hidden="true" class="fa-solid fa-arrow-left mr-2"></i>Voltar
             </a>
         </div>
     </header>
 
     <!-- Área de Conteúdo -->
-    <main class="flex-1 overflow-auto p-6 sm:p-12 fade-in">
+    <main id="main-content" class="flex-1 overflow-auto p-6 sm:p-12 fade-in">
         <div class="max-w-4xl mx-auto bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-8 content-section">
             <h1 class="text-3xl font-bold text-white mb-6">Política de Privacidade</h1>
             <p class="text-gray-400">Última atualização: <span id="updateDate"></span></p>
@@ -183,7 +184,7 @@
                 <h2>7. Contacto com o Encarregado de Dados (DPO)</h2>
                 <p>Para exercer os seus direitos ou esclarecer dúvidas sobre a privacidade e o tratamento dos seus dados pessoais nesta ferramenta, pode entrar em contacto com o **Encarregado pelo Tratamento de Dados Pessoais (DPO)** da UNIFESP através do endereço de e-mail abaixo:</p>
                 <div class="bg-gray-850 p-4 rounded-lg border border-unifesp-900/50 flex items-center gap-3 w-fit">
-                    <i class="fa-solid fa-envelope text-unifesp-400 text-lg"></i>
+                    <i aria-hidden="true" class="fa-solid fa-envelope text-unifesp-400 text-lg"></i>
                     <a href="mailto:lgpd@unifesp.br" class="text-unifesp-400 font-bold hover:underline text-lg">lgpd@unifesp.br</a>
                 </div>
             </section>
@@ -208,19 +209,19 @@
         
         <div class="flex gap-3 items-center">
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
-                <i class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
+                <i aria-hidden="true" class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
             <span class="text-gray-600">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
             <span class="text-gray-600">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
-                <i class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
+                <i aria-hidden="true" class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
             </a>
         </div>
     </footer>
 
     <script>
-        document.getElementById('appVersion').innerText = 'v1.2.0';
+        document.getElementById('appVersion').innerText = 'v1.2.1';
         document.getElementById('lastModDate').innerText = '17/07/2026';
         document.getElementById('updateDate').innerText = '17/07/2026';
     </script>
