@@ -1,6 +1,7 @@
 {
   "institution": {
     "name": "Universidade Federal de São Paulo",
+    "sigla": "UNIFESP",
     "logoUrl": "images/geral/unifesp.png"
   },
   "sectors": [

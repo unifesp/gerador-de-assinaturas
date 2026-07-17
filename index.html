@@ -134,7 +134,7 @@
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="font-bold text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
                     <span class="text-xl text-gray-700 font-light">|</span>
-                    <span class="font-bold text-unifesp-400 leading-none whitespace-nowrap">UNIFESP</span>
+                    <span id="headerSigla" class="font-bold text-unifesp-400 leading-none whitespace-nowrap">UNIFESP</span>
                 </div>
             </div>
         </div>
@@ -431,7 +431,7 @@
         // Atualize estes dois valores juntos, apenas quando a versão da SUA Assinatura mudar.
         // A data deve refletir o dia em que o número de versão foi alterado,
         // não a data corrente de acesso à página.
-        const APP_VERSION = 'v1.0.3';
+        const APP_VERSION = 'v1.1.0';
         const APP_LAST_MODIFIED = '16/07/2026';
 
         // Resolve caminhos relativos (ex.: "images/geral/governo.png") para URLs absolutas com base
@@ -443,6 +443,12 @@
 
         const LOGO_BRASIL = abs('images/geral/governo.png');
         const LOGO_UNIFESP = abs(APP_CONFIG.institution.logoUrl);
+
+        // Sigla da instituição (ex.: "UNIFESP") vem do config.json, para permitir
+        // reuso desta ferramenta por outras instituições do governo sem editar o HTML.
+        const institutionSigla = APP_CONFIG.institution.sigla || '';
+        document.getElementById('headerSigla').innerText = institutionSigla;
+        document.title = `SUA Assinatura - ${institutionSigla}`;
         const LOGO_SUA_DEFAULT = abs('images/geral/suaunifesp.png');
         const PRIMARY_COLOR = APP_CONFIG.colors.primary;
         const ICONS = Object.fromEntries(Object.entries({

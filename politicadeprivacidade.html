@@ -177,7 +177,7 @@
     <!-- Rodapé Padronizado -->
     <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex items-center gap-4">
-            <span><span class="font-mono">v0.9.9</span> | Modificado: <span id="lastModDate"></span></span>
+            <span><span class="font-mono" id="appVersion"></span> | Modificado: <span id="lastModDate"></span></span>
             <span class="text-gray-700">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
             <span class="text-gray-700">|</span>
@@ -200,8 +200,8 @@
     </footer>
 
     <script>
-        const date = new Date().toLocaleDateString();
-        document.getElementById('lastModDate').innerText = date;
+        document.getElementById('appVersion').innerText = 'v1.1.0';
+        document.getElementById('lastModDate').innerText = '16/07/2026';
         document.getElementById('updateDate').innerText = date;
     </script>
 </body>
