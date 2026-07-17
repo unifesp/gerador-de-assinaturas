@@ -376,27 +376,27 @@
                             <input type="hidden" name="signatureHtml" id="injectSignatureHtml">
                         </form>
                     </div>
-                </div>
-            </div>
 
-            <!-- Avalie este aplicativo -->
-            <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8 mt-8">
-                <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center gap-2 text-base">
-                    <i class="fa-solid fa-star"></i> Avalie este aplicativo
-                </h2>
-                <div id="ratingStars" class="flex items-center gap-1 mb-4">
-                    <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="1" aria-label="1 estrela">★</button>
-                    <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="2" aria-label="2 estrelas">★</button>
-                    <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="3" aria-label="3 estrelas">★</button>
-                    <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="4" aria-label="4 estrelas">★</button>
-                    <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="5" aria-label="5 estrelas">★</button>
-                    <span id="ratingValueLabel" class="text-sm text-gray-400 ml-2">Sem nota</span>
+                    <!-- Avalie este aplicativo: mesma largura da pré-visualização, logo abaixo dela -->
+                    <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8">
+                        <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-star"></i> Avalie este aplicativo
+                        </h2>
+                        <div id="ratingStars" class="flex items-center gap-1 mb-4">
+                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="1" aria-label="1 estrela">★</button>
+                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="2" aria-label="2 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="3" aria-label="3 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="4" aria-label="4 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="5" aria-label="5 estrelas">★</button>
+                            <span id="ratingValueLabel" class="text-sm text-gray-400 ml-2">Sem nota</span>
+                        </div>
+                        <textarea id="ratingComment" class="form-input-dark text-sm mb-4" rows="3" placeholder="Comentário (opcional)"></textarea>
+                        <button type="button" id="ratingSubmitButton" class="copy-button">
+                            <i class="fa-solid fa-paper-plane"></i> Enviar avaliação
+                        </button>
+                        <p id="ratingFeedbackMsg" class="text-sm mt-3 hidden"></p>
+                    </div>
                 </div>
-                <textarea id="ratingComment" class="form-input-dark text-sm mb-4" rows="3" placeholder="Comentário (opcional)"></textarea>
-                <button type="button" id="ratingSubmitButton" class="copy-button">
-                    <i class="fa-solid fa-paper-plane"></i> Enviar avaliação
-                </button>
-                <p id="ratingFeedbackMsg" class="text-sm mt-3 hidden"></p>
             </div>
         </div>
     </main>
