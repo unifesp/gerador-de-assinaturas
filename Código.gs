@@ -86,8 +86,22 @@ function createResponse(data) {
  *   "https://www.googleapis.com/auth/gmail.settings.basic"
  * e que o serviço avançado "Gmail API" esteja ativado em Serviços (barra lateral
  * do editor de Apps Script).
+ *
+ * doPost funciona como um DISPATCHER: o parâmetro "action" decide o que fazer.
+ *   - action = "saveRating"  -> grava a avaliação numa planilha (roda no
+ *     PRIMEIRO deployment, o mesmo do doGet, executando como "Eu" - não exige
+ *     login da pessoa que avalia).
+ *   - qualquer outro valor (ou ausente, para compatibilidade)  -> injeta a
+ *     assinatura no Gmail (roda no SEGUNDO deployment, como o usuário).
  */
 function doPost(e) {
+  if (e.parameter.action === 'saveRating') {
+    return saveRating(e);
+  }
+  return injectSignature(e);
+}
+
+function injectSignature(e) {
   const signatureHtml = e.parameter.signatureHtml;
 
   if (!signatureHtml) {
@@ -134,11 +148,61 @@ function doPost(e) {
   }
 }
 
+/**
+ * Grava uma avaliação de satisfação (nota de 1 a 3 + comentário opcional) numa
+ * planilha do Google Drive. Roda como "Eu" (identidade do primeiro deployment),
+ * então não exige nenhum login da pessoa que está avaliando - a chamada é feita
+ * via fetch() direto pelo front-end, sem abrir nova aba.
+ * Na primeira chamada, a planilha "SUA Assinatura - Avaliações" é criada
+ * automaticamente no Google Drive da conta que publicou o script, e o ID dela
+ * fica guardado nas Propriedades do Script para ser reaproveitado nas próximas
+ * chamadas (não precisa criar nem configurar nada manualmente).
+ */
+function saveRating(e) {
+  try {
+    const rating = e.parameter.rating;
+    const comment = (e.parameter.comment || '').toString().slice(0, 1000);
+    if (!rating) {
+      return createResponse({ success: false, error: 'Nota não informada.' });
+    }
+    const sheet = getOrCreateRatingsSheet();
+    sheet.appendRow([new Date(), rating, comment]);
+    return createResponse({ success: true });
+  } catch (err) {
+    return createResponse({ success: false, error: err.message });
+  }
+}
+
+function getOrCreateRatingsSheet() {
+  const props = PropertiesService.getScriptProperties();
+  const sheetId = props.getProperty('RATINGS_SHEET_ID');
+  let spreadsheet = null;
+
+  if (sheetId) {
+    try {
+      spreadsheet = SpreadsheetApp.openById(sheetId);
+    } catch (err) {
+      spreadsheet = null; // a planilha pode ter sido apagada manualmente; recria abaixo
+    }
+  }
+
+  if (!spreadsheet) {
+    spreadsheet = SpreadsheetApp.create('SUA Assinatura - Avaliações');
+    const sheet = spreadsheet.getSheets()[0];
+    sheet.appendRow(['Data/Hora', 'Nota (1-3)', 'Comentário']);
+    sheet.setFrozenRows(1);
+    props.setProperty('RATINGS_SHEET_ID', spreadsheet.getId());
+  }
+
+  return spreadsheet.getSheets()[0];
+}
+
 function createHtmlResponse(success, message) {
   const color = success ? "#16a34a" : "#dc2626";
   const bgIcon = success ? "rgba(22,163,74,0.15)" : "rgba(220,38,38,0.15)";
   const icon = success ? "✅" : "⚠️";
   const title = success ? "Assinatura atualizada com sucesso!" : "Não foi possível atualizar a assinatura";
+  const successFlag = success ? "true" : "false";
   const html =
     '<!DOCTYPE html><html lang="pt-br"><head><meta charset="UTF-8">' +
     '<meta name="viewport" content="width=device-width, initial-scale=1">' +
@@ -160,6 +224,13 @@ function createHtmlResponse(success, message) {
     '<p class="message">' + message + '</p>' +
     '<div class="close-hint">👉 Você já pode fechar esta janela.</div>' +
     '</div>' +
+    '<script>' +
+    // Avisa a aba principal (que abriu esta janela) sobre o resultado, para que
+    // ela possa, por exemplo, exibir o convite de avaliação só em caso de sucesso.
+    // Usamos "*" como origem de destino porque este script é reutilizado por
+    // instituições diferentes, cada uma com seu próprio domínio de hospedagem.
+    'if (window.opener) { window.opener.postMessage({ source: "sua_assinatura", type: "inject_result", success: ' + successFlag + ' }, "*"); }' +
+    '</' + 'script>' +
     '</body></html>';
   return HtmlService.createHtmlOutput(html);
 }

@@ -393,6 +393,17 @@
                         <form id="injectSignatureForm" action="" method="POST" target="_blank" class="hidden">
                             <input type="hidden" name="signatureHtml" id="injectSignatureHtml">
                         </form>
+
+                        <!-- Convite de avaliação: só aparece depois de copiar ou injetar com sucesso -->
+                        <div id="ratingWidget" class="hidden mt-4 p-4 bg-neutral-50 rounded-lg border border-neutral-200 text-center">
+                            <p class="text-sm font-medium text-neutral-700 mb-3">Que tal avaliar este serviço?</p>
+                            <div class="flex justify-center gap-4 mb-3">
+                                <button type="button" class="rating-btn text-3xl hover:scale-125 transition-transform" data-rating="1" title="Não gostei" aria-label="Não gostei">😕</button>
+                                <button type="button" class="rating-btn text-3xl hover:scale-125 transition-transform" data-rating="2" title="Ok" aria-label="Ok">😐</button>
+                                <button type="button" class="rating-btn text-3xl hover:scale-125 transition-transform" data-rating="3" title="Gostei" aria-label="Gostei">😊</button>
+                            </div>
+                            <textarea id="ratingComment" class="form-input-dark text-xs" rows="2" placeholder="Comentário (opcional)"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -747,6 +758,41 @@
             form.submit();
         });
 
+        // Convite de avaliação: aparece só depois de uma ação de sucesso (copiar ou injetar).
+        const ratingWidget = document.getElementById('ratingWidget');
+        let ratingAlreadyShown = false;
+
+        function showRatingWidget() {
+            if (ratingAlreadyShown) return;
+            ratingAlreadyShown = true;
+            ratingWidget.classList.remove('hidden');
+        }
+
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const rating = btn.dataset.rating;
+                const comment = document.getElementById('ratingComment').value.trim();
+                ratingWidget.innerHTML = '<p class="text-sm text-neutral-700">Obrigado pelo retorno! 🙏</p>';
+                trackEvent('rating_submitted', { rating: rating });
+                try {
+                    await fetch(GAS_WEBAPP_URL, {
+                        method: 'POST',
+                        body: new URLSearchParams({ action: 'saveRating', rating: rating, comment: comment })
+                    });
+                } catch (err) {
+                    console.error('Erro ao enviar avaliação:', err);
+                }
+            });
+        });
+
+        // A injeção de assinatura abre numa aba separada (necessário para o login do Google).
+        // Essa aba avisa esta janela, via postMessage, se a gravação deu certo de verdade.
+        window.addEventListener('message', (event) => {
+            if (event.data && event.data.source === 'sua_assinatura' && event.data.type === 'inject_result' && event.data.success) {
+                showRatingWidget();
+            }
+        });
+
         document.getElementById('copyButton').addEventListener('click', () => {
             const form = document.getElementById('signatureForm'); 
             if (!form.reportValidity()) return;
@@ -767,6 +813,7 @@
                 setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('success'); }, 3000);
                 const layoutType = document.querySelector('input[name="layoutType"]:checked')?.value || 'completo';
                 trackEvent('copy_signature', { layout: layoutType });
+                showRatingWidget();
             }
             container.removeAttribute('contenteditable');
             selection.removeAllRanges();
