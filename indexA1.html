@@ -1,35 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUA Assinatura - UNIFESP</title>
-    
-    <!-- Tailwind CSS -->
+
+    <!-- ROTA A: Padrao Digital de Governo (gov.br Design System) v3.7.0 -->
+    <!-- Fonte oficial Rawline (CDN oficial gov.br) -->
+    <link rel="stylesheet" href="https://cdngovbr-ds.estaleiro.serpro.gov.br/design-system/fonts/rawline/css/rawline.css">
+    <!-- Fonte Raleway (usada pelo DS para titulos em alguns contextos) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800,900&display=swap">
+    <!-- CSS oficial do Design System gov.br (@govbr-ds/core, via CDN jsDelivr) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@govbr-ds/core@3.7.0/dist/core.min.css">
+
+    <!-- Tailwind CSS: mantido apenas para utilitarios de layout (grid/flex/spacing).
+         Nao ha colisao de nomes com as classes br-* do Design System gov.br. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Rawline', 'Arial', 'Helvetica', 'sans-serif'],
+                    },
                     colors: {
+                        // Tokens REAIS extraidos de core-tokens.css do @govbr-ds/core v3.7.0
+                        // (blue-warm-vivid-*). Usados so na INTERFACE do editor.
                         unifesp: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            400: '#4ade80',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#1E5A3A',
+                            50: '#D4E5FF',  // blue-warm-vivid-10
+                            100: '#ADCDFF', // blue-warm-vivid-20
+                            400: '#1351B4', // blue-warm-vivid-70 (cor "interactive" oficial)
+                            600: '#1351B4', // blue-warm-vivid-70 (mesma cor primaria oficial)
+                            700: '#0C326F', // blue-warm-vivid-80
+                            800: '#071D41', // blue-warm-vivid-90
+                            900: '#050F24', // ainda mais escuro, so para gradientes/selecao
                         },
-                        gray: {
-                            850: '#1f2937',
-                            900: '#111827',
-                            950: '#030712',
-                            800: '#374151',
-                            700: '#4b5563',
-                            600: '#9ca3af',
-                            300: '#d1d5db',
+                        // Escala neutra clara baseada nos tokens de cinza oficiais do gov.br
+                        neutral: {
+                            50: '#F8F8F8',  // gray-2
+                            100: '#F0F0F0', // gray-5
+                            200: '#E6E6E6', // gray-10
+                            300: '#CCCCCC', // gray-20
+                            500: '#888888', // gray-40
+                            600: '#636363', // gray-60
+                            700: '#555555', // gray-70
+                            900: '#333333', // gray-80 (texto padrao do DS)
                         },
                     }
                 }
@@ -37,25 +53,22 @@
         }
     </script>
 
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --bg-body: #030712;
-            --bg-main: #111827;
-            --bg-panel: #1f2937;
-            --bg-element: #374151;
-            --border-color: #374151;
-            --text-primary: #f9fafb;
-            --text-muted: #9ca3af;
-            --text-dim: #d1d5db;
+            --bg-body: #F8F8F8;
+            --bg-main: #FFFFFF;
+            --bg-panel: #FFFFFF;
+            --bg-element: #F0F0F0;
+            --border-color: #CCCCCC;
+            --text-primary: #333333;
+            --text-muted: #636363;
+            --text-dim: #555555;
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); color: var(--text-dim); transition: all 0.3s; }
+        body { font-family: 'Rawline', Arial, sans-serif; background-color: var(--bg-body); color: var(--text-dim); transition: all 0.3s; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-body); }
         ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
@@ -67,31 +80,32 @@
 
         .form-input-dark {
             width: 100%; padding: 10px 12px; background: var(--bg-panel); border: 1px solid var(--border-color);
-            border-radius: 6px; font-size: 14px; color: var(--text-primary); transition: all 0.2s;
+            border-radius: 4px; font-size: 14px; color: var(--text-primary); transition: all 0.2s;
         }
 
-        .form-input-dark:focus { outline: none; border-color: #4ade80; box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.6); }
-        .form-input-dark:invalid:not(:placeholder-shown) { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.05); }
-        .form-input-dark::placeholder { color: #9ca3af; opacity: 1; }
+        /* Cor de foco: dourado (--gold-vivid-40, #C2850C), identico ao token oficial
+           de foco do Design System gov.br - usado para acessibilidade (contraste). */
+        .form-input-dark:focus { outline: none; border-color: #C2850C; box-shadow: 0 0 0 2px rgba(194, 133, 12, 0.4); }
+        .form-input-dark:invalid:not(:placeholder-shown) { border-color: #E52207; background-color: rgba(229, 34, 7, 0.05); }
 
         .copy-button {
-            background-color: #1E5A3A; color: white; padding: 12px 16px; border-radius: 6px;
+            background-color: #1351B4; color: white; padding: 12px 16px; border-radius: 4px;
             font-size: 14px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;
             display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 160px;
         }
 
-        .copy-button:hover { background-color: #123924; }
-        .copy-button.success { background-color: #15803d; }
-        .copy-button.error { background-color: #991b1b; }
+        .copy-button:hover { background-color: #0C326F; }
+        .copy-button.success { background-color: #168821; }
+        .copy-button.error { background-color: #E52207; }
 
         .json-action-button {
-            height: 46px; padding: 0 12px; border-radius: 6px; display: flex; align-items: center; 
+            height: 46px; padding: 0 12px; border-radius: 4px; display: flex; align-items: center; 
             justify-content: center; transition: all 0.3s ease; font-size: 12px; font-weight: 600; 
             cursor: pointer; border: 1px solid; flex-shrink: 0; gap: 6px;
         }
 
         .icon-only-button {
-            height: 46px; width: 46px; border-radius: 6px; display: flex; align-items: center; 
+            height: 46px; width: 46px; border-radius: 4px; display: flex; align-items: center; 
             justify-content: center; transition: all 0.3s ease; font-size: 18px; cursor: pointer;
             border: 1px solid; flex-shrink: 0;
         }
@@ -99,15 +113,15 @@
         .label-with-icon { display: flex; align-items: center; gap: 8px; }
 
         .layout-selector {
-            display: flex; gap: 16px; background: var(--bg-panel); padding: 12px; border-radius: 12px;
+            display: flex; gap: 16px; background: var(--bg-element); padding: 12px; border-radius: 8px;
             border: 1px solid var(--border-color); margin-bottom: 24px;
         }
 
         .layout-option {
             cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; transition: all 0.2s;
         }
-        .layout-option:hover { background: var(--bg-element); }
-        .layout-option input[type="radio"], .layout-option input[type="checkbox"] { accent-color: #4ade80; width: 16px; height: 16px; }
+        .layout-option:hover { background: #E6E6E6; }
+        .layout-option input[type="radio"], .layout-option input[type="checkbox"] { accent-color: #1351B4; width: 16px; height: 16px; }
 
         .loader-dots { display: inline-flex; gap: 4px; align-items: center; }
         .loader-dots div { width: 4px; height: 4px; background: currentColor; border-radius: 50%; animation: blink 1.4s infinite both; }
@@ -145,17 +159,20 @@
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-unifesp-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">Pular para o conteúdo</a>
 
     <!-- Cabeçalho Principal -->
-    <header class="bg-gray-900 border-b border-gray-700 flex flex-col shadow-lg z-20 shrink-0 transition-colors duration-300">
-        <div class="flex items-center justify-between px-4 py-3 bg-gray-900">
+    <header class="bg-unifesp-600 border-b border-unifesp-700 flex flex-col shadow-sm z-20 shrink-0 transition-colors duration-300">
+        <div class="flex items-center justify-between px-4 py-3 bg-unifesp-600">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded bg-gradient-to-br from-unifesp-600 to-unifesp-900 flex items-center justify-center text-white font-bold shadow-glow">
+                <div class="w-8 h-8 rounded bg-white flex items-center justify-center text-unifesp-600 font-bold">
                     <i aria-hidden="true" class="fa-solid fa-signature"></i>
                 </div>
                 <div class="flex items-center gap-2 overflow-hidden">
                     <h1 class="font-bold text-white leading-none whitespace-nowrap">SUA Assinatura</h1>
-                    <span class="text-xl text-gray-700 font-light">|</span>
-                    <span id="headerSigla" class="font-bold text-unifesp-400 leading-none whitespace-nowrap">UNIFESP</span>
+                    <span class="text-xl text-white/30 font-light">|</span>
+                    <span id="headerSigla" class="font-bold text-white/90 leading-none whitespace-nowrap">UNIFESP</span>
                 </div>
+            </div>
+            <div class="bg-white rounded px-2 py-1.5 flex items-center shrink-0">
+                <img src="images/geral/gov_br.svg" alt="Governo Federal" class="h-5 w-auto">
             </div>
         </div>
     </header>
@@ -166,209 +183,202 @@
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
                 
                 <!-- Formulário -->
-                <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8 lg:col-span-2">
+                <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-5 sm:p-8 lg:col-span-2">
                     
-                    <form id="signatureForm" onsubmit="event.preventDefault();">
+                    <!-- Seletor de Modelo -->
+                    <h2 class="section-title font-bold text-unifesp-400 mb-3 flex items-center gap-2 text-base">
+                        <i aria-hidden="true" class="fa-solid fa-layer-group"></i> Modelo da Assinatura
+                    </h2>
+                    <div class="layout-selector">
+                        <label class="layout-option">
+                            <input type="radio" name="layoutType" id="layoutCompleto" value="completo" checked>
+                            <span class="text-neutral-900 font-medium">Completo</span>
+                        </label>
+                        <label class="layout-option">
+                            <input type="radio" name="layoutType" id="layoutSimplificado" value="simplificado">
+                            <span class="text-neutral-900 font-medium">Simplificado</span>
+                        </label>
+                    </div>
 
-                        <!-- 1. Email -->
+                    <form id="signatureForm" onsubmit="event.preventDefault();">
+                        
+                        <!-- Seção Email -->
                         <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center justify-between text-base">
-                            <span class="flex items-center gap-2"><i aria-hidden="true" class="fa-solid fa-envelope"></i> 1. Email @unifesp.br</span>
+                            <span class="flex items-center gap-2"><i aria-hidden="true" class="fa-solid fa-envelope"></i> Email @unifesp.br</span>
                             <div id="emailLoader" class="hidden text-xs text-unifesp-400 italic flex items-center gap-2" role="status" aria-live="polite">
                                 Buscando dados <div class="loader-dots"><div></div><div></div><div></div></div>
                             </div>
                         </h2>
                         <div class="form-group mb-8">
-                            <label for="email" class="form-label text-gray-300 font-medium mb-1 block font-bold">E-mail Institucional <span class="text-red-500">*</span></label>
+                            <label for="email" class="form-label text-neutral-700 font-medium mb-1 block font-bold">E-mail Institucional <span class="text-red-500">*</span></label>
                             <input type="email" id="email" class="form-input-dark" required placeholder="seu.usuario@unifesp.br">
-                            <p class="text-xs text-gray-400 mt-1">O seu nome e a foto serão preenchidos automaticamente se disponíveis no Google Workspace.</p>
+                            <p class="text-xs text-gray-500 mt-1">O nome e a foto serão preenchidos automaticamente se encontrados no diretório.</p>
                         </div>
 
-                        <!-- 2. Modelo de Assinatura -->
-                        <h2 class="section-title font-bold text-unifesp-400 mb-3 flex items-center gap-2 text-base">
-                            <i aria-hidden="true" class="fa-solid fa-layer-group"></i> 2. Modelo de Assinatura
-                        </h2>
-                        <div class="layout-selector mb-8">
-                            <label class="layout-option">
-                                <input type="radio" name="layoutType" id="layoutCompleto" value="completo" checked>
-                                <span class="text-white font-medium">Completo</span>
-                            </label>
-                            <label class="layout-option">
-                                <input type="radio" name="layoutType" id="layoutSimplificado" value="simplificado">
-                                <span class="text-white font-medium">Simplificado</span>
-                            </label>
-                        </div>
-
-                        <!-- 3. Dados Principais -->
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2 text-base">
-                            <i aria-hidden="true" class="fa-solid fa-user-pen"></i> 3. Dados Principais
+                            <i aria-hidden="true" class="fa-solid fa-user-pen"></i> Seus Dados Principais
                         </h2>
-                        <div class="grid grid-cols-1 gap-4 mb-8">
+
+                        <div class="grid grid-cols-1 gap-4">
                             <!-- Nome Completo -->
                             <div class="form-group">
-                                <label for="fullName" class="form-label text-gray-300 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
+                                <label for="fullName" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Nome Completo <span class="text-red-500">*</span></label>
                                 <input type="text" id="fullName" class="form-input-dark" placeholder="Nome Profissional" required minlength="3">
                             </div>
 
                             <!-- Foto de Perfil -->
                             <div id="photoGroup" class="form-group">
-                                <label for="photoUrl" class="form-label text-gray-300 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
+                                <label for="photoUrl" class="form-label text-neutral-700 font-medium mb-1 block font-bold">URL da Foto de Perfil</label>
                                 <input type="url" id="photoUrl" class="form-input-dark" placeholder="https://atendimento.unifesp.br/pics/usuarios/usuario.jpg">
                             </div>
 
                             <!-- Restante dos campos principais -->
                             <div class="form-group">
-                                <label for="title" class="form-label text-gray-300 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
+                                <label for="title" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Cargo ou Função <span class="text-red-500">*</span></label>
                                 <input type="text" id="title" class="form-input-dark" placeholder="Ex: Professor Adjunto" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="department" class="form-label text-gray-300 font-medium mb-1 block font-bold">Unidade de Lotação <span class="text-red-500">*</span></label>
+                                <label for="department" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade de Lotação <span class="text-red-500">*</span></label>
                                 <input type="text" id="department" class="form-input-dark" placeholder="Ex: STI" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="superiorUnit" class="form-label text-gray-300 font-medium mb-1 block font-bold">Unidade Superior (Opcional)</label>
+                                <label for="superiorUnit" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Unidade Superior (Opcional)</label>
                                 <input type="text" id="superiorUnit" class="form-input-dark" placeholder="Ex: Reitoria">
                             </div>
 
                             <!-- Telefones -->
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="form-group">
-                                    <label for="phone" class="form-label text-gray-300 font-medium mb-1 block font-bold">Telefone Fixo</label>
+                                    <label for="phone" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Telefone Fixo</label>
                                     <input type="tel" id="phone" class="form-input-dark" placeholder="(11) 3385-4100">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ramal" class="form-label text-gray-300 font-medium mb-1 block font-bold">Ramal</label>
+                                    <label for="ramal" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Ramal</label>
                                     <input type="text" id="ramal" class="form-input-dark" value="" placeholder="8000" pattern="\d*">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="celular" class="form-label text-gray-300 font-medium mb-1 block font-bold">Celular</label>
+                                <label for="celular" class="form-label text-neutral-700 font-medium mb-1 block font-bold">Celular</label>
                                 <input type="tel" id="celular" class="form-input-dark" placeholder="(11) 90000-0000">
                             </div>
-                        </div>
 
-                        <!-- 4. Unidade Setorial -->
-                        <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group mb-8">
-                            <summary class="section-title font-bold text-unifesp-400 flex items-center gap-2 text-base cursor-pointer list-none">
-                                <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> 4. Unidade Setorial
-                            </summary>
-                            <div class="mt-4 p-4 bg-gray-900/50 rounded-lg border border-gray-700 space-y-3">
-                                <label for="sectorSelect" class="form-label text-gray-300 font-medium mb-1 block text-xs">Selecione a unidade setorial</label>
-                                <select id="sectorSelect" class="form-input-dark text-xs">
-                                    <option value="">Sem Unidade Setorial</option>
-                                    <option value="__manual__">Outro (informar URL manualmente)</option>
-                                </select>
-                                <div id="sectorManualWrap" class="space-y-3 hidden">
-                                    <label for="sectorLogoUrl" class="form-label text-gray-300 mb-1 block text-xs">URL da imagem do logotipo</label>
-                                    <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem (PNG/JPG)">
-                                    <label for="sectorLogoLink" class="form-label text-gray-300 mb-1 block text-xs">Link de destino ao clicar</label>
-                                    <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link ao clicar">
-                                </div>
-                            </div>
-                        </details>
+                            <!-- Cortina: Personalização Avançada -->
+                            <details class="bg-neutral-50 p-4 rounded-lg border border-neutral-200 group mt-2">
+                                <summary class="font-bold text-unifesp-400 cursor-pointer list-none flex items-center gap-2">
+                                    <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> Personalização Avançada
+                                </summary>
+                                <div class="mt-4 flex flex-col gap-4">
+                                    
+                                    <div class="form-group">
+                                        <p class="form-label text-unifesp-400 font-bold mb-2 block text-xs uppercase tracking-wider">Redes Sociais e Acadêmicas</p>
+                                    </div>
 
-                        <!-- 5. Personalizar Exibição -->
-                        <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group mb-8">
-                            <summary class="section-title font-bold text-unifesp-400 flex items-center gap-2 text-base cursor-pointer list-none">
-                                <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> 5. Personalizar Exibição
-                            </summary>
-                            <div class="mt-4 flex flex-col gap-3">
-                                <!-- Controle: Exibir Botão Abrir Chamado -->
-                                <div class="form-group">
-                                    <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
-                                        <input type="checkbox" id="showTicketBtn" checked onchange="updatePreview()">
-                                        <span class="text-gray-300 font-medium text-xs">Exibir botão "Abrir um chamado"</span>
-                                    </label>
-                                </div>
+                                    <div id="socialFieldsGroup" class="flex flex-col gap-4">
+                                        <div class="form-group"><label for="lattes" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos numéricos" pattern="[0-9]{16}"></div>
+                                        <div class="form-group"><label for="prodmais" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="Seu ID no ProdMais"></div>
+                                        <div class="form-group"><label for="orcid" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)</label><input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]"></div>
+                                        <div class="form-group"><label for="zotero" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/zotero.png" class="w-4 h-4" alt=""> Zotero (ID)</label><input type="text" id="zotero" class="form-input-dark" placeholder="ID de usuário"></div>
+                                        <div class="form-group"><label for="wikipedia" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Usuário)</label><input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário"></div>
+                                        <div class="form-group"><label for="googleacademic" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/googleacademic.png" class="w-4 h-4" alt=""> Google Acadêmico (ID)</label><input type="text" id="googleacademic" class="form-input-dark" placeholder="Código user="></div>
+                                        <div class="form-group"><label for="researchgate" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/researchgate.png" class="w-4 h-4" alt=""> ResearchGate (ID)</label><input type="text" id="researchgate" class="form-input-dark" placeholder="ID do perfil"></div>
+                                        <div class="form-group"><label for="linkedin" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)</label><input type="text" id="linkedin" class="form-input-dark" placeholder="nome-perfil"></div>
+                                        <div class="form-group"><label for="instagram" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)</label><input type="text" id="instagram" class="form-input-dark" placeholder="@perfil"></div>
+                                        <div class="form-group"><label for="reddit" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/reddit.png" class="w-4 h-4" alt=""> Reddit (Usuário)</label><input type="text" id="reddit" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="tiktok" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)</label><input type="text" id="tiktok" class="form-input-dark" placeholder="@perfil"></div>
+                                        <div class="form-group"><label for="youtube" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/youtube.png" class="w-4 h-4" alt=""> YouTube (Canal)</label><input type="text" id="youtube" class="form-input-dark" placeholder="@canal"></div>
+                                        <div class="form-group"><label for="telegram" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/telegram.png" class="w-4 h-4" alt=""> Telegram (Usuário)</label><input type="text" id="telegram" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="signal" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/signal.png" class="w-4 h-4" alt=""> Signal (Número)</label><input type="text" id="signal" class="form-input-dark" placeholder="+5511..."></div>
+                                        <div class="form-group"><label for="medium" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/medium.png" class="w-4 h-4" alt=""> Medium (Usuário)</label><input type="text" id="medium" class="form-input-dark" placeholder="@usuario"></div>
+                                        <div class="form-group"><label for="whatsapp" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp</label><input type="text" id="whatsapp" class="form-input-dark" placeholder="11900000000" pattern="\d{10,11}"></div>
+                                        <div class="form-group"><label for="github" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)</label><input type="text" id="github" class="form-input-dark" placeholder="seu-usuario"></div>
+                                        <div class="form-group"><label for="gitlab" class="form-label text-neutral-700 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)</label><input type="text" id="gitlab" class="form-input-dark" placeholder="seu-usuario"></div>
+                                    </div>
 
-                                <!-- Controle: Exibir Botão Agendar Horário -->
-                                <div class="form-group">
-                                    <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
-                                        <input type="checkbox" id="showScheduleBtn" checked onchange="updatePreview()">
-                                        <span class="text-gray-300 font-medium text-xs">Exibir botão "Agendar horário" (mantém o link salvo, mesmo oculto)</span>
-                                    </label>
-                                </div>
+                                    <div class="form-group pt-2 border-t border-neutral-200">
+                                        <p class="form-label text-unifesp-400 font-bold mb-1 block text-xs uppercase tracking-wider">Opções Técnicas</p>
+                                    </div>
 
-                                <!-- Controle: Exibir Logotipo SUA Unifesp -->
-                                <div class="form-group">
-                                    <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
-                                        <input type="checkbox" id="showSuaLogo" checked onchange="updatePreview()">
-                                        <span class="text-gray-300 font-medium text-xs">Exibir logotipo SUA Unifesp</span>
-                                    </label>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="scheduleLink" class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
+                                        <div class="flex">
+                                            <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-neutral-300 bg-neutral-100 text-neutral-600 text-xs">calendar.app.google/</span>
+                                            <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
+                                        </div>
+                                    </div>
 
-                                <!-- Controle: Exibir Logotipo do Governo Federal -->
-                                <div class="form-group">
-                                    <label class="layout-option flex items-center gap-3 p-2 bg-gray-900/30 rounded-lg border border-gray-700/50 cursor-pointer">
-                                        <input type="checkbox" id="showGovLogo" checked onchange="updatePreview()">
-                                        <span class="text-gray-300 font-medium text-xs">Exibir logotipo do Governo Federal (desative durante o período de defeso eleitoral)</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </details>
+                                    <div id="pgpGroup" class="form-group">
+                                        <label for="pgpKey" class="form-label text-neutral-700 font-medium mb-1 block text-xs">Chave Pública PGP</label>
+                                        <input type="text" id="pgpKey" class="form-input-dark" placeholder="Link ou ID da chave">
+                                    </div>
 
-                        <!-- 6. Redes Sociais e Acadêmicas -->
-                        <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group mb-8">
-                            <summary class="section-title font-bold text-unifesp-400 flex items-center gap-2 text-base cursor-pointer list-none">
-                                <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> 6. Redes Sociais e Acadêmicas
-                            </summary>
-                            <div id="socialFieldsGroup" class="mt-4 flex flex-col gap-4">
-                                <div class="form-group"><label for="lattes" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/lattes.png" class="w-4 h-4" alt=""> Currículo Lattes (ID)</label><input type="text" id="lattes" class="form-input-dark" placeholder="16 dígitos numéricos" pattern="[0-9]{16}"></div>
-                                <div class="form-group"><label for="prodmais" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/prodmais.png" class="w-4 h-4" alt=""> ProdMais Unifesp (ID)</label><input type="text" id="prodmais" class="form-input-dark" placeholder="Seu ID no ProdMais"></div>
-                                <div class="form-group"><label for="orcid" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/orcid.png" class="w-4 h-4" alt=""> ORCID (ID)</label><input type="text" id="orcid" class="form-input-dark" placeholder="0000-0000-0000-0000" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]"></div>
-                                <div class="form-group"><label for="zotero" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/zotero.png" class="w-4 h-4" alt=""> Zotero (ID)</label><input type="text" id="zotero" class="form-input-dark" placeholder="ID de usuário"></div>
-                                <div class="form-group"><label for="wikipedia" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/wikipedia.png" class="w-4 h-4" alt=""> Wikipédia (Usuário)</label><input type="text" id="wikipedia" class="form-input-dark" placeholder="Nome_de_Usuário"></div>
-                                <div class="form-group"><label for="googleacademic" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/googleacademic.png" class="w-4 h-4" alt=""> Google Acadêmico (ID)</label><input type="text" id="googleacademic" class="form-input-dark" placeholder="Código user="></div>
-                                <div class="form-group"><label for="researchgate" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/researchgate.png" class="w-4 h-4" alt=""> ResearchGate (ID)</label><input type="text" id="researchgate" class="form-input-dark" placeholder="ID do perfil"></div>
-                                <div class="form-group"><label for="linkedin" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/linkedin.png" class="w-4 h-4" alt=""> LinkedIn (Usuário)</label><input type="text" id="linkedin" class="form-input-dark" placeholder="nome-perfil"></div>
-                                <div class="form-group"><label for="instagram" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/instagram.png" class="w-4 h-4" alt=""> Instagram (Usuário)</label><input type="text" id="instagram" class="form-input-dark" placeholder="@perfil"></div>
-                                <div class="form-group"><label for="reddit" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/reddit.png" class="w-4 h-4" alt=""> Reddit (Usuário)</label><input type="text" id="reddit" class="form-input-dark" placeholder="seu-usuario"></div>
-                                <div class="form-group"><label for="tiktok" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/tiktok.png" class="w-4 h-4" alt=""> TikTok (Usuário)</label><input type="text" id="tiktok" class="form-input-dark" placeholder="@perfil"></div>
-                                <div class="form-group"><label for="youtube" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/youtube.png" class="w-4 h-4" alt=""> YouTube (Canal)</label><input type="text" id="youtube" class="form-input-dark" placeholder="@canal"></div>
-                                <div class="form-group"><label for="telegram" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/telegram.png" class="w-4 h-4" alt=""> Telegram (Usuário)</label><input type="text" id="telegram" class="form-input-dark" placeholder="seu-usuario"></div>
-                                <div class="form-group"><label for="signal" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/signal.png" class="w-4 h-4" alt=""> Signal (Número)</label><input type="text" id="signal" class="form-input-dark" placeholder="+5511..."></div>
-                                <div class="form-group"><label for="medium" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/medium.png" class="w-4 h-4" alt=""> Medium (Usuário)</label><input type="text" id="medium" class="form-input-dark" placeholder="@usuario"></div>
-                                <div class="form-group"><label for="whatsapp" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/whatsapp.png" class="w-4 h-4" alt=""> WhatsApp</label><input type="text" id="whatsapp" class="form-input-dark" placeholder="11900000000" pattern="\d{10,11}"></div>
-                                <div class="form-group"><label for="github" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/github.png" class="w-4 h-4" alt=""> GitHub (Usuário)</label><input type="text" id="github" class="form-input-dark" placeholder="seu-usuario"></div>
-                                <div class="form-group"><label for="gitlab" class="form-label text-gray-300 font-medium mb-1 label-with-icon text-xs"><img src="images/icons/gitlab.png" class="w-4 h-4" alt=""> GitLab (Usuário)</label><input type="text" id="gitlab" class="form-input-dark" placeholder="seu-usuario"></div>
-                            </div>
-                        </details>
+                                    <div id="customMessageGroup" class="form-group">
+                                        <label for="customMessage" class="form-label text-neutral-700 font-medium mb-1 block text-xs font-bold">Mensagem de Rodapé</label>
+                                        <textarea id="customMessage" class="form-input-dark" rows="2" placeholder="Frase ou aviso de segurança"></textarea>
+                                    </div>
 
-                        <!-- 7. Outras Configurações -->
-                        <details class="bg-gray-800 p-4 rounded-lg border border-gray-700 group">
-                            <summary class="section-title font-bold text-unifesp-400 flex items-center gap-2 text-base cursor-pointer list-none">
-                                <i aria-hidden="true" class="fa-solid fa-circle-plus group-open:rotate-45 transition-transform"></i> 7. Outras Configurações
-                            </summary>
-                            <div class="mt-4 flex flex-col gap-4">
-                                <div class="form-group">
-                                    <label for="scheduleLink" class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">ID Agenda Google</label>
-                                    <div class="flex">
-                                        <span class="hidden sm:inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-700 bg-gray-850 text-gray-400 text-xs">calendar.app.google/</span>
-                                        <input type="text" id="scheduleLink" class="form-input-dark sm:rounded-l-none" placeholder="2cKG4...">
+                                    <div class="form-group">
+                                        <label for="sectorSelect" class="form-label text-unifesp-400 font-bold mb-2 flex items-center gap-2 text-xs uppercase tracking-wider">
+                                            <i aria-hidden="true" class="fa-solid fa-gear"></i> Unidade Setorial
+                                        </label>
+                                        <div class="p-4 bg-neutral-50 rounded-lg border border-neutral-200 space-y-3">
+                                            <select id="sectorSelect" class="form-input-dark text-xs">
+                                                <option value="">Sem Unidade Setorial</option>
+                                                <option value="__manual__">Outro (informar URL manualmente)</option>
+                                            </select>
+                                            <div id="sectorManualWrap" class="space-y-3 hidden">
+                                                <label for="sectorLogoUrl" class="form-label text-neutral-700 mb-1 block text-xs">URL da imagem do logotipo</label>
+                                                <input type="url" id="sectorLogoUrl" class="form-input-dark text-xs" placeholder="URL da imagem (PNG/JPG)">
+                                                <label for="sectorLogoLink" class="form-label text-neutral-700 mb-1 block text-xs">Link de destino ao clicar</label>
+                                                <input type="url" id="sectorLogoLink" class="form-input-dark text-xs" placeholder="Link ao clicar">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controle: Exibir Botão Abrir Chamado -->
+                                    <div class="form-group mt-2 pt-2 border-t border-neutral-200">
+                                        <div class="br-checkbox p-2 bg-neutral-50 rounded-lg border border-neutral-200">
+                                            <input id="showTicketBtn" type="checkbox" checked onchange="updatePreview()">
+                                            <label for="showTicketBtn" class="text-xs">Exibir botão "Abrir um chamado"</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controle: Exibir Botão Agendar Horário -->
+                                    <div class="form-group mt-2">
+                                        <div class="br-checkbox p-2 bg-neutral-50 rounded-lg border border-neutral-200">
+                                            <input id="showScheduleBtn" type="checkbox" checked onchange="updatePreview()">
+                                            <label for="showScheduleBtn" class="text-xs">Exibir botão "Agendar horário" (mantém o link salvo, mesmo oculto)</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controle: Exibir Logotipo SUA Unifesp -->
+                                    <div class="form-group mt-2">
+                                        <div class="br-checkbox p-2 bg-neutral-50 rounded-lg border border-neutral-200">
+                                            <input id="showSuaLogo" type="checkbox" checked onchange="updatePreview()">
+                                            <label for="showSuaLogo" class="text-xs">Exibir logotipo SUA Unifesp</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controle: Exibir Logotipo do Governo Federal -->
+                                    <div class="form-group mt-2">
+                                        <div class="br-checkbox p-2 bg-neutral-50 rounded-lg border border-neutral-200">
+                                            <input id="showGovLogo" type="checkbox" checked onchange="updatePreview()">
+                                            <label for="showGovLogo" class="text-xs">Exibir logotipo do Governo Federal (desative durante o período de defeso eleitoral)</label>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div id="pgpGroup" class="form-group">
-                                    <label for="pgpKey" class="form-label text-gray-300 font-medium mb-1 block text-xs">Chave Pública PGP</label>
-                                    <input type="text" id="pgpKey" class="form-input-dark" placeholder="Link ou ID da chave">
-                                </div>
-
-                                <div id="customMessageGroup" class="form-group">
-                                    <label for="customMessage" class="form-label text-gray-300 font-medium mb-1 block text-xs font-bold">Mensagem de Rodapé</label>
-                                    <textarea id="customMessage" class="form-input-dark" rows="2" placeholder="Frase ou aviso de segurança"></textarea>
-                                </div>
-                            </div>
-                        </details>
+                            </details>
+                        </div>
                     </form>
                 </div>
 
                 <!-- Pré-visualização -->
                 <div class="space-y-6 lg:col-span-3 lg:sticky lg:top-4 lg:self-start">
-                    <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8">
+                    <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-5 sm:p-8">
                         <h2 class="section-title font-bold text-unifesp-400 mb-6 flex items-center gap-2">
-                            <i aria-hidden="true" class="fa-solid fa-eye"></i> 8. Pré-visualização
+                            <i aria-hidden="true" class="fa-solid fa-eye"></i> Pré-visualização Real
                         </h2>
                         
                         <div class="signature-preview-area mb-6">
@@ -382,7 +392,7 @@
                             <button id="injectButton" class="copy-button" disabled title="Preencha um e-mail institucional (@unifesp.br) válido para habilitar">
                                 <i aria-hidden="true" class="fa-brands fa-google"></i> <span>Injetar no Gmail</span>
                             </button>
-                            <a href="ajuda.html" class="icon-only-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Ajuda" aria-label="Ajuda">
+                            <a href="ajuda.html" class="icon-only-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Ajuda" aria-label="Ajuda">
                                 <i aria-hidden="true" class="fa-solid fa-question"></i>
                             </a>
                             <button id="resetButton" class="icon-only-button bg-red-800 hover:bg-red-900 text-white border-red-700" title="Limpar" aria-label="Limpar formulário">
@@ -392,7 +402,7 @@
                             <button id="exportButton" class="json-action-button bg-unifesp-800 hover:bg-unifesp-900 text-white border-unifesp-700" title="Exportar dados para arquivo JSON" aria-label="Exportar dados para arquivo JSON">
                                 <i aria-hidden="true" class="fa-solid fa-arrow-down"></i> JSON
                             </button>
-                            <button id="importButton" class="json-action-button bg-gray-800 hover:bg-gray-700 text-white border-gray-700" title="Importar dados de um arquivo JSON salvo" aria-label="Importar dados de um arquivo JSON salvo">
+                            <button id="importButton" class="json-action-button bg-unifesp-700 hover:bg-unifesp-800 text-white border-unifesp-600" title="Importar dados de um arquivo JSON salvo" aria-label="Importar dados de um arquivo JSON salvo">
                                 <i aria-hidden="true" class="fa-solid fa-arrow-up"></i> JSON
                             </button>
                         </div>
@@ -407,17 +417,17 @@
                     </div>
 
                     <!-- Avalie este aplicativo: mesma largura da pré-visualização, logo abaixo dela -->
-                    <div class="bg-gray-900 border border-gray-700 rounded-2xl shadow-xl p-5 sm:p-8">
+                    <div class="bg-white border border-neutral-200 rounded-lg shadow-sm p-5 sm:p-8">
                         <h2 class="section-title font-bold text-unifesp-400 mb-4 flex items-center gap-2 text-base">
-                            <i aria-hidden="true" class="fa-solid fa-star"></i> 9. Avaliar este aplicativo
+                            <i aria-hidden="true" class="fa-solid fa-star"></i> Avalie este aplicativo
                         </h2>
                         <div id="ratingStars" class="flex items-center gap-1 mb-4">
-                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="1" aria-label="1 estrela">★</button>
-                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="2" aria-label="2 estrelas">★</button>
-                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="3" aria-label="3 estrelas">★</button>
-                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="4" aria-label="4 estrelas">★</button>
-                            <button type="button" class="rating-star text-3xl text-gray-600 hover:scale-110 transition-transform" data-value="5" aria-label="5 estrelas">★</button>
-                            <span id="ratingValueLabel" class="text-sm text-gray-400 ml-2">Sem nota</span>
+                            <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="1" aria-label="1 estrela">★</button>
+                            <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="2" aria-label="2 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="3" aria-label="3 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="4" aria-label="4 estrelas">★</button>
+                            <button type="button" class="rating-star text-3xl text-neutral-300 hover:scale-110 transition-transform" data-value="5" aria-label="5 estrelas">★</button>
+                            <span id="ratingValueLabel" class="text-sm text-neutral-600 ml-2">Sem nota</span>
                         </div>
                         <textarea id="ratingComment" class="form-input-dark text-sm mb-4" rows="3" placeholder="Comentário (opcional)"></textarea>
                         <button type="button" id="ratingSubmitButton" class="copy-button">
@@ -431,16 +441,16 @@
     </main>
 
     <!-- Rodapé Padronizado -->
-    <footer class="bg-gray-950 border-t border-gray-700 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
+    <footer class="bg-unifesp-800 border-t border-unifesp-900 py-3 px-6 text-xs text-gray-400 flex flex-col sm:flex-row justify-between items-center shrink-0 gap-4">
         <div class="flex items-center gap-4">
             <span><span class="font-mono" id="appVersion"></span> | Modificado: <span id="lastModDate"></span></span>
-            <span class="text-gray-700">|</span>
+            <span class="text-white/25">|</span>
             <a href="termodeuso.html" class="hover:text-white transition-colors">Termo de uso</a>
-            <span class="text-gray-700">|</span>
+            <span class="text-white/25">|</span>
             <a href="politicadeprivacidade.html" class="hover:text-white transition-colors">Política de privacidade</a>
-            <span class="text-gray-700">|</span>
+            <span class="text-white/25">|</span>
             <a href="ajuda.html" class="hover:text-white transition-colors">Como usar (ajuda)</a>
-            <span class="text-gray-700">|</span>
+            <span class="text-white/25">|</span>
             <button type="button" id="highContrastToggle" class="hover:text-white transition-colors flex items-center gap-1" aria-pressed="false">
                 <i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i> Alto contraste
             </button>
@@ -450,9 +460,9 @@
             <a href="https://github.com/alexsandroccarv" target="_blank" class="hover:text-white hover:underline transition-colors flex items-center gap-1">
                 <i aria-hidden="true" class="fa-brands fa-github text-unifesp-400"></i> Alexsandro Cardoso Carvalho
             </a>
-            <span class="text-gray-600">|</span>
+            <span class="text-white/25">|</span>
             <a href="https://github.com/unifesp/gerador-de-assinaturas" target="_blank" class="hover:text-white hover:underline transition-colors">UNIFESP</a>
-            <span class="text-gray-600">|</span>
+            <span class="text-white/25">|</span>
             <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" class="hover:text-white transition-colors flex items-center gap-1" title="Licença AGPLv3 (Free Software Foundation)">
                 <i aria-hidden="true" class="fa-solid fa-scale-balanced text-unifesp-400"></i> AGPLv3
             </a>
@@ -820,7 +830,7 @@
             ratingStarButtons.forEach(star => {
                 const starValue = parseInt(star.dataset.value, 10);
                 star.classList.toggle('text-yellow-400', starValue <= value);
-                star.classList.toggle('text-gray-600', starValue > value);
+                star.classList.toggle('text-neutral-300', starValue > value);
             });
             ratingValueLabel.textContent = ratingLabels[value];
         }
@@ -842,7 +852,8 @@
 
             if (!FEEDBACK_SHEET_ID || FEEDBACK_SHEET_ID.startsWith('COLE_AQUI')) {
                 feedbackMsg.textContent = 'A planilha de avaliações ainda não foi configurada (feedback.sheetId no config.json).';
-                feedbackMsg.className = 'text-sm mt-3 text-red-400';
+                feedbackMsg.className = 'text-sm mt-3 text-red-600';
+                feedbackMsg.classList.remove('hidden');
                 return;
             }
 
@@ -864,7 +875,7 @@
                 const data = await response.json();
                 if (data.success) {
                     feedbackMsg.textContent = 'Obrigado pela sua avaliação!';
-                    feedbackMsg.className = 'text-sm mt-3 text-green-400';
+                    feedbackMsg.className = 'text-sm mt-3 text-green-600';
                     trackEvent('rating_submitted', { rating: currentRating });
                     document.getElementById('ratingComment').value = '';
                     currentRating = 0;
@@ -872,13 +883,13 @@
                     submitBtn.innerHTML = origBtnHtml;
                 } else {
                     feedbackMsg.textContent = 'Não foi possível enviar sua avaliação: ' + (data.error || 'erro desconhecido.');
-                    feedbackMsg.className = 'text-sm mt-3 text-red-400';
+                    feedbackMsg.className = 'text-sm mt-3 text-red-600';
                     submitBtn.innerHTML = origBtnHtml;
                 }
             } catch (err) {
                 console.error('Erro ao enviar avaliação:', err);
                 feedbackMsg.textContent = 'Não foi possível enviar sua avaliação. Verifique sua conexão e tente novamente.';
-                feedbackMsg.className = 'text-sm mt-3 text-red-400';
+                feedbackMsg.className = 'text-sm mt-3 text-red-600';
                 submitBtn.innerHTML = origBtnHtml;
             }
             feedbackMsg.classList.remove('hidden');
